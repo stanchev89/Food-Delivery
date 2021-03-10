@@ -1,0 +1,20 @@
+<article class="container">
+    <h5>Добавяне на нов адрес</h5>
+    <form (ngSubmit)="addNewAddress(newAddressForm.value); newAddressForm.reset()" #newAddressForm="ngForm">
+        <label for="region">
+            Изберете регион в гр.Смолян:
+            <select name="region" id="region" ngModel="smolyan">
+                <option value="smolyan">Смолян</option>
+                <option value="raikovo">кв.Райково</option>
+                <option value="ustovo">кв.Устово</option>
+                <option value="kaptaja">кв.Каптажа</option>
+            </select>
+        </label>
+            <input type="text" name="newAddress" id="newAddress" ngModel="" placeholder="Въведете точен адрес...">
+            <article class="btn-wrapper">
+                <button *ngIf="backBtn" class="btn-add back" type="button" (click)="back()" >Назад</button>
+                <button class="btn-add">Добави</button>
+            </article>
+
+    </form>
+</article>

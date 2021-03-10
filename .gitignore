@@ -1,0 +1,7 @@
+/Frontend/node_modules/
+/Frontend/.env
+/Rest-api/node_modules/
+/Rest-api/.env
+/Admin-api/node_modules/
+/Admin-api/.env
+.DS_Store
