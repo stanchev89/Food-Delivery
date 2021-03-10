@@ -13,7 +13,7 @@ const removePassword = (data) => {
 
 function register(req, res, next) {
 	const { username, password } = req.body;
-    if(process.env.ADMIN_TOKEN === '' ||  process.env.ADMIN_TOKEN === req.headers('admin-token')) {
+    if(process.env.ADMIN_TOKEN === 'empty' ||  process.env.ADMIN_TOKEN === req.body.adminToken) {
         return adminModel
 		.create({ username, password })
 		.then(() => {
@@ -31,6 +31,7 @@ function register(req, res, next) {
 			next(err);
 		});
     }
+	return res.status(401).send( { message: 'Invalid token!'} )
 	
 }
 
