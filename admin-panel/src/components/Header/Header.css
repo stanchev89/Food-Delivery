@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header .list {
+    width: 60%;
+    display:flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.header .list-item a{
+    margin: 50px;
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+}
+
+.header .settings {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+
+.header .settings a {
+    color: black;
+    font-size: 2rem;
+    margin: 20px;
+}

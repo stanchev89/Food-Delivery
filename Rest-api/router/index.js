@@ -5,6 +5,6 @@ const admins = require("./admins")
 
 router.use("/users", users);
 router.use("/dishes", dishes);
-router.use("/admins", admins);
+router.use("/cms", admins);
 
 module.exports = router;
