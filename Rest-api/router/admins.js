@@ -39,5 +39,4 @@ router.post('/change_password',
 	adminController.changeUserPassword
 );
 
-
 module.exports = router;
