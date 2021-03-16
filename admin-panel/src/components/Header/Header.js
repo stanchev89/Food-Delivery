@@ -1,4 +1,5 @@
 import './Header.css';
+import { Link } from 'react-router-dom';
 function Header(props) {
     return (
         <section className="header">
@@ -7,18 +8,20 @@ function Header(props) {
                 props.admin
                     ? <ul className="list">
                         <li className="list-item">
-                            <a href="">Food</a>
+                            <Link to="/food">
+                                <p> Food </p>
+                            </Link>
                         </li>
                         <li className="list-item">
-                            <a href="">Users</a>
+                            <Link to="/user">
+                                <p>Users</p>
+                            </Link>
                         </li>
                     </ul>
                     : null
             }
             <article className="settings">
-                <a href="">
-                    <i class="fas fa-cog"></i>
-                </a>
+                    <i className="fas fa-cog"></i>
             </article>
         </section>
     );

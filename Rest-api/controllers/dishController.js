@@ -5,6 +5,13 @@ const getAllDishes = (model) => {
 	}
 }
 
+const getDish = (model) => {
+	return (req,res,next) => {
+		const id = req.params.id;
+		model.find( { _id: id } ).then(dish => res.json(dish)).catch(next);
+	}
+}
+
 
 const getDishesByCategory = (model) => {
 	return (req, res, next) => {
@@ -83,6 +90,7 @@ const editDish = (model) => {
 
 module.exports = {
 	getAllDishes,
+	getDish,
 	getDishesByCategory,
 	addNewDish,
 	removeDish,

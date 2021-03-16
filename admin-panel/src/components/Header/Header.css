@@ -10,7 +10,7 @@
     list-style: none;
 }
 
-.header .list-item a{
+.header .list-item p{
     margin: 50px;
     font-size: 2rem;
     text-decoration: none;
@@ -23,8 +23,12 @@
     justify-content: flex-end;
 }
 
-.header .settings a {
+.header .settings p {
     color: black;
     font-size: 2rem;
     margin: 20px;
+}
+
+.header p {
+    display: inline-block;
 }

@@ -6,7 +6,7 @@ function Aside(props) {
     return (
         <aside className="aside">
             {
-                props.selectedPanel==='user'
+                props.match.path.includes('user')
                 ? <UserPanel></UserPanel>
                 : <FoodPanel></FoodPanel>
             }

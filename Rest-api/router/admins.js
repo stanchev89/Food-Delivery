@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { adminController } = require("../controllers");
-const { adminModel } = require("../models");
+const { adminController, dishController, userController } = require("../controllers");
+const { adminModel, userModel, dishModel,archiveDishModel } = require("../models");
 const { adminAuth } = require("../utils");
 const validator = require("../validators");
 
@@ -38,5 +38,23 @@ router.post('/change_password',
 	validator.handleValidationErrors,
 	adminController.changeUserPassword
 );
+
+router.get('/all_dishes',
+adminAuth(),
+dishController.getAllDishes(archiveDishModel)
+);
+
+router.get('/all_dishes:id',
+adminAuth(),
+dishController.getDish(archiveDishModel)
+);
+
+router.get('/daily_menu',
+adminAuth(),
+dishController.getAllDishes(dishModel)
+);
+
+
+
 
 module.exports = router;
