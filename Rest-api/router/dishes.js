@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { auth } = require("../utils");
 const { dishController } = require("../controllers");
-import dishModel, {} from '../models/dishModel';
+const dishModel = require('../models/dishModel');
 // middleware that is specific to this router
 
 router.get("/", dishController.getAllDishes(dishModel));

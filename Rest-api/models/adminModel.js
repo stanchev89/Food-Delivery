@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = Number(process.env.SALTROUNDS);
-import fs from 'fs';
+const fs = require('fs');
 
 const validateEmail = function (email) {
 	const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

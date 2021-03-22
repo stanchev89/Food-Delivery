@@ -1,0 +1,12 @@
+.option-name-wrapper {
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.option-name-wrapper i {
+    flex-basis: 100%;
+}
+.option-wrapper input {
+    width: 60%;
+}

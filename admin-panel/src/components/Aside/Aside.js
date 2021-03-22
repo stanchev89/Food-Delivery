@@ -1,16 +1,26 @@
-import UserPanel from './UserPanel';
-import FoodPanel from './FoodPanel';
-import './Aside.css'
-
+import './Aside.css';
+import { Link } from 'react-router-dom'
 function Aside(props) {
+    const options = props.options;
+
     return (
-        <aside className="aside">
-            {
-                props.match.path.includes('user')
-                ? <UserPanel></UserPanel>
-                : <FoodPanel></FoodPanel>
-            }
-        </aside>
+        options
+            ? <aside className="aside">
+
+                <ul>
+                    {
+                        Object.entries(options).map(([option, route]) => {
+                            return (<li key={option}>
+                                <Link to={route}><p>{option}</p></Link>
+                            </li>)
+                        })
+
+                    }
+                </ul>
+
+
+            </aside>
+            : null
     )
 }
 

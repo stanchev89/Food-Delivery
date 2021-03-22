@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { adminController, dishController, userController } = require("../controllers");
-const { adminModel, userModel, dishModel,archiveDishModel } = require("../models");
+const { adminModel, userModel, dishModel, archiveDishModel } = require("../models");
 const { adminAuth } = require("../utils");
 const validator = require("../validators");
 
@@ -30,7 +30,7 @@ router.get("/profile", adminAuth(false), adminController.getProfileInfo);
 router.put("/profile", adminAuth(),
 	adminController.editProfileInfo);
 
-router.get('/all-users', adminAuth(), adminController.getAllUsers);
+router.get('/all_users', adminAuth(), adminController.getAllUsers);
 
 router.post('/change_password',
 	adminAuth(),
@@ -40,18 +40,23 @@ router.post('/change_password',
 );
 
 router.get('/all_dishes',
-adminAuth(),
-dishController.getAllDishes(archiveDishModel)
+	adminAuth(),
+	dishController.getAllDishes(archiveDishModel)
 );
 
 router.get('/all_dishes:id',
-adminAuth(),
-dishController.getDish(archiveDishModel)
+	adminAuth(),
+	dishController.getDish(archiveDishModel)
 );
 
+router.post('/all_dishes',
+	// adminAuth(),
+	dishController.addNewDish(archiveDishModel)
+)
+
 router.get('/daily_menu',
-adminAuth(),
-dishController.getAllDishes(dishModel)
+	adminAuth(),
+	dishController.getAllDishes(dishModel)
 );
 
 

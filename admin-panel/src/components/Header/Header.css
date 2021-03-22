@@ -1,6 +1,7 @@
 .header {
     display: flex;
     align-items: center;
+    flex-basis: 100%;
 }
 
 .header .list {
@@ -23,7 +24,7 @@
     justify-content: flex-end;
 }
 
-.header .settings p {
+.header .settings{
     color: black;
     font-size: 2rem;
     margin: 20px;

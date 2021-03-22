@@ -91,6 +91,24 @@ function getProfileInfo(req, res, next) {
 		.catch(next);
 }
 
+function changeUserPassword(req,res,next) {
+	const {_id: userId} = req.user;
+	const {oldPassword, newPassword} = req.body;
+	userModel.findOne({_id: userId}).then(user => {
+		user.matchPassword(oldPassword).then(equal => {
+			if (!equal) {
+				const err = {errorMessage: 'Invalid password!'};
+				res.status(401).send(err);
+				return;
+			}
+			user.password = newPassword;
+			user.save()
+			res.clearCookie(authCookieName).status(200).send(user);
+		});
+
+	}).catch(next);
+}
+
 function getAllUsers(req,res,next) {
 	userModel.find({},{password: 0, __v: 0})
 		.then((users) => {
