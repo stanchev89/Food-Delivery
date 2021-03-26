@@ -1,0 +1,57 @@
+.dish-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+.dish-item .dish-item-header img {
+    width: 80%;
+    border-radius: 90px;
+}
+
+.dish-item-content {
+    background: lightgray;
+}
+
+.dish-item-buttons .remove-menu-btn,
+.dish-item-buttons .add-to-menu-btn,
+.dish-item-buttons .edit-dish-btn,
+.dish-item-buttons .delete-dish-btn {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 6px;
+    border: none;
+    font-weight: bold;
+    color: white;
+}
+.dish-item-buttons .add-to-menu-btn {
+    background: green;
+    flex-basis: 100%;
+}
+.dish-item-buttons .add-to-menu-btn:hover {
+    cursor: pointer;
+}
+
+.dish-item-buttons .remove-menu-btn {
+    background: lightcoral;
+}
+
+.dish-item-buttons .remove-menu-btn:hover {
+    cursor: pointer;
+}
+.dish-item-buttons .edit-dish-btn {
+    background: orange;
+}
+.dish-item-buttons .edit-dish-btn:hover {
+    cursor: pointer;
+}
+.dish-item-buttons .delete-dish-btn {
+    background: red;
+}
+.dish-item-buttons .delete-dish-btn:hover {
+    cursor: pointer;
+}
+

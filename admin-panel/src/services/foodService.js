@@ -1,16 +1,12 @@
 import environments from '../environments';
-const foodApiMap = {
-    dailyMenu: 'food/daily_menu',
-    allDishes: 'food/'
-}
+const foodApi = environments.apiUrl + 'food/';
 
 export const getAllDishes = () => {
-    const fullPath = environments.apiUrl + 'food/';
-    return fetch(fullPath).then(data => data.json()).catch(err => console.log(err));
+    return fetch(foodApi).then(data => data.json()).catch(err => console.error(err));
 }
 
-export const addNewDish = (typeMenu,newDish) => {
-    const fullPath = environments.apiUrl + foodApiMap[typeMenu] + 'add_new_dish';
+export const addNewDish = (newDish) => {
+    const fullPath = foodApi + 'add_new_dish';
     const modifiedProducts = newDish.products.split(',').map(p => p.trim());
     newDish.products = modifiedProducts;
     console.log(JSON.stringify(newDish));
@@ -21,8 +17,19 @@ export const addNewDish = (typeMenu,newDish) => {
         },
         body: JSON.stringify(newDish),
     })
-    .then(res => res.json())
     .then(res => console.log(res))
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
+}
 
+export const editDish = (id,editedDish) => {
+    const fullPath = foodApi + 'dish/' + id;
+    return fetch(fullPath, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editedDish)
+    })
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
 }

@@ -6,7 +6,6 @@ import SavedOptions from './SavedOptions';
 
 
 function AddNewDish(props) {
-    const typeMenu = 'allDishes';
     const initialDish = {
         name: '', products: '', meatless: false, category: '', price: 0,
         weight: 0, img: '', options: [], _editing_options: []
@@ -16,7 +15,7 @@ function AddNewDish(props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        foodService.addNewDish(typeMenu,newDish).then(data => props.history.push('/food')).catch(err => console.log(err))
+        foodService.addNewDish(newDish).then(() => props.history.push('/food')).catch(err => console.log(err))
     }
 
     const onChange = (event) => {

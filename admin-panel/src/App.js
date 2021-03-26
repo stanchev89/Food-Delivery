@@ -5,12 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 import UserPanel from './components/UserPanel';
 import FoodPanel from './components/FoodPanel';
 import Aside from './components/Aside'
-import * as foodService from './services/foodService';
 import * as userService from './services/userService';
-const typeMenu = {
-  allDishes: 'allDishes',
-  dailyMenu: 'dailyMenu'
-}
+
 
 class App extends Component {
   constructor(props) {

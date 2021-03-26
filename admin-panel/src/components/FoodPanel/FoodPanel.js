@@ -1,4 +1,4 @@
-import {Link, Switch, Route} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {useState, useEffect} from 'react'
 import FoodList from './FoodList';
 import AddNewDish from './AddNewDish';
@@ -6,12 +6,26 @@ import './FoodPanel.css';
 import * as foodService from '../../services/foodService';
 
 const initailDishes = {
-    dailyMenu: [],
     allDishes: []
 }
 
 function FoodPanel(props) {
     const [dishes, setDishes] = useState(initailDishes);
+    const getDailyMenu = () => {
+        return dishes.allDishes.filter(d => d.daily_menu === true);
+    }
+    const toggleDishDailyMenu = (dish) => {
+        dish.daily_menu = !dish.daily_menu;
+        foodService.editDish(dish._id, dish)
+            .then(() => {
+                setDishes((prevState) => (
+                    {
+                        ...prevState
+                    }
+                ));
+            })
+            .catch(err => console.error(err));
+    }
 
     useEffect(() => {
         props.setAsideOptions(options);
@@ -23,6 +37,7 @@ function FoodPanel(props) {
                         allDishes: res
                     }
                 ))
+                return res;
             })
             .catch(err => console.log(err));
 
@@ -39,21 +54,11 @@ function FoodPanel(props) {
     return (
 
         <section className="container">
-            {
-                dishes.dailyMenu.length > 0
-                    ? dishes.dailyMenu.map(d => {
-                        return (
-                            <h1 key={d._id}>{d.name}</h1>
-                        )
-                    })
-                    : null
-
-            }
             <Switch>
 
                 <Route path='/food/daily-menu'
                        render={(props) => (
-                           <FoodList {...props} dishes={dishes}/>
+                           <FoodList {...props} toggleDishDailyMenu={toggleDishDailyMenu} dishes={getDailyMenu()}/>
                        )}
                 />
                 <Route path="/food/add_new_dish"
@@ -64,7 +69,7 @@ function FoodPanel(props) {
 
                 <Route path='/food'
                        render={(props) => (
-                           <FoodList {...props} dishes={dishes}/>
+                           <FoodList {...props} toggleDishDailyMenu={toggleDishDailyMenu} dishes={dishes.allDishes}/>
                        )}
                 />
             </Switch>

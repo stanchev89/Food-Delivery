@@ -23,6 +23,9 @@ function getDishesByCategory(req, res, next) {
 
 function addNewDish(req, res, next) {
     const newDish = req.body;
+    if(newDish.daily_menu === undefined) {
+        newDish.daily_menu = false;
+    }
     return dishModel.find({name: newDish.name})
         .then(dish => {
             if (dish.length > 0) {

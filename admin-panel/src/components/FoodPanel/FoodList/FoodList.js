@@ -1,11 +1,9 @@
-import {Link, Route} from 'react-router-dom'
-import {useEffect} from 'react';
+import {Link} from 'react-router-dom';
+import DishItem from '../DishItem';
+import './FoodList.css';
 
 function FoodList(props) {
     const dishes = props.dishes;
-    console.log(dishes);
-    const selectedMenu = props.match.path.includes('daily') ? dishes.dailyMenu : dishes.allDishes;
-    console.log(selectedMenu)
     return (
         <article className="food-list">
             <article className="food-list-header">
@@ -20,14 +18,14 @@ function FoodList(props) {
 
             <article className="food-list-content">
                 {
-                    selectedMenu?.length > 0 ?
+                    dishes?.length > 0 ?
 
-                        < ul>
+                        < ul className="food-list">
                             {
-                                selectedMenu.map(dish => {
+                                dishes.map(dish => {
                                    return ( <li key={dish._id}>
-                                        <p>{dish.name}</p>
-                                    </li>
+                                           <DishItem dish={dish} toggleDishDailyMenu={props.toggleDishDailyMenu}/>
+                                       </li>
                                    )
                                 })
                             }

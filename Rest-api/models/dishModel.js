@@ -32,7 +32,8 @@ const dishSchema = new mongoose.Schema(
         selected_options: [types.String]
         ,
         daily_menu: {
-            type: types.Boolean
+            type: types.Boolean,
+            required: true
         }
     }
 );
