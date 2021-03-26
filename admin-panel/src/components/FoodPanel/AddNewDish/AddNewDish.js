@@ -16,11 +16,11 @@ function AddNewDish(props) {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        const formData = event.target;
-        // foodService.addNewDish(typeMenu,newDish);
+        foodService.addNewDish(typeMenu,newDish).then(data => props.history.push('/food')).catch(err => console.log(err))
     }
 
     const onChange = (event) => {
+        event.preventDefault()
         const prop = event.target.name;
         const value = event.target.value;
 
@@ -30,7 +30,6 @@ function AddNewDish(props) {
                 [prop]: value
             }));
     }
-
 
 
     function addDishOption(event) {
@@ -53,10 +52,10 @@ function AddNewDish(props) {
 
         Object.keys(currOption).forEach(key => {
             if (key === oldName) {
-                let newPair = { [newName]: currOption[oldName] };
-                newWordsObject = { ...newWordsObject, ...newPair }
+                let newPair = {[newName]: currOption[oldName]};
+                newWordsObject = {...newWordsObject, ...newPair}
             } else {
-                newWordsObject = { ...newWordsObject, [key]: currOption[key] }
+                newWordsObject = {...newWordsObject, [key]: currOption[key]}
             }
         });
         const allOptions = newDish._editing_options;
@@ -147,6 +146,7 @@ function AddNewDish(props) {
             }
         ))
     }
+
     function deleteExistOption(index) {
         const currOptions = newDish.options;
         currOptions.splice(index, 1);
@@ -165,11 +165,12 @@ function AddNewDish(props) {
             <form onSubmit={onSubmit} className="form">
                 <label>
                     <p>Name:</p>
-                    <input type="text" name="name" onChange={onChange} />
+                    <input type="text" name="name" onChange={onChange}/>
                 </label>
                 <label>
                     <p>Category:</p>
                     <select name="category" onChange={onChange}>
+                        <option value=""></option>
                         <option value="soup">Soup</option>
                         <option value="salad">Salad</option>
                         <option value="main">Main</option>
@@ -181,11 +182,11 @@ function AddNewDish(props) {
                 </label>
                 <label>
                     <p>Products:</p>
-                    <input type="text" name="products" onChange={onChange} />
+                    <input type="text" name="products" onChange={onChange}/>
                 </label>
                 <label>
                     <p>Meatless:</p>
-                    <select name="meatless" onChange={onChange} value={newDish.meatless}>
+                    <select name="meatless" onChange={onChange} defaultValue={newDish.meatless}>
                         <option value="false">False</option>
                         <option value="true">True</option>
                     </select>
@@ -193,20 +194,21 @@ function AddNewDish(props) {
                 </label>
                 <label>
                     <p>Weight:</p>
-                    <input type="number" name="weight" onChange={onChange} />
+                    <input type="number" name="weight" onChange={onChange}/>
                 </label>
 
                 <label>
                     <p>Image URL:</p>
-                    <input type="text" name="img" onChange={onChange} />
+                    <input type="text" name="img" onChange={onChange}/>
                 </label>
 
                 <label>
                     <p>Price:</p>
-                    <input type="number" name="price" onChange={onChange} />
+                    <input type="number" name="price" onChange={onChange}/>
                 </label>
                 <h4 className="options-title">Dish options:{newDish.options.length === 0 ? ' not set' : ''}</h4>
-                <SavedOptions options={newDish.options} editExistOption={editExistOption} deleteExistOption={deleteExistOption} />
+                <SavedOptions options={newDish.options} editExistOption={editExistOption}
+                              deleteExistOption={deleteExistOption}/>
                 <DishOptions
                     options={newDish._editing_options}
                     addDishOption={addDishOption}
@@ -215,9 +217,9 @@ function AddNewDish(props) {
                     addOptionValue={addOptionValue}
                     onChangeOptionValue={onChangeOptionValue}
                     removeOptionValue={removeOptionValue}
-                    saveOptions={saveOptions} />
+                    saveOptions={saveOptions}/>
 
-                <input type="submit" value="submit" className="submit" />
+                <input type="submit" value="submit" className="submit"/>
             </form>
         </article>
     )

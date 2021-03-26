@@ -1,14 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { adminController, dishController, userController } = require("../controllers");
-const { adminModel, userModel, dishModel, archiveDishModel } = require("../models");
+const { adminModel, userModel, dishModel } = require("../models");
 const { adminAuth } = require("../utils");
 const validator = require("../validators");
 
 
 router.post(
 	"/register",
-	adminAuth(false),
 	validator.checkMinLength(3, "username"),
 	validator.checkMinLength(5, "password"),
 	validator.onlyEnglishAndNumbers("username", "password"),
@@ -26,38 +25,49 @@ router.post(
 );
 router.post("/logout", adminController.logout);
 
-router.get("/profile", adminAuth(false), adminController.getProfileInfo);
-router.put("/profile", adminAuth(),
+router.get("/profile", adminController.getProfileInfo);
+
+router.put("/profile",
 	adminController.editProfileInfo);
-
-router.get('/all_users', adminAuth(), adminController.getAllUsers);
-
 router.post('/change_password',
-	adminAuth(),
+	// adminAuth(),
 	validator.checkMinLength(5, 'oldPassword', 'newPassword'),
 	validator.handleValidationErrors,
 	adminController.changeUserPassword
 );
 
-router.get('/all_dishes',
-	adminAuth(),
-	dishController.getAllDishes(archiveDishModel)
-);
+router.get('/users/', adminController.getAllUsers);
 
-router.get('/all_dishes:id',
-	adminAuth(),
-	dishController.getDish(archiveDishModel)
-);
 
-router.post('/all_dishes',
+
+router.get('/food/',
 	// adminAuth(),
-	dishController.addNewDish(archiveDishModel)
-)
-
-router.get('/daily_menu',
-	adminAuth(),
-	dishController.getAllDishes(dishModel)
+	dishController.getAllDishes
 );
+router.get('/food/daily_menu',
+	// adminAuth(),
+	dishController.getDailyMenu
+);
+
+router.post('/food/add_new_dish',
+	// adminAuth(),
+	dishController.addNewDish
+);
+
+router.get('/food/dish/:id',
+	// adminAuth(),
+	dishController.getDish
+);
+
+router.put('/food/dish/:id',
+	// adminAuth(),
+	dishController.editDish
+);
+router.post('/food/dish/:id',
+	// adminAuth(),
+	dishController.removeDish
+);
+
 
 
 

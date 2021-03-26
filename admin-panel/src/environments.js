@@ -1,5 +1,5 @@
 const environments = {
-    apiUrl: 'http://localhost:3000/cms/',
+    apiUrl: 'http://localhost:5000/cms/',
 }
 
 export default environments;

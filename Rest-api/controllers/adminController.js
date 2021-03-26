@@ -1,4 +1,4 @@
-const { adminModel, tokenBlacklistModel } = require("../models");
+const { adminModel,userModel, tokenBlacklistModel } = require("../models");
 
 const utils = require("../utils");
 const { authCookieName } = require("../app-config");

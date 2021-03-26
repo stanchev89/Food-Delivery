@@ -26,29 +26,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    foodService.getAllDishes(typeMenu.allDishes).then(data => {
-      if (data) {
-        this.setState({ allDishes: data });
-      }
-    })
-
-    foodService.getAllDishes(typeMenu.dailyMenu).then(data => {
-      if (data) {
-        this.setState({ dailyMenu: data });
-      }
-    })
 
     userService.getAllUsers().then(data => {
       if (data) {
         this.setState({ allUsers: data });
       }
-    })
+    }).catch(err => console.log(err))
 
     userService.getProfileInfo().then(data => {
       if (data) {
         this.setState({ currentUser: data });
       }
-    })
+    }).catch(err => console.log(err))
   }
 
 
@@ -74,7 +63,7 @@ class App extends Component {
               />
               <Route path="/food"
                 render={(props) => (
-                  <FoodPanel {...props} setAsideOptions={this.setAsideOptions} allDishes={this.state.allDishes} dailyMenu={this.state.dailyMenu} />
+                  <FoodPanel {...props} setAsideOptions={this.setAsideOptions}/>
                 )}
               />
 

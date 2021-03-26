@@ -1,7 +1,7 @@
 import environments from '../environments';
 
 export const getAllUsers = () => {
-    const fullPath = environments.apiUrl + 'all_users';
+    const fullPath = environments.apiUrl + 'users';
     return fetch(fullPath).then(data => data.json()).catch(err => console.log(err));
 }
 

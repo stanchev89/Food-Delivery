@@ -1,30 +1,34 @@
-import { Link, Route } from 'react-router-dom'
-import AddNewDish from '../AddNewDish';
+import {Link, Route} from 'react-router-dom'
+import {useEffect} from 'react';
 
 function FoodList(props) {
     const dishes = props.dishes;
+    console.log(dishes);
+    const selectedMenu = props.match.path.includes('daily') ? dishes.dailyMenu : dishes.allDishes;
+    console.log(selectedMenu)
     return (
         <article className="food-list">
             <article className="food-list-header">
-                {
-                    props.location.pathname.includes('dishes')
-                        ? <article className="add-wrapper">
-                            <Link to='/food/add-new-dish'>
-                                <i className="fas fa-plus fa-x5"></i>
-                            </Link>
-                        </article>
-                        : <h1> List </h1>
-                }
+
+                <article className="add-wrapper">
+                    <Link to='/food/add_new_dish'>
+                        <i className="fas fa-plus fa-x5"></i>
+                    </Link>
+                </article>
+
             </article>
 
             <article className="food-list-content">
                 {
-                    dishes ?
+                    selectedMenu?.length > 0 ?
 
-                        < ul >
+                        < ul>
                             {
-                                dishes.map(dish => {
-                                    <li key={dish.id}>{dish.name}</li>
+                                selectedMenu.map(dish => {
+                                   return ( <li key={dish._id}>
+                                        <p>{dish.name}</p>
+                                    </li>
+                                   )
                                 })
                             }
                         </ul>

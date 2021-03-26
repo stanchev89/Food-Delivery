@@ -22,7 +22,7 @@ dbConnector()
 			})
 		);
 
-		app.use("/api", apiRouter);
+		app.use(apiRouter);
 
 		app.use(errorHandler);
 
