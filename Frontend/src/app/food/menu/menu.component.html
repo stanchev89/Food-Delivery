@@ -1,6 +1,6 @@
 <section class="container-menu">
   <article class="menu">
-    <app-dishes [dishes]="menu"></app-dishes>
+    <app-dishes [dishes]="(menu$ | async)"></app-dishes>
   </article>
   <app-cart> </app-cart>
 </section>

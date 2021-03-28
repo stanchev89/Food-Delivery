@@ -12,6 +12,8 @@ import {FoodService} from './food/food.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ConfirmDialogComponent} from './core/confirm-dialog/confirm-dialog.component';
+import { appInterceptorProvider } from './core/app.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,7 @@ import {ConfirmDialogComponent} from './core/confirm-dialog/confirm-dialog.compo
     NgbModule,
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     SharedModule,
     CoreModule,
     FoodModule,

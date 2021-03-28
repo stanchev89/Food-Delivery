@@ -1,10 +1,11 @@
 .App .app-main{
     display: flex;
-    flex-wrap: wrap;
+
 }
 
 .App .app-main-content {
     flex-grow: 1;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }

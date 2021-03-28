@@ -10,6 +10,7 @@ import { NewsComponent } from './news/news.component';
 import { FooterComponent } from './footer/footer.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
 import {MatDialogModule} from "@angular/material/dialog";
+import {appInterceptorProvider} from './app.interceptor';
 
 
 
@@ -24,6 +25,9 @@ import {MatDialogModule} from "@angular/material/dialog";
         RouterModule,
         NgbModule,
         MatDialogModule
-    ]
+    ],
+  providers: [
+    appInterceptorProvider
+  ]
 })
 export class CoreModule { }

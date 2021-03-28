@@ -20,11 +20,11 @@ function FoodList(props) {
                 {
                     dishes?.length > 0 ?
 
-                        < ul className="food-list">
+                        < ul className="food-list-ul">
                             {
                                 dishes.map(dish => {
                                    return ( <li key={dish._id}>
-                                           <DishItem dish={dish} toggleDishDailyMenu={props.toggleDishDailyMenu}/>
+                                           <DishItem updateDishes={props.updateDishes} dish={dish} history={props.history} toggleDishDailyMenu={props.toggleDishDailyMenu}/>
                                        </li>
                                    )
                                 })

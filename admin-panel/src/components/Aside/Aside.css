@@ -1,5 +1,5 @@
 .aside {
-    max-width: 250px;
+    width: 300px;
     max-height: fit-content;
     display: flex;
     border: 2px solid black;
