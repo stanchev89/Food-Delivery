@@ -1,1 +1,1 @@
-export {default} from './AddNewDish';
+export {default} from './DishForm';
