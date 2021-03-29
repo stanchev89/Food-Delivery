@@ -5,3 +5,10 @@
   align-items: center;
   margin: 20px auto;
 }
+.app-main {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

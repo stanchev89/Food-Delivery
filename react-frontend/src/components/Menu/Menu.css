@@ -1,8 +1,16 @@
+.menu {
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    width: 100%;
+}
 .menu .food-list {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     padding:30px;
     padding-top:10px;
+    width: 100%;
   }
 /* .menu article {
     display: flex;
@@ -29,4 +37,8 @@
     color: white;
     border-radius: 18px;
   }
+.menu .cart {
+    position: -webkit-sticky;
+    top:15px;
+}
   

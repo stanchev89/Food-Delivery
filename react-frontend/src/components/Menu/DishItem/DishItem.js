@@ -1,7 +1,7 @@
 import "./DishItem.css";
 
 function DishItem(props) {
-	const dish = props.dish;
+	const {dish} = props;
 	return (
 		<article className="dish">
 			<img src={dish.img} alt="dish img" />
@@ -9,7 +9,6 @@ function DishItem(props) {
 				<h3>{dish.name}</h3>
 				<ul className="products">
 					<p>Продукти: {dish.products.join(", ")}</p>
-					{/* {dish.products.map((p, i) => <li key={i}>{p}</li>)} */}
 				</ul>
 				<p>{dish.weight} гр.</p>
 			</article>
