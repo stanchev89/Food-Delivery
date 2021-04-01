@@ -13,18 +13,25 @@
   .container-header .container-left,
   .container-header .container-right{
     display: flex;
-    width:30%;
+    width:20%;
   }
   .container-header .container-middle {
     display: flex;
-    width:40%
+    justify-content: center;
+    width:60%
   }
   .container-header .container-right {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     flex-wrap:wrap;
     font-size: .9rem;
   }
+
+  .user-bar svg {
+    font-size: 20px;
+    color: #E25E20;
+  }
+
   .container-header .container-left {
     align-self:flex-end;
   }

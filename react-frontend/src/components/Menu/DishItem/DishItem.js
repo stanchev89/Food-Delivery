@@ -1,7 +1,7 @@
 import "./DishItem.css";
 
 function DishItem(props) {
-	const {dish} = props;
+	const {dish, addToCart} = props;
 	return (
 		<article className="dish">
 			<img src={dish.img} alt="dish img" />
@@ -17,7 +17,7 @@ function DishItem(props) {
 				<article className="dish-buy-options" />
 				<article className="dish-buy-order">
 					<h3 className="price">{dish.price.toFixed(2)} лв.</h3>
-					<button className="price-btn">Добави</button>
+					<button className="price-btn" onClick={addToCart.bind(null,dish)}>Добави</button>
 				</article>
 			</article>
 		</article>

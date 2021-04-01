@@ -52,11 +52,15 @@ const userSchema = new mongoose.Schema(
 						}
 					}
 				],
-				note: [ types.String ]
+				note: {
+					type: types.String,
+					default: ""
+				}
 			}
 		],
 		phone: {
-			type: types.String
+			type: types.String,
+			required:true
 		},
 		email: {
 			type: String,
@@ -79,21 +83,15 @@ const userSchema = new mongoose.Schema(
 						}
 					],
 					selected_options: [ types.String ],
-					quantity: types.Number
+					quantity: {
+						type: types.Number
+					}
 				}
 			],
 			totalPrice: {
 				type: types.Number
 			}
-		},
-		posts: [
-			{
-				title: types.String,
-				description: types.String
-			}
-		],
-		liked_posts: [ types.ObjectId ],
-		disliked_posts: [ types.ObjectId ]
+		}
 	},
 	{ timestamps: { createdAt: "created_at" } }
 );

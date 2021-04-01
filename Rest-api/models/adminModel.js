@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const saltRounds = Number(process.env.SALTROUNDS);
-const fs = require('fs');
+const fs = require("fs");
 
-const validateEmail = function (email) {
+const validateEmail = function(email) {
 	const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	return re.test(email)
+	return re.test(email);
 };
 
 const types = mongoose.Schema.Types;
@@ -16,9 +16,9 @@ const adminSchema = new mongoose.Schema(
 			type: types.String,
 			required: true,
 			unique: true,
-			minlength: [5, "Username should be at least 5 characters"],
+			minlength: [ 5, "Username should be at least 5 characters" ],
 			validate: {
-				validator: function (v) {
+				validator: function(v) {
 					return /[a-zA-Z0-9]+/g.test(v);
 				},
 				message: (props) => `${props.value} must contains only latin letters and digits!`
@@ -27,19 +27,19 @@ const adminSchema = new mongoose.Schema(
 		password: {
 			type: types.String,
 			required: true,
-			minlength: [5, "Password should be at least 5 characters"]
+			minlength: [ 5, "Password should be at least 5 characters" ]
 		}
 	},
 	{ timestamps: { createdAt: "created_at" } }
 );
 
 adminSchema.methods = {
-	matchPassword: function (password) {
+	matchPassword: function(password) {
 		return bcrypt.compare(password, this.password);
 	}
 };
 
-adminSchema.pre("save", function (next) {
+adminSchema.pre("save", function(next) {
 	if (this.isModified("password")) {
 		bcrypt.genSalt(saltRounds, (err, salt) => {
 			if (err) {
@@ -50,11 +50,11 @@ adminSchema.pre("save", function (next) {
 					next(err);
 				}
 				this.password = hash;
-                if(process.env.ADMIN_TOKEN === 'empty') {
-                    fs.writeFile('.env',`ADMIN_TOKEN=${hash}`,function(err) {
-                        if(err) throw err;
-                    });
-                }
+				if (process.env.ADMIN_TOKEN === "empty") {
+					fs.writeFile(".env", `ADMIN_TOKEN=${hash}`, function(err) {
+						if (err) throw err;
+					});
+				}
 				next();
 			});
 		});

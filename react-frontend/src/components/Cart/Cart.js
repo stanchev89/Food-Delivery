@@ -1,11 +1,55 @@
 import './Cart.css';
-import {FiShoppingCart} from 'react-icons/fi'
+import {FiShoppingCart} from 'react-icons/fi';
+import {BsTrash} from 'react-icons/bs';
+import CartItem from "./CartItem/CartItem";
+import foodService from "../../services/foodService";
 
 function Cart(props) {
-    const {user} = props;
+    const {user, clearCart,setUser} = props;
+    const onChangeItemQuantity = (item,action) => {
+        action === 'add' ? item.quantity++ : item.quantity--;
+        foodService.addToCart(user,item,action)
+            .then(user => setUser(user))
+            .catch(console.error);
+    }
+
+    const onRemoveItemHandler = (dish) => {
+        foodService.removeItemFromCart(user,dish)
+            .then(user => setUser(user))
+            .catch(console.error);
+    }
     return (
         <section className="cart">
-            <FiShoppingCart className="cart-icon"/>
+            <article className="cart-icon-wrapper">
+                <FiShoppingCart className="cart-icon"/>
+                <BsTrash className="cart-trash-icon" onClick={clearCart}/>
+            </article>
+            {
+                user?.cart?.products.length > 0
+                    ?
+                    <article className="cart-dishes">
+                        <ul>
+                            {
+                                user?.cart?.products.map(item => (
+                                    <li key={item?.name}>
+                                        <CartItem item={item}
+                                                  onChangeItemQuantity={onChangeItemQuantity}
+                                                  onRemoveItem={onRemoveItemHandler}
+                                        />
+                                    </li>
+                                ))
+                            }
+                        </ul>
+                        <article className="cart-summary">
+                            <p className="cart-total-price">
+                                {Number(user?.cart?.totalPrice).toFixed(2)} лв.
+                            </p>
+                        </article>
+
+                    </article>
+                    : <p>Няма добавени продукти...</p>
+            }
+
         </section>
     )
 }

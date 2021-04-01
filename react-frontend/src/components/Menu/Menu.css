@@ -35,10 +35,10 @@
     text-align: center;
     background: #8D9F3E;
     color: white;
-    border-radius: 18px;
+    border-radius: 3px;
   }
 .menu .cart {
-    position: -webkit-sticky;
+    position: sticky;
     top:15px;
 }
   

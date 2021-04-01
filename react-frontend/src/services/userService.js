@@ -1,24 +1,39 @@
 import environments from "../environments";
+import {fetchWithCredentials} from "../helpers";
 
-const initialCart = {
-    products: [],
-    totalPrice: 0
-};
-const initialUser = {
-    username: 'stanchev89',
-    password: '123123',
-    address: [{location: 'Varna,Lyuben Karavelov 50, ap 8', delivery: 1.5}, {
-        location: 'Smolyan, ul. Chan 3, ap 43',
-        delivery: 0.5
-    }],
-    phone: '+359876969696',
-    email: 'stanchev89@abv.bg',
-    orders: [],
-    cart: initialCart
-};
 const userService = {
-    getDemoUser: () => {
-        return Promise.resolve(initialUser);
+
+    login: ( username, password ) => {
+        const fullPath = environments.apiURL + 'user/login';
+        return fetchWithCredentials(fullPath,'POST',{username,password})
+            .then(res => res.json())
+            .catch(err => console.error(err))
+
+    },
+    register: (newUser) => {
+        const fullPath = environments.apiURL + 'user/register';
+        return fetchWithCredentials(fullPath,'POST',newUser)
+            .then(res => res.json())
+            .catch(err => console.error(err))
+
+    },
+    editUserData: (data) => {
+        const fullPath = environments.apiURL + 'user/profile';
+        return fetchWithCredentials(fullPath,'PUT',data)
+            .then(res => res.json())
+            .catch(console.error)
+    },
+    getUserInfo: () => {
+        const fullPath = environments.apiURL + 'user/profile'
+        return fetchWithCredentials(fullPath,'GET')
+            .then(res => res.json())
+            .catch(err => console.error(err));
+    },
+    logout: () => {
+        const fullPath = environments.apiURL + 'user/logout';
+        return fetchWithCredentials(fullPath,'POST')
+            .then(res => res.json())
+            .catch(console.error)
     }
 };
 
