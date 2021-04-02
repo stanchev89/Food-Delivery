@@ -53,12 +53,13 @@ const userSchema = new mongoose.Schema(
 						}
 					}
 				],
+				payment: types.String,
 				address: {
 					region:types.String,
 					location:types.String,
-					delivery:types.Number
 				},
-				note: types.String,
+				delivery:types.Number,
+				description: types.String,
 				totalPrice: types.Number
 			}
 		],

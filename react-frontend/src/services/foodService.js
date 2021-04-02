@@ -32,7 +32,7 @@ const foodService = {
 	},
 	addToCart: function (user,item,addOrSubtract) {
 		const cart = user.cart;
-		const exist = cart.products.find((prod) =>
+		const exist = cart.products?.find((prod) =>
 			prod.name === item.name
 			&& prod.price === item.price
 			&& arraysEqual(prod.selected_options, item.selected_options));
@@ -46,18 +46,18 @@ const foodService = {
 			}
 		} else {
 			item.quantity = 1;
-			cart.products = cart.products.concat(item);
+			cart.products = cart.products ? cart.products.concat(item) : [item];
 		}
 		cart.totalPrice = calculateCartTotalPrice(cart);
 		return userService.editUserData({cart});
 	},
 	removeItemFromCart: function (user,item) {
-		const index = user.cart.products.findIndex(prod =>
+		const index = user.cart?.products?.findIndex(prod =>
 			prod.name === item.name
 			&& prod.price === item.price
 			&& arraysEqual(prod.selected_options, item.selected_options)
 		)
-		user.cart.products.splice(index,1);
+		user.cart?.products?.splice(index,1);
 		user.cart.totalPrice = calculateCartTotalPrice(user.cart)
 		return userService.editUserData({cart: user.cart});
 	},
