@@ -44,10 +44,42 @@
     cursor: pointer;
 }
 
+.cart-total-price p {
+    margin:0;
+}
+
 .cart .cart-total-price {
+    display: flex;
+    flex-direction: column;
     border: 1px solid #E25E20;
     color: #E25E20;
-    width: fit-content;
-    padding: 10px;
+    height: fit-content;
+    width: 70px;
+    padding: 5px;
     font-weight: bold;
+    font-size: .7rem;
+    margin: 0;
+}
+.cart .cart-summary-text {
+    margin: 5px 10px;
+}
+
+.cart .cart-summary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cart .cart-summary-btn {
+    padding: 5px;
+    width: 70px;
+    height: fit-content;
+    border: 1px solid #8D9F3E;
+    background: #8D9F3E;
+    color: white;
+    font-weight: bold;
+}
+
+.cart .cart-summary-btn:hover {
+    cursor: pointer;
 }

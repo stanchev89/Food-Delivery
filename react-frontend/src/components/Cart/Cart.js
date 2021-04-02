@@ -3,18 +3,25 @@ import {FiShoppingCart} from 'react-icons/fi';
 import {BsTrash} from 'react-icons/bs';
 import CartItem from "./CartItem/CartItem";
 import foodService from "../../services/foodService";
+import {Link} from 'react-router-dom'
 
 function Cart(props) {
-    const {user, clearCart,setUser} = props;
-    const onChangeItemQuantity = (item,action) => {
+    const {user, setUser, match} = props;
+    const onChangeItemQuantity = (item, action) => {
         action === 'add' ? item.quantity++ : item.quantity--;
-        foodService.addToCart(user,item,action)
+        foodService.addToCart(user, item, action)
+            .then(user => setUser(user))
+            .catch(console.error);
+    }
+
+    const clearCart = () => {
+        foodService.clearCart()
             .then(user => setUser(user))
             .catch(console.error);
     }
 
     const onRemoveItemHandler = (dish) => {
-        foodService.removeItemFromCart(user,dish)
+        foodService.removeItemFromCart(user, dish)
             .then(user => setUser(user))
             .catch(console.error);
     }
@@ -41,9 +48,21 @@ function Cart(props) {
                             }
                         </ul>
                         <article className="cart-summary">
-                            <p className="cart-total-price">
-                                {Number(user?.cart?.totalPrice).toFixed(2)} лв.
-                            </p>
+                            <p className="cart-summary-text">Общо</p>
+                            <article className="cart-summary-ctrl">
+                                <p className="cart-total-price">
+                                    {Number(user?.cart?.totalPrice).toFixed(2)} лв.
+                                </p>
+
+                                {
+                                    !match.path.includes('order')
+                                        ? <Link to="order" >
+                                            <button className="cart-summary-btn">Поръчай</button>
+                                        </Link>
+                                        : null
+                                }
+                            </article>
+
                         </article>
 
                     </article>

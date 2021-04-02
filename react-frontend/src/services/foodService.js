@@ -3,6 +3,11 @@ import {fetchWithCredentials} from '../helpers'
 
 import userService from "./userService";
 
+const initialCart = {
+	products:[],
+	totalPrice:0
+}
+
 function objectsEqual(o1, o2){
 	return typeof o1 === 'object' && Object.keys(o1).length > 0
 		? Object.keys(o1).length === Object.keys(o2).length
@@ -33,7 +38,7 @@ const foodService = {
 			&& arraysEqual(prod.selected_options, item.selected_options));
 		if (exist) {
 			if(!addOrSubtract) {
-				exist.quantity += item.quantity;
+				exist.quantity += 1;
 			}else {
 				if(exist.quantity === 0) {
 					exist.quantity ++;
@@ -53,9 +58,12 @@ const foodService = {
 			&& arraysEqual(prod.selected_options, item.selected_options)
 		)
 		user.cart.products.splice(index,1);
+		user.cart.totalPrice = calculateCartTotalPrice(user.cart)
 		return userService.editUserData({cart: user.cart});
-	}
-
+	},
+	clearCart: () => {
+		return userService.editUserData({cart: initialCart})
+	},
 };
 
 export default foodService;

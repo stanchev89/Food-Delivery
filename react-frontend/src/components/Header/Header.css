@@ -1,5 +1,5 @@
 .container-header{
-    font-size: 1.1rem;
+    font-size: 1rem;
     position: relative;
     margin: 20px auto;
     display: flex;
@@ -22,9 +22,10 @@
   }
   .container-header .container-right {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     flex-wrap:wrap;
     font-size: .9rem;
+    width: fit-content;
   }
 
   .user-bar svg {
@@ -80,6 +81,13 @@
   
   .container-header img:hover {
     cursor: pointer;
+  }
+
+  .container-header .is-active {
+    padding: 2px;
+    color:#8D9F3E;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
   
   /*@media screen and (max-width: 1000px) {*/

@@ -1,0 +1,10 @@
+.finish-order {
+    width: 100%;
+    display: flex;
+}
+
+.finish-order .cart,
+.finish-order .order-address,
+.finish-order .order-payment{
+    margin:20px;
+}

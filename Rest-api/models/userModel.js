@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema(
 		address: [
 			{
 				location: types.String,
+				region: types.String,
 				delivery: types.Number
 			}
 		],
@@ -52,15 +53,18 @@ const userSchema = new mongoose.Schema(
 						}
 					}
 				],
-				note: {
-					type: types.String,
-					default: ""
-				}
+				address: {
+					region:types.string,
+					location:types.string,
+					delivery:types.Number
+				},
+				note: types.String,
+				totalPrice: types.Number
 			}
 		],
 		phone: {
 			type: types.String,
-			required:true
+			required: true
 		},
 		email: {
 			type: String,

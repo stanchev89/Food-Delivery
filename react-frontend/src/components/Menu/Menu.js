@@ -3,27 +3,16 @@ import DishItem from "./DishItem/DishItem";
 import Cart from "../Cart/Cart";
 import foodService from "../../services/foodService";
 import userService from "../../services/userService";
-
-const initialCart = {
-	products:[],
-	totalPrice:0
-}
+import Login from "../Login/Login";
 
 function Menu(props) {
-	const {menu, user,setUser} = props;
-
+	const {menu, user,setUser,match,history} = props;
 	const addToCart = (dish) => {
 		foodService.addToCart(user,dish)
 			.then(user => {
 				setUser(user);
 			})
 			.catch(console.error)
-	}
-
-	const clearCart = () => {
-		userService.editUserData({cart:initialCart})
-			.then(user => setUser(user))
-			.catch(console.error);
 	}
 
 	return (
@@ -34,7 +23,7 @@ function Menu(props) {
 					<ul>
 						{menu?.filter((d) => d.category === "salad").map((d) => (
 							<li key={d._id}>
-								<DishItem dish={d} addToCart={addToCart} />
+								<DishItem dish={d} addToCart={addToCart} isLogged={!!user} />
 							</li>
 						))}
 					</ul>
@@ -44,7 +33,7 @@ function Menu(props) {
 					<ul>
 						{menu?.filter((d) => d.category === "soup").map((d) => (
 							<li key={d._id}>
-								<DishItem dish={d} addToCart={addToCart}/>
+								<DishItem dish={d} addToCart={addToCart} isLogged={!!user}/>
 							</li>
 						))}
 					</ul>
@@ -54,7 +43,7 @@ function Menu(props) {
 					<ul>
 						{menu?.filter((d) => d.category === "main").map((d) => (
 							<li key={d._id}>
-								<DishItem dish={d} addToCart={addToCart}/>
+								<DishItem dish={d} addToCart={addToCart} isLogged={!!user}/>
 							</li>
 						))}
 					</ul>
@@ -64,7 +53,7 @@ function Menu(props) {
 					<ul>
 						{menu?.filter((d) => d.category === "desert").map((d) => (
 							<li key={d._id}>
-								<DishItem dish={d} addToCart={addToCart}/>
+								<DishItem dish={d} addToCart={addToCart} isLogged={!!user}/>
 							</li>
 						))}
 					</ul>
@@ -74,13 +63,17 @@ function Menu(props) {
 					<ul>
 						{menu?.filter((d) => d.category === "drink").map((d) => (
 							<li key={d._id}>
-								<DishItem dish={d} addToCart={addToCart}/>
+								<DishItem dish={d} addToCart={addToCart} isLogged={!!user}/>
 							</li>
 						))}
 					</ul>
 				</article>
 			</article>
-			<Cart user={user} clearCart={clearCart} setUser={setUser}/>
+			{
+				user
+					? <Cart user={user} setUser={setUser} match={match}/>
+					: <Login setUser={setUser} history={history}/>
+			}
 		</section>
 	);
 }
