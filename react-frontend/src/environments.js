@@ -1,5 +1,5 @@
 const environments = {
-	apiURL: "http://localhost:5000/",
+	apiURL: "http://localhost:3500/",
 	regions:{
 		smolyan: 0.5,
 		raykovo: 1.5,

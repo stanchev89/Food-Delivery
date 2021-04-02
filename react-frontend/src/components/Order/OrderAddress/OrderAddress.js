@@ -1,7 +1,7 @@
 import './OrderAddress.css';
 import userService from "../../../services/userService";
 import environments from "../../../environments";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 const mapRegions = environments.regions;
 const mapBgRegions = {
@@ -18,12 +18,18 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
         setViewNewAddress(prevState => !prevState);
     }
 
+    useEffect(() => {
+        if(user?.address.length > 0) {
+            setOrder(prevState => ({...prevState,address: user.address[0]}))
+        }
+    },[])
+
 
     const addUserNewAddress = (e) => {
         e.preventDefault();
         const region = e.target.region?.value;
         const location = e.target.location?.value;
-        const exist = user?.address.find(adr => adr.location === location);
+        const exist = user?.address?.find(adr => adr.location === location);
         if(region && location && ! exist) {
             const delivery = mapRegions[region];
             const newAddress = {region, location, delivery}

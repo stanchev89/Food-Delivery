@@ -5,13 +5,21 @@
 .order-address .add-new-address p,
 .my-address .my-address-form p
 {
-    margin-bottom: 0;
+    margin:10px
 }
 
-.order-address label {
+.order-address label,
+.order-address select
+{
     margin-bottom: 3px;
-    margin-top: 20px;
+    /*margin-top: 20px;*/
+    font-size: 1.5rem;
 }
+.order-address input {
+    padding: 5px;
+    font-size: 1rem;
+}
+
 #address {
     margin: 10px 0 10px 0;
 }
@@ -23,6 +31,7 @@
 .add-new-address-form-ctrl label{
     margin: 10px;
 }
+
 .add-new-address-form .confirm-new-address-btn {
     padding: 3px;
     border: 1px solid #8D9F3E;

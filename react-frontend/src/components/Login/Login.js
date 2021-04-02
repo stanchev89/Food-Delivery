@@ -8,7 +8,7 @@ const Login = ({setUser, history}) => {
         const username = e.target.username.value;
         const password = e.target.password.value;
         userService.login(username,password)
-            .then(res => setUser(res))
+            .then(res => !res.message ?setUser(res) : null)
             .then(()=> history.push('/'))
             .catch(console.error)
     }

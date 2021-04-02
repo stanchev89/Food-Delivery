@@ -27,8 +27,7 @@ const dishSchema = new mongoose.Schema(
         img: {
             type: types.String
         },
-        options:[]
-        ,
+        options: [],
         selected_options: [types.String]
         ,
         daily_menu: {

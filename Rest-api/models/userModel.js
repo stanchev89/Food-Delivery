@@ -54,8 +54,8 @@ const userSchema = new mongoose.Schema(
 					}
 				],
 				address: {
-					region:types.string,
-					location:types.string,
+					region:types.String,
+					location:types.String,
 					delivery:types.Number
 				},
 				note: types.String,
