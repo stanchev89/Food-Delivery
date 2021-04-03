@@ -12,7 +12,6 @@ function Order({user, setUser, match,history}) {
     const [delivery, setDelivery] = useState(undefined);
 
     useEffect(() => {
-        console.log(user)
         if(Number(user?.cart?.totalPrice) >= 10) {
             setDelivery(0.5);
         }else {
@@ -22,21 +21,27 @@ function Order({user, setUser, match,history}) {
     },[user?.cart?.totalPrice, order?.address])
 
     const onSubmitOrderHandler = () => {
-
+        const orderId =
+            Date.now().toString() +
+            user._id
+            .split('')
+            .reverse()
+            .splice(0,5)
+            .join('');
         const newOrder = {
             cart:order?.cart?.products,
             address: {region:order?.address?.region, location: order?.address?.location},
             delivery: delivery,
             totalPrice:order?.cart?.totalPrice + delivery,
             description:order.description || '',
-            payment: order?.payment
+            payment: order?.payment,
+            orderId: orderId
         };
         const validOrder = newOrder.cart && newOrder.address && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
         if(validOrder) {
             userService.editUserData({order:newOrder})
                 .then(user =>  {
                     user.cart = {};
-                    console.log(user);
                     setUser(user);
                 })
                 .then(() => history.push('/'))

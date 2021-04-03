@@ -32,7 +32,7 @@ function Cart(props) {
                 <BsTrash className="cart-trash-icon" onClick={clearCart}/>
             </article>
             {
-                user?.cart?.products.length > 0
+                user?.cart?.products?.length > 0
                     ?
                     <article className="cart-dishes">
                         <ul>

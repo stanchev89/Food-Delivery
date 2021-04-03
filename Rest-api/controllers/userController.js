@@ -167,6 +167,7 @@ function editProfileInfo(req, res, next) {
 
 	if (order) {
 		update.$push.orders;
+		update.$set.cart = {}
 	}
 	userModel
 		.findOneAndUpdate({ _id: userId }, update, { new: true })

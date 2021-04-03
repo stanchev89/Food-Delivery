@@ -75,7 +75,7 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
                         </form>
                     </article>
                     : <article className="my-address">
-                        <form className="my-address-form" onBlur={onSelectAddressHandler}>
+                        <form className="my-address-form" onChange={onSelectAddressHandler}>
                             <p>Моите адреси:</p>
                             <select name="address" id="address">
                                 {
