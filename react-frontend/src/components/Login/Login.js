@@ -2,14 +2,25 @@ import './Login.css';
 import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
 
-const Login = ({setUser, history}) => {
+const Login = ({setUser, history, setNotification,...props}) => {
     const onSubmitLoginHandler = (e) => {
         e.preventDefault();
         const username = e.target.username.value;
         const password = e.target.password.value;
         userService.login(username,password)
-            .then(res => !res.message ?setUser(res) : null)
-            .then(()=> history.push('/'))
+            .then(res => {
+                if(res.message) {
+                    const notification = {
+                        message: res.message,
+                        type: 'error'
+                    };
+                    setNotification(notification);
+                }else {
+                    setNotification({});
+                    setUser(res)
+                    history.push('/')
+                }
+            })
             .catch(console.error)
     }
 

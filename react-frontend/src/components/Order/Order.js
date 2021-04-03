@@ -7,7 +7,7 @@ import OrderDescription from "./OrderDescription/OrderDescription";
 import environments from "../../environments";
 import userService from "../../services/userService";
 
-function Order({user, setUser, match,history}) {
+function Order({user, setUser, match,history,setNotification}) {
     const [order,setOrder] = useState({cart:user?.cart});
     const [delivery, setDelivery] = useState(undefined);
 
@@ -43,11 +43,20 @@ function Order({user, setUser, match,history}) {
                 .then(user =>  {
                     user.cart = {};
                     setUser(user);
+                    const notification = {
+                        message:'Благодарим ви за поръчката!',
+                        type: 'success'
+                    }
+                    setNotification(notification)
                 })
                 .then(() => history.push('/'))
                 .catch(console.error);
         }else {
-            console.log('invalid', newOrder);
+            const notification = {
+                message: 'Моля, въведете адрес и начин на плащане!',
+                type: 'error'
+            }
+            setNotification(notification)
         }
 
     }

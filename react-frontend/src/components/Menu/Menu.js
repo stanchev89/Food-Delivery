@@ -5,7 +5,7 @@ import foodService from "../../services/foodService";
 import Login from "../Login/Login";
 
 function Menu(props) {
-    const {menu, user, setUser, match, history} = props;
+    const {menu, user, setUser, match, history,setNotification} = props;
     const addToCart = (dish) => {
         foodService.addToCart(user, dish)
             .then(user => {
@@ -71,7 +71,7 @@ function Menu(props) {
             {
                 user
                     ? <Cart user={user} setUser={setUser} match={match}/>
-                    : <Login setUser={setUser} history={history}/>
+                    : <Login setUser={setUser} history={history} setNotification={setNotification}/>
             }
         </section>
     );

@@ -37,7 +37,7 @@ const userSchema = new mongoose.Schema(
 		],
 		orders: [
 			{
-				cart: [
+				cart:
 					{
 						name: types.String,
 						price: types.Number,
@@ -52,7 +52,7 @@ const userSchema = new mongoose.Schema(
 							type: types.Number
 						}
 					}
-				],
+				,
 				payment: types.String,
 				address: {
 					region:types.String,

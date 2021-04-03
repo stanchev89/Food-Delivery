@@ -16,9 +16,10 @@ import About from "./components/About/About";
 import Conditions from "./components/Conditions/Conditions";
 
 
-import {Switch, Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {Component} from "react";
 import Cart from "./components/Cart/Cart";
+import Notification from "./components/Notification/Notification";
 
 
 class App extends Component {
@@ -26,10 +27,15 @@ class App extends Component {
         super(props);
         this.state = {
             menu: [],
-            currentUser: {}
+            currentUser: {},
+            notification: {
+                message:'',
+                type: ''
+            }
         }
         this.setUser = this.setUser.bind(this)
         this.getUserInfo = this.getUserInfo.bind(this);
+        this.setNotification = this.setNotification.bind(this);
     }
 
     componentDidMount() {
@@ -39,7 +45,7 @@ class App extends Component {
             }).catch(err => console.error(err));
         userService.getUserInfo()
             .then(user => {
-                if(user) {
+                if (user) {
                     this.setState((state) => ({currentUser: user.message ? undefined : user}))
                 }
             }).catch(err => console.error(err));
@@ -48,9 +54,19 @@ class App extends Component {
     setUser(user) {
         return this.setState((state) => (
             {
+                ...state,
                 currentUser: user
             }
-            ))
+        ))
+    }
+
+    setNotification(notification) {
+        return this.setState((state) => (
+            {
+                ...state,
+                notification
+            }
+        ))
     }
 
     getUserInfo() {
@@ -65,34 +81,67 @@ class App extends Component {
         return (
             <div className="App">
                 <Header user={this.state.currentUser}/>
+                {
+                    this.state.notification.message
+                        ? <Notification
+                            notification={this.state.notification}
+                            setNotification={this.setNotification}
+                        />
+                        :null
+                }
                 <main className="app-main">
                     <Switch>
 
                         <Route path="/" exact render={(props) => (
-                            <Menu {...props} menu={this.state.menu}
+                            <Menu {...props}
+                                  menu={this.state.menu}
                                   user={this.state.currentUser}
                                   setUser={this.setUser}
+                                  setNotification={this.setNotification}
                             />
                         )}/>
 
-                        <Route path="/register" exact component={Register}/>
+                        <Route path="/register" exact render={(props) => (
+                            <Register {...props}
+                                      setNotification={this.setNotification}
+                            />
+                        )}/>
 
-                        <Route path="/login" exact  render={(props) => (
-                            <Login {...props} setUser={this.setUser}/>
+                        <Route path="/login" exact render={(props) => (
+                                <Login {...props}
+                                       setUser={this.setUser}
+                                       setNotification={this.setNotification}
+                                />
                         )}/>
                         <Route path="/logout" exact render={(props) => (
                             <Logout {...props} setUser={this.setUser}/>
                         )}/>
 
                         <Route path="/cart" exact render={(props) => (
-                            <Cart {...props} setUser={this.setUser} user={this.state.currentUser}/>
+                            <Cart {...props}
+                                  setUser={this.setUser}
+                                  user={this.state.currentUser}
+                                  setNotification={this.setNotification}
+                            />
                         )}/>
 
                         <Route path="/order" exact render={(props) => (
-                            <Order {...props} setUser={this.setUser} user={this.state.currentUser}/>
+                            <Order {...props}
+                                   setUser={this.setUser}
+                                   user={this.state.currentUser}
+                                   setNotification={this.setNotification}
+                            />
+                        )}/>
+
+                        <Route path="/posts" exact render={(props) => (
+                            <Posts {...props}
+                                  setUser={this.setUser}
+                                  user={this.state.currentUser}
+                                  notification={this.state.notification}
+                                  setNotification={this.setNotification}
+                            />
                         )}/>
                         <Route path="/contacts" exact component={Contacts}/>
-                        <Route path="/posts" exact component={Posts}/>
                         <Route path="/about" exact component={About}/>
                         <Route path="/conditions" exact component={Conditions}/>
                     </Switch>
