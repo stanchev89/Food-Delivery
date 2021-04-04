@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const saltRounds = Number(process.env.SALTROUNDS);
+const saltRounds = Number(process.env.SALTROUNDS) || 9;
 
 const validateEmail = function(email) {
 	const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
 			type: types.String,
 			required: true,
 			unique: true,
-			minlength: [ 5, "Username should be at least 5 characters" ],
+			minlength: [ 3, "Username should be at least 3 characters" ],
 			validate: {
 				validator: function(v) {
 					return /[a-zA-Z0-9]+/g.test(v);

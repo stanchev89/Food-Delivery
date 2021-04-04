@@ -1,0 +1,21 @@
+
+.posts {
+    margin:20px;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.posts .post-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.posts .post-create {
+    align-self: flex-end;
+    text-align: center;
+}
+.new-post-form {
+    display: flex;
+    flex-direction: column;
+}

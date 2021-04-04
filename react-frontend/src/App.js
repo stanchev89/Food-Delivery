@@ -27,7 +27,7 @@ class App extends Component {
         super(props);
         this.state = {
             menu: [],
-            currentUser: {},
+            currentUser: undefined,
             notification: {
                 message:'',
                 type: ''
@@ -137,7 +137,6 @@ class App extends Component {
                             <Posts {...props}
                                   setUser={this.setUser}
                                   user={this.state.currentUser}
-                                  notification={this.state.notification}
                                   setNotification={this.setNotification}
                             />
                         )}/>

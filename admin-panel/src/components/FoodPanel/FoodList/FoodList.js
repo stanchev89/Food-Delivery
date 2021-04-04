@@ -10,7 +10,7 @@ function FoodList(props) {
 
                 <article className="add-wrapper">
                     <Link to='/food/add_new_dish'>
-                        <i className="fas fa-plus fa-x5"></i>
+                        <i className="fas fa-plus fa-x5"> Add new dish</i>
                     </Link>
                 </article>
 

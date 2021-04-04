@@ -2,7 +2,7 @@ import './Register.css';
 import {FiUserPlus} from 'react-icons/fi'
 import userService from "../../services/userService";
 
-const Register = ({history}) => {
+const Register = ({history, setNotification}) => {
     const invalidInput = false;
 
     const onSubmitRegisterHandler = (e) => {
@@ -14,9 +14,20 @@ const Register = ({history}) => {
             password: e.target.password.value,
             repeatPassword: e.target.repeatPassword.value
         }
-        console.log(newUser)
         userService.register(newUser)
-            .then(history.push('/login')).catch(console.error)
+            .then(res => {
+                if(res.message !== 'Successful registration') {
+                    const notification = {
+                        message: res.message,
+                        type: 'error'
+                    }
+                    setNotification(notification);
+                }else {
+                    setNotification({});
+                    history.push('/login')
+                }
+            })
+            .catch(console.error)
     }
 
 
