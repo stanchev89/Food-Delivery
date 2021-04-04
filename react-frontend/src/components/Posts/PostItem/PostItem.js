@@ -7,16 +7,19 @@ const PostItem = ({item, likeHandler, user}) => {
     const [disliked, setDisliked] = useState(false);
 
     const likeClickHandler =  (type) => {
-        if(type === 'like') {
-            if(!item.likes.includes(user._id)) {
-                likeHandler(item,type);
+        if(user && item.author._id !== user._id){
+            if(type === 'like') {
+                if(!item.likes.includes(user._id)) {
+                    likeHandler(item,type);
+                }
+            }
+            if(type === 'dislike') {
+                if(!item.dislikes.includes(user._id)) {
+                    likeHandler(item,type);
+                }
             }
         }
-        if(type === 'dislike') {
-            if(!item.dislikes.includes(user._id)) {
-                likeHandler(item,type);
-            }
-        }
+
     };
 
     useEffect(() => {
