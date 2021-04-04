@@ -46,7 +46,7 @@ function Header(props) {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="contacts"
+                            <NavLink to="/contacts"
                                      exact
                                      activeClassName="is-active">
                                 Контакти

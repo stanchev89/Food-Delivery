@@ -40,7 +40,7 @@ function Order({user, setUser, match,history,setNotification}) {
             payment: order?.payment,
             orderId: orderId
         };
-        const validOrder = newOrder.cart && newOrder.address && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
+        const validOrder = newOrder.cart && newOrder.address.location && newOrder.address.region && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
         if(validOrder) {
             userService.editUserData({order:newOrder})
                 .then(user =>  {

@@ -84,7 +84,7 @@ export const Posts = ({user, setNotification}) => {
                             }
                             {
                                 !user
-                                    ? <p className="post-list-title-info">* Само регистрирани потребители могат да дават рейтинг.</p>
+                                    ? <p className="post-list-title-info">* Само регистрирани потребители оценяват мнения.</p>
                                     : null
                             }
                         </>

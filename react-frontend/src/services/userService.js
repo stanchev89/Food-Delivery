@@ -24,7 +24,7 @@ const userService = {
             .catch(console.error)
     },
     getUserInfo: () => {
-        const fullPath = environments.apiURL + 'user/profile'
+        const fullPath = environments.apiURL + 'user/profile';
         return fetchWithCredentials(fullPath,'GET')
             .then(res => res.json())
             .catch(err => console.error(err));

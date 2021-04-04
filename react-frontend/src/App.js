@@ -20,6 +20,7 @@ import {Route, Switch} from "react-router-dom";
 import {Component} from "react";
 import Cart from "./components/Cart/Cart";
 import Notification from "./components/Notification/Notification";
+import Profile from "./components/Profile/Profile";
 
 
 class App extends Component {
@@ -113,6 +114,12 @@ class App extends Component {
                                        setNotification={this.setNotification}
                                 />
                         )}/>
+
+                        <Route path="/profile" render={(props) => (
+                            <Profile {...props} setUser={this.setUser}/>
+                        )}/>
+
+
                         <Route path="/logout" exact render={(props) => (
                             <Logout {...props} setUser={this.setUser}/>
                         )}/>
