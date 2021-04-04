@@ -133,7 +133,6 @@ function getAllUsers(req, res, next) {
 }
 
 function editProfileInfo(req, res, next) {
-	const initProps = [ "username", "addAddress", "deleteAddress", "phone", "email", "cart", "order" ];
 	const { _id: userId } = req.user;
 	const { username, addAddress, deleteAddress, phone, email, cart, order } = req.body;
 	const update = {

@@ -23,7 +23,11 @@ const Register = ({history, setNotification}) => {
                     }
                     setNotification(notification);
                 }else {
-                    setNotification({});
+                    const notification = {
+                        message: 'Успешна регистрация!',
+                        type: 'success'
+                    }
+                    setNotification(notification);
                     history.push('/login')
                 }
             })

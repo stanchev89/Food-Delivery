@@ -1,6 +1,6 @@
 import environments from "../environments";
 import {fetchWithCredentials} from "../helpers";
-const path = environments.apiURL + 'posts/'
+const path = environments.apiURL + 'posts/';
 
 const postService = {
     getPosts: () => {
@@ -9,10 +9,16 @@ const postService = {
             .catch(console.error)
     },
     createPost: (post) => {
-        const fullPath = path + 'create_post'
-        return fetchWithCredentials(fullPath,'POST',post)
+        const fullPath = path + 'create_post';
+        return fetchWithCredentials(fullPath,'POST', post)
             .then(res => res.json())
             .catch(console.error)
+    },
+    editPost: (post) => {
+        const fullPath = path + 'edit_post';
+        return fetchWithCredentials(fullPath,'POST',post)
+            .then(res => res.json())
+            .catch(console.error);
     }
 }
 
