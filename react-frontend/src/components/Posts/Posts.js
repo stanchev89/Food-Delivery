@@ -13,16 +13,18 @@ export const Posts = ({user, setNotification}) => {
             }).catch(console.error)
     }, []);
 
-    const likeHandler = (post,type) => {
-        const likeAction = (up,down) => {
+    const likeHandler = (post, type) => {
+        const likeAction = (up, down) => {
             up.push(user._id);
             const index = down.findIndex(d => d === user._id);
-            down.splice(index,1);
-        }
+            if (down.includes(user?._id)) {
+                down.splice(index, 1);
+            }
+        };
 
-        if(type === 'like'){
+        if (type === 'like') {
             likeAction(post.likes, post.dislikes)
-        }else {
+        } else {
             likeAction(post.dislikes, post.likes)
         }
         postService.editPost(post)
@@ -47,9 +49,9 @@ export const Posts = ({user, setNotification}) => {
                     message: res.message,
                     type: 'error'
                 };
-                if(res.message) {
+                if (res.message) {
                     setNotification(notification);
-                }else {
+                } else {
                     notification.message = 'Вашето мнение беше добавено!';
                     notification.type = 'success';
                     setNotification(notification);
@@ -62,7 +64,6 @@ export const Posts = ({user, setNotification}) => {
     };
 
 
-
     return (
         <section className="posts">
             <article className="post-list">
@@ -72,7 +73,7 @@ export const Posts = ({user, setNotification}) => {
                         : <>
                             <h1 className="post-list-title">Мнения</h1>
                             {
-                                allPosts?.sort((a,b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+                                allPosts?.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
                                     .map(post => (
                                         <PostItem key={post.description + post.title + post.author.username}
                                                   item={post}
@@ -81,7 +82,11 @@ export const Posts = ({user, setNotification}) => {
                                         />
                                     ))
                             }
-
+                            {
+                                !user
+                                    ? <p className="post-list-title-info">* Само регистрирани потребители могат да дават рейтинг.</p>
+                                    : null
+                            }
                         </>
 
                 }

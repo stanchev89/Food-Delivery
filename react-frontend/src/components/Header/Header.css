@@ -90,6 +90,20 @@
     font-size: 1.2rem;
   }
 
+  .user-bar .user-bar-username-wrapper {
+      display: flex;
+      align-items: center;
+  }
+
+  .user-bar-username-wrapper .user-bar-username {
+      padding: 0;
+      margin: 0;
+      margin-right: 5px;
+      font-size: .7rem;
+      align-self: flex-end;
+      font-weight: bold;
+  }
+
   /*@media screen and (max-width: 1000px) {*/
   /*  .container {*/
   /*    flex-direction: column;*/

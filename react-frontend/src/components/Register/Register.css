@@ -69,7 +69,7 @@
 }
 
 input:focus::placeholder {
-    opacity: .1;
+    opacity: .5;
 }
 
 .register .register-form form input:focus {
@@ -82,4 +82,3 @@ input:focus::placeholder {
 .invalid {
     border: 2px solid red;
 }
-

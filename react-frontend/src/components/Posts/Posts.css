@@ -47,3 +47,10 @@
 .post-create .post-create-btn:hover {
     cursor: pointer;
 }
+
+.post-list .post-list-title-info {
+    font-style: italic;
+    font-weight: lighter;
+    font-size: .8rem;
+    margin: 0;
+}

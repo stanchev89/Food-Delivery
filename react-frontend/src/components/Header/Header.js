@@ -63,7 +63,8 @@ function Header(props) {
                             ? (
                                 <ul>
                                     <li>
-                                        <NavLink to="/profile">
+                                        <NavLink to="/profile" className="user-bar-username-wrapper">
+                                            <p className="user-bar-username">{user?.username}</p>
                                             <FaUser/>
                                         </NavLink>
                                     </li>

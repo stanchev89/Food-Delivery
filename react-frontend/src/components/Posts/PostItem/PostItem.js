@@ -23,15 +23,13 @@ const PostItem = ({item, likeHandler, user}) => {
     };
 
     useEffect(() => {
-        console.log(item);
-        console.log(user);
         if(item?.likes?.includes(user?._id)) {
             setLiked(true);
         }
         if(item?.dislikes?.includes(user?._id)) {
             setDisliked(true);
         }
-    },[]);
+    },[user]);
 
     useEffect(() => {
         if(item?.likes?.includes(user?._id)) {
