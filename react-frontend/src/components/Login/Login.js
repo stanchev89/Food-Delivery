@@ -1,6 +1,7 @@
 import './Login.css';
 import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
+import { Link } from 'react-router-dom'
 
 const Login = ({setUser, history, setNotification,...props}) => {
     const onSubmitLoginHandler = (e) => {
@@ -36,6 +37,7 @@ const Login = ({setUser, history, setNotification,...props}) => {
                         <input type="password" placeholder="Парола" name="password" id="password" required={true}/>
                     </label>
                     <button className="login-form-btn">Влез</button>
+                    <Link to="/register" className="login-form-to-register">Регистрация</Link>
                 </form>
             </article>
         </section>

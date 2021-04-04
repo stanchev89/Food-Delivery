@@ -16,13 +16,13 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
 
     const toggleNewAddressForm = () => {
         setViewNewAddress(prevState => !prevState);
-    }
+    };
 
     useEffect(() => {
         if(user?.address.length > 0) {
             setOrder(prevState => ({...prevState,address: user.address[0]}))
         }
-    },[])
+    },[user]);
 
 
     const addUserNewAddress = (e) => {

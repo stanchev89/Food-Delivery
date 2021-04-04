@@ -9,16 +9,19 @@ import userService from "../../services/userService";
 
 function Order({user, setUser, match,history,setNotification}) {
     const [order,setOrder] = useState({cart:user?.cart});
-    const [delivery, setDelivery] = useState(undefined);
+    const [delivery, setDelivery] = useState(0.5);
 
     useEffect(() => {
         if(Number(user?.cart?.totalPrice) >= 10) {
             setDelivery(0.5);
         }else {
             const deliveryPerRegion = Number(environments.regions[order?.address?.region]);
-            setDelivery(deliveryPerRegion);
+            if(!isNaN(deliveryPerRegion)) {
+                setDelivery(deliveryPerRegion);
+            }
         }
-    },[user?.cart?.totalPrice, order?.address])
+    },[user, order?.address]);
+
 
     const onSubmitOrderHandler = () => {
         const orderId =
@@ -86,7 +89,7 @@ function Order({user, setUser, match,history,setNotification}) {
                             {
                                 delivery !== undefined
                                     ? <>
-                                        <p>Доставка: <strong>{delivery.toFixed(2)}</strong> лв.</p>
+                                        <p>Доставка: <strong>{delivery.toFixed(2) || 0.5}</strong> лв.</p>
                                         <p className="finish-order-summary-total-process">
                                             Крайна сума: <strong>{(Number(order?.cart?.totalPrice) + Number(delivery)).toFixed(2)} лв.</strong>
                                         </p>

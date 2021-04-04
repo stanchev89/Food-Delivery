@@ -82,3 +82,10 @@ input:focus::placeholder {
 .invalid {
     border: 2px solid red;
 }
+
+.login-form-to-register {
+    text-decoration: none;
+    color: #8D9F3E;
+    font-size: .6rem;
+    margin: 5px;
+}
