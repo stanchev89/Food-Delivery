@@ -2,8 +2,14 @@ import './Login.css';
 import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
 import { Link } from 'react-router-dom'
+import {useEffect} from "react";
 
 const Login = ({setUser, history, setNotification,...props}) => {
+
+    useEffect(() => {
+        return () => setNotification({});
+    },[]);
+
     const onSubmitLoginHandler = (e) => {
         e.preventDefault();
         const username = e.target.username.value;

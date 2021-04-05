@@ -1,9 +1,15 @@
 import './ProfileInfo.css';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import userService from "../../../services/userService";
 
 const ProfileInfo = ({user, setUser, setNotification}) => {
-    const [editMode, setEditMode] = useState(false)
+
+    useEffect(() => {
+        return () => setNotification({});
+    },[])
+
+    const [editMode, setEditMode] = useState(false);
+
     const editModeToggle = () => {
         setEditMode(prev => !prev)
     };
@@ -48,6 +54,13 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
                 .then(() => newData.email = email)
                 .catch(() => invalidInputData = true);
             if(invalidInputData) return
+            if(!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/g)){
+                setNotification({
+                    message: 'Невалиден емайл адрес',
+                    type: 'error'
+                });
+                return;
+            }
         }
         if (Object.keys(newData).length === 0) {
             return editModeToggle();

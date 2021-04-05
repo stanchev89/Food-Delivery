@@ -11,10 +11,20 @@
 
 .profile-header .profile-header-nav a{
     text-decoration: none;
-    /*margin: 0 50px 20px 50px;*/
+    padding: 10px;
+    background: white;
     color: #8D9F3E;
     font-weight: bold;
     margin: 10px;
+}
+
+.profile-header .is-active {
+    background: #8D9F3E;
+    border-radius: 3px;
+}
+.profile-header-nav a.is-active {
+    color:white;
+    background: #8D9F3E;
 }
 
 .profile {

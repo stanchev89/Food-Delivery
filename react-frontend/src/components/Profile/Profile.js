@@ -1,7 +1,8 @@
 import './Profile.css';
-import {Link, Route, Switch} from 'react-router-dom'
+import {Link, NavLink, Route, Switch} from 'react-router-dom'
 import {FaUser} from 'react-icons/fa';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileAddress from "./ProfileAddress/ProfileAddress";
 
 
 const Profile = ({user, setUser, match, setNotification}) => {
@@ -9,9 +10,24 @@ const Profile = ({user, setUser, match, setNotification}) => {
         <section className="profile">
             <section className="profile-header">
                 <nav className="profile-header-nav">
-                    <Link to={match.url}>Моите данни</Link>
-                    <Link to={match.url + '/address'}>Моите адреси</Link>
-                    <Link to={match.url + '/orders'}>Моите порчки</Link>
+                    <NavLink
+                        to={match.url}
+                        exact
+                        activeClassName="is-active">
+                        Моите данни
+                    </NavLink>
+                    <NavLink
+                        to={match.url + '/address'}
+                        exact
+                        activeClassName="is-active">
+                        Моите адреси
+                    </NavLink>
+                    <NavLink
+                        to={match.url + '/orders'}
+                        exact
+                        activeClassName="is-active">
+                        Моите адреси
+                    </NavLink>
                 </nav>
             </section>
 
@@ -25,6 +41,13 @@ const Profile = ({user, setUser, match, setNotification}) => {
                                      user={user}
                                      setUser={setUser}
                                      setNotification={setNotification}
+                        />
+                    )}/>
+                    <Route path="/profile/address" exact render={(props) => (
+                        <ProfileAddress {...props}
+                                        user={user}
+                                        setUser={setUser}
+                                        setNotification={setNotification}
                         />
                     )}/>
                 </Switch>
