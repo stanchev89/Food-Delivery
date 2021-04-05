@@ -1,3 +1,7 @@
+.profile-info {
+    min-width: 350px;
+}
+
 .profile-info .profile-info-form {
     display: flex;
     flex-direction: column;

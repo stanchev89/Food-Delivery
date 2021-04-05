@@ -6,6 +6,10 @@ body,
     box-sizing: border-box;
 }
 
+button:focus {
+    outline: none;
+}
+
 .App {
     width: 80%;
     display: flex;

@@ -8,12 +8,14 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
         setEditMode(prev => !prev)
     };
 
-    const checkForMinLength = (str, count) => {
-        if (str.length < count) {
+    const checkForMinLength = (obj, count, e) => {
+        const [key,value] = Object.entries(obj)[0];
+        if (value.length < count) {
             const notification = {
-                message: `Твърде малко символа - "${str}". Трябва да бъде минимум ${count}.`,
+                message: `Твърде малко символа за "${key}". Трябва да бъде минимум ${count}.`,
                 type: 'error'
             }
+            e.target[key].value = user[key];
             setNotification(notification);
             return Promise.reject('not enough symbols')
         }
@@ -28,7 +30,7 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
         const newData = {};
         let invalidInputData = false;
         if (username !== user.username) {
-           await checkForMinLength(username, 3)
+           await checkForMinLength({username}, 3, e)
                 .then(() => {
                     newData.username = username
                 })
@@ -36,13 +38,13 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
             if(invalidInputData) return
         }
         if (phone !== user.phone) {
-           await checkForMinLength(phone, 5)
+           await checkForMinLength({phone}, 5, e)
                 .then(() => newData.phone = phone)
                 .catch(() => invalidInputData = true);
             if(invalidInputData) return
         }
         if (email !== user.email) {
-           await checkForMinLength(email, 6)
+           await checkForMinLength({email}, 6, e)
                 .then(() => newData.email = email)
                 .catch(() => invalidInputData = true);
             if(invalidInputData) return
