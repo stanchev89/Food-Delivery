@@ -2,7 +2,7 @@ import './ProfileInfo.css';
 import {useState, useEffect} from 'react';
 import userService from "../../../services/userService";
 
-const ProfileInfo = ({user, setUser, setNotification}) => {
+const ProfileInfo = ({user, setUser, setNotification,history}) => {
 
     useEffect(() => {
         return () => setNotification({});
@@ -18,7 +18,7 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
         const [key,value] = Object.entries(obj)[0];
         if (value.length < count) {
             const notification = {
-                message: `Твърде малко символа за "${key}". Трябва да бъде минимум ${count}.`,
+                message: `Твърде малко символа за "${key}". Трябва да бъдат минимум ${count} символа.`,
                 type: 'error'
             }
             e.target[key].value = user[key];
@@ -26,7 +26,7 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
             return Promise.reject('not enough symbols')
         }
         return Promise.resolve()
-    }
+    };
 
     const editUserInfoHandler = async (e) => {
         e.preventDefault();
@@ -41,24 +41,26 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
                     newData.username = username
                 })
                 .catch(() => invalidInputData = true);
-            if(invalidInputData) return
+            if (invalidInputData) return
         }
         if (phone !== user.phone) {
            await checkForMinLength({phone}, 5, e)
                 .then(() => newData.phone = phone)
                 .catch(() => invalidInputData = true);
-            if(invalidInputData) return
+            if (invalidInputData) return
         }
         if (email !== user.email) {
            await checkForMinLength({email}, 6, e)
                 .then(() => newData.email = email)
                 .catch(() => invalidInputData = true);
-            if(invalidInputData) return
-            if(!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/g)){
+            if (invalidInputData) return;
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/g)){
                 setNotification({
                     message: 'Невалиден емайл адрес',
                     type: 'error'
                 });
+                e.target.email.value = user.email;
+                editModeToggle();
                 return;
             }
         }
@@ -68,21 +70,36 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
         userService.editUserData(newData)
             .then(res => {
                 if (res.message) {
+                    const mongoError = res.message.split('dup key: ');
+                    if(mongoError.length > 0) {
+                        const curMessage = JSON.parse(JSON.stringify(mongoError[1].split(' ')));
+                        const duplicatedProp = (Object.values(curMessage)[1]).split(':')[0].trim();
+                        e.target[duplicatedProp].value = user[duplicatedProp];
+                        setNotification({
+                            message: `Името вече е заето - ${duplicatedProp}`,
+                            type: 'error'
+                        });
+                         editModeToggle();
+                         return;
+                    }
                     const notification = {
                         message: res.message,
                         type: 'error'
-                    }
-                    return setNotification(notification)
+                    };
+                    setNotification(notification);
+                    return editModeToggle();
                 }
-                const notification = {
-                    message: 'Промените са запаметени.',
-                    type: 'success'
-                };
-                setNotification(notification);
-                setUser(res);
-                editModeToggle();
+
+                    const notification = {
+                        message: 'Промените са запаметени.',
+                        type: 'success'
+                    };
+                    setNotification(notification);
+                    setUser(res);
+                    editModeToggle();
+
             })
-            .catch(console.error);
+            .catch(history.push('/profile'));
     };
     return (
         <article className="profile-info">

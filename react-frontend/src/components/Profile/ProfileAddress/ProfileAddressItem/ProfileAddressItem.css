@@ -1,0 +1,61 @@
+.profile-address-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 10px;
+}
+
+.profile-address-item label {
+    font-weight: bold;
+    font-size: .7rem;
+}
+
+.profile-address-item .profile-address-item-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.profile-address-item .profile-address-item-wrapper.region {
+    max-width: 90px;
+}
+
+.profile-address-item .profile-address-item-wrapper.buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-address-item .profile-address-item-wrapper.buttons svg {
+    margin: 10px;
+}
+
+.profile-address-item input {
+    font-size: 1rem;
+    padding: 5px 5px 5px 0;
+    border-radius: 5px;
+    border: none;
+    overflow: hidden;
+}
+
+.profile-address-item-wrapper.location {
+    min-width:200px;
+    flex-grow: 1;
+}
+
+.profile-address-item-wrapper.buttons svg:hover {
+    cursor: pointer;
+    color: #E25E20;
+}
+
+.profile-address-item-wrapper.buttons .confirm:hover {
+    color: #8D9F3E;
+}
+
+.profile-address-item-wrapper .editing-location {
+    border: 2px solid #8D9F3E;
+    font-style: italic;
+    padding: 3px 3px 3px 5px;
+}
+
+#add-address-location {
+    flex-grow: 1;
+}

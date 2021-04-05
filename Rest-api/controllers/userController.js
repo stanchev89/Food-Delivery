@@ -155,8 +155,8 @@ function editProfileInfo(req, res, next) {
 	if (addAddress) {
 		update.$addToSet.address = addAddress;
 	}
-	if (deleteAddress) {
-		update.$pull.address = { $in: deleteAddress };
+	if (deleteAddress){
+		update.$pull.address = { location: deleteAddress.location, region: deleteAddress.region };
 	}
 
 	if (cart) {
