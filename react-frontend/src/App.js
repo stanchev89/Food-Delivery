@@ -30,7 +30,7 @@ class App extends Component {
             menu: [],
             currentUser: undefined,
             notification: {
-                message:'',
+                message: '',
                 type: ''
             }
         }
@@ -88,7 +88,7 @@ class App extends Component {
                             notification={this.state.notification}
                             setNotification={this.setNotification}
                         />
-                        :null
+                        : null
                 }
                 <main className="app-main">
                     <Switch>
@@ -109,14 +109,18 @@ class App extends Component {
                         )}/>
 
                         <Route path="/login" exact render={(props) => (
-                                <Login {...props}
-                                       setUser={this.setUser}
-                                       setNotification={this.setNotification}
-                                />
+                            <Login {...props}
+                                   setUser={this.setUser}
+                                   setNotification={this.setNotification}
+                            />
                         )}/>
 
                         <Route path="/profile" render={(props) => (
-                            <Profile {...props} setUser={this.setUser}/>
+                            <Profile {...props}
+                                     user={this.state.currentUser}
+                                     setUser={this.setUser}
+                                     setNotification={this.setNotification}
+                            />
                         )}/>
 
 
@@ -142,9 +146,9 @@ class App extends Component {
 
                         <Route path="/posts" exact render={(props) => (
                             <Posts {...props}
-                                  setUser={this.setUser}
-                                  user={this.state.currentUser}
-                                  setNotification={this.setNotification}
+                                   setUser={this.setUser}
+                                   user={this.state.currentUser}
+                                   setNotification={this.setNotification}
                             />
                         )}/>
                         <Route path="/contacts" exact component={Contacts}/>

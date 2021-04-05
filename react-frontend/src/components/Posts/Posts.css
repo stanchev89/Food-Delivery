@@ -42,6 +42,7 @@
     border-radius: 4px;
     background: #8D9F3E;
     color:white;
+    font-size: .9rem;
 }
 
 .post-create .post-create-btn:hover {

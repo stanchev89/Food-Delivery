@@ -49,7 +49,6 @@ function register(req, res, next) {
 
 function login(req, res, next) {
 	const { username, password } = req.body;
-	console.log(username, password);
 	userModel
 		.findOne({ username })
 		.populate("dish")

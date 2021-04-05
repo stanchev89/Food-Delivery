@@ -104,7 +104,7 @@ export const Posts = ({user, setNotification}) => {
                                 cols="30"
                                 rows="10">
                             </textarea>
-                            <button className='post-create-btn'>Сподели</button>
+                            <button className='post-create-btn'>Публикувай</button>
                         </form>
                     </article>
                     : null

@@ -1,13 +1,46 @@
+.profile-header {
+    width: 40%;
+}
+
 .profile-header .profile-header-nav {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-left: 20px;
 }
 
 .profile-header .profile-header-nav a{
     text-decoration: none;
-    margin: 0 50px 20px 50px;
+    /*margin: 0 50px 20px 50px;*/
     color: #8D9F3E;
     font-weight: bold;
+    margin: 10px;
+}
+
+.profile {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile .profile-content {
+    position: relative;
+    width: fit-content;
+    padding: 50px;
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #E25E20;
+    border-bottom: 1px solid #E25E20;
+    border-radius: 30px;
+}
+
+.profile .profile-content svg {
+    color:#8D9F3E;
+    position: absolute;
+    top: -65px;
+    transform: translate(-50%);
+    font-size: 3rem;
 }
