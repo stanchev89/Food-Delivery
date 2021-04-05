@@ -28,12 +28,7 @@ router.post("/logout", userController.logout);
 
 router.get("/profile", auth(false), userController.getProfileInfo);
 
-router.put("/profile",
-    auth(),
-    validator.checkMinLength(3,"username"),
-    validator.checkUsernameExisting(userModel),
-    validator.handleValidationErrors,
-    userController.editProfileInfo);
+router.put("/profile", auth(), userController.editProfileInfo);
 
 
 router.post('/change_password',

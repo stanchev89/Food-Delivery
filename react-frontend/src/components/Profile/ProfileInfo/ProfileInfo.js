@@ -6,17 +6,48 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
     const [editMode, setEditMode] = useState(false)
     const editModeToggle = () => {
         setEditMode(prev => !prev)
+    };
+
+    const checkForMinLength = (str, count) => {
+        if (str.length < count) {
+            const notification = {
+                message: `Твърде малко символа - "${str}". Трябва да бъде минимум ${count}.`,
+                type: 'error'
+            }
+            setNotification(notification);
+            return Promise.reject('not enough symbols')
+        }
+        return Promise.resolve()
     }
 
-    const editUserInfoHandler = (e) => {
+    const editUserInfoHandler = async (e) => {
         e.preventDefault();
-        console.log(e)
-        const newData = {
-            username: e.target.username.value,
-            email: e.target.email.value,
-            phone: e.target.phone.value
-        };
-        if (newData.username === user.username && newData.email === user.email && newData.phone === user.phone) {
+        const username = e.target.username.value;
+        const email = e.target.email.value;
+        const phone = e.target.phone.value;
+        const newData = {};
+        let invalidInputData = false;
+        if (username !== user.username) {
+           await checkForMinLength(username, 3)
+                .then(() => {
+                    newData.username = username
+                })
+                .catch(() => invalidInputData = true);
+            if(invalidInputData) return
+        }
+        if (phone !== user.phone) {
+           await checkForMinLength(phone, 5)
+                .then(() => newData.phone = phone)
+                .catch(() => invalidInputData = true);
+            if(invalidInputData) return
+        }
+        if (email !== user.email) {
+           await checkForMinLength(email, 6)
+                .then(() => newData.email = email)
+                .catch(() => invalidInputData = true);
+            if(invalidInputData) return
+        }
+        if (Object.keys(newData).length === 0) {
             return editModeToggle();
         }
         userService.editUserData(newData)
@@ -31,8 +62,9 @@ const ProfileInfo = ({user, setUser, setNotification}) => {
                 const notification = {
                     message: 'Промените са запаметени.',
                     type: 'success'
-                }
+                };
                 setNotification(notification);
+                setUser(res);
                 editModeToggle();
             })
             .catch(console.error);
