@@ -3,6 +3,14 @@ import {FiShoppingCart} from 'react-icons/fi';
 import {IoMdClose, IoMdSearch} from 'react-icons/io'
 
 function ShowOrderCart({order,closeHandler}) {
+
+    const getCartProductsPrice = (products) => {
+        let totalPrice = 0;
+        products.forEach(product => {
+            totalPrice += product.price * product.quantity
+        });
+        return totalPrice.toFixed(2) + ' лв.'
+    }
     return (
         <article className="show-order-cart">
                 <article className="show-order-cart-icons">
@@ -36,7 +44,7 @@ function ShowOrderCart({order,closeHandler}) {
                     <th>Крайна цена</th>
                 </tr>
                 <tr className="tr-summary-content">
-                    <td className="tr-summary-content-item">{order?.totalPrice}</td>
+                    <td className="tr-summary-content-item">{getCartProductsPrice(order.cart)}</td>
                     <td className="tr-summary-content-item">{Number(order.delivery).toFixed(2)} лв.</td>
                     <td className="tr-summary-content-item">{Number(order.totalPrice).toFixed(2)} лв.</td>
                 </tr>
