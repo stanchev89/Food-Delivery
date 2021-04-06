@@ -44,7 +44,7 @@
     align-items: center;
     /*border-top: 3px solid #E25E20;*/
     /*border-bottom: 3px solid #E25E20;*/
-    border: 2px solid #E25E20;
+    border: 3px double #E25E20;
     border-radius: 20px;
 }
 

@@ -2,13 +2,9 @@ import './ProfileAddressItem.css';
 import {useState} from 'react';
 import {FiCheck, FiEdit2, FiTrash} from 'react-icons/fi'
 import {IoMdClose} from 'react-icons/io';
+import environments from "../../../../environments";
 
-const mapBgRegions = {
-    smolyan: 'Смолян',
-    raykovo: 'Райково',
-    ustovo: 'Устово',
-    kaptaja: 'Каптажа'
-};
+const mapBgRegions = environments.mapBgRegions;
 
 const ProfileAddressItem = ({address, index,onDeleteAddressHandler,onUpdateExistAddressHandler, setNotification}) => {
     const [editMode, setEditMode] = useState(false);

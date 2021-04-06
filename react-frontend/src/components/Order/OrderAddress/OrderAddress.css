@@ -1,8 +1,4 @@
-.add-new-address .add-new-address-form {
-    display: flex;
-    flex-direction: column;
-}
-.order-address .add-new-address p,
+
 .my-address .my-address-form p
 {
     margin:10px
@@ -23,26 +19,7 @@
 #address {
     margin: 10px 0 10px 0;
 }
-.add-new-address-form .add-new-address-form-ctrl {
-    display: flex;
-    justify-content: space-between;
-    margin:10px;
-}
-.add-new-address-form-ctrl label{
-    margin: 10px;
-}
 
-.add-new-address-form .confirm-new-address-btn {
-    padding: 5px;
-    border: 1px solid #8D9F3E;
-    border-radius: 3px;
-    background: #8D9F3E;
-    color:white;
-    font-size: .7rem;
-}
-.add-new-address-form .confirm-new-address-btn:hover {
-    cursor: pointer;
-}
 
 .my-address .add-new-address-btn {
     padding: 5px;

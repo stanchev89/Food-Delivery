@@ -1,19 +1,14 @@
 import './ProfileAddress.css';
 import {useState} from 'react';
 import ProfileAddressItem from "./ProfileAddressItem/ProfileAddressItem";
+import AddNewAddressForm from '../AddNewAddressForm/AddNewAddressForm';
 
-const mapBgRegions = {
-    smolyan: 'Смолян',
-    raykovo: 'Райково',
-    ustovo: 'Устово',
-    kaptaja: 'Каптажа'
-}
 
-const ProfileAddress = ({user,setUser,setNotification,onDeleteAddressHandler,onUpdateExistAddressHandler}) => {
+const ProfileAddress = ({user, setUser, setNotification, onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
     const [addAddressMode, setAddAddressMode] = useState(false);
 
-    const onChangeAddressHandler = (address,index) => {
-        console.log(address,index);
+    const toggleNewAddressForm = () => {
+        setAddAddressMode(prev => !prev);
     };
 
     return (
@@ -30,6 +25,24 @@ const ProfileAddress = ({user,setUser,setNotification,onDeleteAddressHandler,onU
                     />
                 ))
             }
+
+            {
+                user?.address.length === 0
+                    ? <p>Нямате добавени адреси...</p>
+                    : null
+            }
+
+            {
+                addAddressMode
+                    ? <AddNewAddressForm user={user} setUser={setUser} toggleNewAddressForm={toggleNewAddressForm}/>
+                    : <button className="add-new-address-btn"
+                              onClick={toggleNewAddressForm}
+                    >
+                        Добави нов адрес
+                    </button>
+            }
+
+
         </section>
     )
 }

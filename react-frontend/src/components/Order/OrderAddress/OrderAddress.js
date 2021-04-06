@@ -2,14 +2,9 @@ import './OrderAddress.css';
 import userService from "../../../services/userService";
 import environments from "../../../environments";
 import {useState, useEffect} from 'react';
+import AddNewAddressForm from '../../Profile/AddNewAddressForm/AddNewAddressForm';
 
-const mapRegions = environments.regions;
-const mapBgRegions = {
-    smolyan: 'Смолян',
-    raykovo: 'Райково',
-    ustovo: 'Устово',
-    kaptaja: 'Каптажа'
-}
+const mapBgRegions = environments.mapBgRegions;
 const OrderAddress = ({user, order, setOrder, setUser}) => {
 
     const [viewNewAddress, setViewNewAddress] = useState(false);
@@ -24,22 +19,6 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
         }
     },[user]);
 
-
-    const addUserNewAddress = (e) => {
-        e.preventDefault();
-        const region = e.target.region?.value;
-        const location = e.target.location?.value;
-        const exist = user?.address?.find(adr => adr.location === location);
-        if(region && location && ! exist) {
-            const delivery = mapRegions[region];
-            const newAddress = {region, location, delivery}
-            userService.editUserData({addAddress: newAddress})
-                .then(user => setUser(user))
-                .then(() => toggleNewAddressForm())
-                .catch(console.error)
-        }
-    }
-
     const onSelectAddressHandler = (e) => {
         const selectedLocation = e.target.value;
         const selected = user?.address?.find(adr => adr.location === selectedLocation)
@@ -53,27 +32,7 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
             <h3>Изберете адрес</h3>
             {
                 viewNewAddress
-                    ? <article className="add-new-address">
-                        <p>Добавяне на нов адрес</p>
-                        <form className="add-new-address-form" onSubmit={addUserNewAddress}>
-                            <label htmlFor="region">Регион</label>
-                            <select name="region" id="region">
-                                {
-                                    Object.keys(mapRegions).map(key => (
-                                        <option value={key} key={key}>{mapBgRegions[key]}</option>
-                                    ))
-                                }
-                            </select>
-                            <label htmlFor="add-new-address">Адрес</label>
-                            <input type="text" name="location" id="add-new-address"/>
-                            <article className="add-new-address-form-ctrl">
-                                <button type="button" className="close-new-address-btn"
-                                        onClick={toggleNewAddressForm}>Затвори
-                                </button>
-                                <input type="submit" className="confirm-new-address-btn" value="Добави"/>
-                            </article>
-                        </form>
-                    </article>
+                    ? <AddNewAddressForm user={user} setUser={setUser} toggleNewAddressForm={toggleNewAddressForm}/>
                     : <article className="my-address">
                         <form className="my-address-form" onChange={onSelectAddressHandler}>
                             <p>Моите адреси:</p>

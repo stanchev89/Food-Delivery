@@ -8,9 +8,8 @@ import userService from "../../services/userService";
 
 const Profile = ({user, setUser, match, setNotification}) => {
     const onDeleteAddressHandler = (adr,idx) => {
-        user.address.splice(idx,1,adr);
+        user.address.splice(idx,1);
         userService.editUserData({deleteAddress:adr});
-        userService.editUserData({addAddress:adr});
         setUser(user);
     };
 

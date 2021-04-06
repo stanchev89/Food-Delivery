@@ -12,10 +12,6 @@ function Order({user, setUser, match,history,setNotification}) {
     const [delivery, setDelivery] = useState(0.5);
 
     useEffect(() => {
-        return () => setNotification({});
-    },[]);
-
-    useEffect(() => {
         if(Number(user?.cart?.totalPrice) >= 10) {
             setDelivery(0.5);
         }else {
