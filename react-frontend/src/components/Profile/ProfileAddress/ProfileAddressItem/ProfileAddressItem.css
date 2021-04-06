@@ -26,6 +26,7 @@
 
 .profile-address-item .profile-address-item-wrapper.buttons svg {
     margin: 10px;
+    opacity: .1;
 }
 
 .profile-address-item input {
@@ -42,12 +43,13 @@
 }
 
 .profile-address-item-wrapper.buttons svg:hover {
+    opacity: 1;
     cursor: pointer;
     color: #E25E20;
 }
 
 .profile-address-item-wrapper.buttons .confirm:hover {
-    color: #8D9F3E;
+    color: green;
 }
 
 .profile-address-item-wrapper .editing-location {

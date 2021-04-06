@@ -9,7 +9,7 @@ function Header(props) {
         <article className="container-header">
             <article className="container-left">
                 <Link to="/">
-                    <img src="foodDelivery-icon.png" alt="" className="logo"/>
+                    <img src="foodDelivery-icon.png" alt="site-logo" className="logo"/>
                 </Link>
             </article>
 

@@ -32,6 +32,7 @@ function Order({user, setUser, match,history,setNotification}) {
             totalPrice:order?.cart?.totalPrice + delivery,
             description:order.description || '',
             payment: order?.payment,
+            date: new Date().toLocaleString()
         };
         const validOrder = newOrder.cart && newOrder.address.location && newOrder.address.region && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
         if(validOrder) {

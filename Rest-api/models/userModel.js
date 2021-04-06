@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema(
                 delivery: types.Number,
                 description: types.String,
                 totalPrice: types.Number,
-                orderId: types.String
+                date: types.String
             }
         ],
         phone: {

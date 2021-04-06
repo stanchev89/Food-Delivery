@@ -1,21 +1,22 @@
 import './Profile.css';
-import {Link, NavLink, Route, Switch} from 'react-router-dom'
+import {NavLink, Route, Switch} from 'react-router-dom'
 import {FaUser} from 'react-icons/fa';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileAddress from "./ProfileAddress/ProfileAddress";
 import userService from "../../services/userService";
+import ProfileOrders from "./ProfileOrders/ProfileOrders";
 
 
 const Profile = ({user, setUser, match, setNotification}) => {
-    const onDeleteAddressHandler = (adr,idx) => {
-        user.address.splice(idx,1);
-        userService.editUserData({deleteAddress:adr});
+    const onDeleteAddressHandler = (adr, idx) => {
+        user.address.splice(idx, 1);
+        userService.editUserData({deleteAddress: adr});
         setUser(user);
     };
 
-    const onUpdateExistAddressHandler = (oldAddress,newAddres,idx) => {
-        user.address.splice(idx,1,newAddres);
-        userService.editUserData({deleteAddress:oldAddress});
+    const onUpdateExistAddressHandler = (oldAddress, newAddres, idx) => {
+        user.address.splice(idx, 1, newAddres);
+        userService.editUserData({deleteAddress: oldAddress});
         userService.editUserData({addAddress: newAddres});
         setUser(user);
     }
@@ -69,6 +70,9 @@ const Profile = ({user, setUser, match, setNotification}) => {
                                                     onUpdateExistAddressHandler={onUpdateExistAddressHandler}
                                     />
                                 )}/>
+                                <Route path="/profile/orders" exact render={(props) => (
+                                    <ProfileOrders {...props} user={user}/>
+                                )}/>
                             </Switch>
                         </section>
                     </>
@@ -79,6 +83,7 @@ const Profile = ({user, setUser, match, setNotification}) => {
 
 
     )
-};
+}
+;
 
 export default Profile;
