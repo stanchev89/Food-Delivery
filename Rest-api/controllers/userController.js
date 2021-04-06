@@ -164,7 +164,7 @@ function editProfileInfo(req, res, next) {
 	}
 
 	if (order) {
-		update.$push.orders;
+		update.$push.orders = order;
 		update.$set.cart = {}
 	}
 	userModel

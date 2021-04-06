@@ -51,9 +51,9 @@
 }
 
 .profile-address-item-wrapper .editing-location {
-    border: 2px solid #8D9F3E;
+    border: 1px solid #E25E20;
     font-style: italic;
-    padding: 3px 3px 3px 5px;
+    padding: 4px 2px 4px 0px;
 }
 
 #add-address-location {

@@ -24,13 +24,7 @@ function Order({user, setUser, match,history,setNotification}) {
 
 
     const onSubmitOrderHandler = () => {
-        const orderId =
-            Date.now().toString() +
-            user._id
-            .split('')
-            .reverse()
-            .splice(0,5)
-            .join('');
+
         const newOrder = {
             cart:order?.cart?.products,
             address: {region:order?.address?.region, location: order?.address?.location},
@@ -38,7 +32,6 @@ function Order({user, setUser, match,history,setNotification}) {
             totalPrice:order?.cart?.totalPrice + delivery,
             description:order.description || '',
             payment: order?.payment,
-            orderId: orderId
         };
         const validOrder = newOrder.cart && newOrder.address.location && newOrder.address.region && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
         if(validOrder) {
