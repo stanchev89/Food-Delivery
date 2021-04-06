@@ -82,10 +82,11 @@
     font-size: .6rem;
     color: black;
 }
-.show-order-cart-description blockquote {
+.show-order-cart-description q {
     background: antiquewhite;
     padding: 10px;
     font-size: .7rem;
+    font-style: italic;
     margin: 0;
 }
 .show-order-cart-description .description-title {

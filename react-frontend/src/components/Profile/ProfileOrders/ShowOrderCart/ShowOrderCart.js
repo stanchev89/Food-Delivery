@@ -46,7 +46,7 @@ function ShowOrderCart({order,closeHandler}) {
                 order.description
                     ? <article className="show-order-cart-description">
                         <p className="description-title">Бележка към поръчката:</p>
-                        <blockquote>{order.description}</blockquote>
+                        <q>{order.description}</q>
                     </article>
                     : null
             }

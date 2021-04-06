@@ -1,4 +1,10 @@
-
+.posts .post-list-logo {
+    align-self: center;
+    font-size: 3rem;
+    margin: 20px;
+    margin-top:0;
+    color: #E25E20;
+}
 .posts {
     margin-top:20px;
     width: 80%;
@@ -21,6 +27,7 @@
 .posts .post-create {
     text-align: center;
     margin-left: 20px;
+    margin-top: 65px;
 }
 .new-post-form {
     display: flex;

@@ -2,6 +2,7 @@ import './Posts.css';
 import {useEffect, useState} from 'react';
 import postService from "../../services/postService";
 import PostItem from "./PostItem/PostItem";
+import {BsChatDots} from 'react-icons/bs'
 
 export const Posts = ({user, setNotification}) => {
     const [allPosts, setAllPosts] = useState([]);
@@ -71,7 +72,7 @@ export const Posts = ({user, setNotification}) => {
                     allPosts.length === 0
                         ? <p>Няма предишни мнения...</p>
                         : <>
-                            <h1 className="post-list-title">Мнения</h1>
+                        <BsChatDots className="post-list-logo"/>
                             {
                                 allPosts?.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
                                     .map(post => (
@@ -84,7 +85,8 @@ export const Posts = ({user, setNotification}) => {
                             }
                             {
                                 !user
-                                    ? <p className="post-list-title-info">* Само регистрирани потребители оценяват мнения.</p>
+                                    ?
+                                    <p className="post-list-title-info">* Само регистрирани потребители оценяват мнения.</p>
                                     : null
                             }
                         </>
