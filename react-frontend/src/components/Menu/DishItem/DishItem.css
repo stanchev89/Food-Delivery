@@ -1,7 +1,6 @@
 
 .dish {
     display: flex;
-    font-size: .7rem;
     align-items: center;
     /*border: 1px solid #E25E20;*/
     border-bottom: 1px solid #E25E20;
@@ -105,15 +104,53 @@
 
 @media screen and (max-width: 800px) {
     .dish {
+        font-size: .7rem;
         flex-direction: column;
         height: fit-content;
+        text-align: center;
+    }
+    .dish .dish-content {
+        display: flex;
+        flex-direction: column;
     }
     .dish img {
-
-        height: 80px;
-        max-height: 90%;
-        border-radius: 90px;
-        object-fit: contain;
-        margin-right: 10px;
+        display: none;
+        /*height: 80px;*/
+        /*max-height: 90%;*/
+        /*border-radius: 90px;*/
+        /*object-fit: contain;*/
+        /*margin-right: 10px;*/
     }
+    .dish ul {
+        max-height:fit-content;
+
+    }
+
+    .dish .dish-buy-order {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .dish .dish-buy {
+        width: 100%;
+    }
+    .dish .dish-buy-order h3{
+        align-self: center;
+        font-size: .7rem;
+    }
+    .dish .dish-buy-order .price-btn{
+        align-self: baseline;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding:5px;
+        margin: 0;
+
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .dish {
+        font-size: .7rem;
+    }
+
 }

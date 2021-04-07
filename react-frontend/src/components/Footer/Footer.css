@@ -12,7 +12,7 @@
     flex-wrap: wrap;
     list-style: none;
     text-align: center;
-    padding-left: 0;
+    padding-left: 10px;
 }
 .footer .footer-nav-bar li {
     margin-right: 20px

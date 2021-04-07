@@ -37,7 +37,6 @@
 
 @media screen and (max-width: 1000px) {
     .finish-order .finish-order-details {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
     }
 }
