@@ -17,11 +17,12 @@ const OrderAddress = ({user, order, setOrder, setUser}) => {
         if(user?.address.length > 0) {
             setOrder(prevState => ({...prevState,address: user.address[0]}))
         }
-    },[user]);
+    },[]);
 
     const onSelectAddressHandler = (e) => {
+        console.log('change')
         const selectedLocation = e.target.value;
-        const selected = user?.address?.find(adr => adr.location === selectedLocation)
+        const selected = user?.address?.find(adr => adr.location === selectedLocation);
         if(selected) {
             const {region,location,delivery} = selected;
             setOrder(prevState => ({...prevState, address: {region, location, delivery}}))

@@ -14,13 +14,13 @@ function Order({user, setUser, match,history,setNotification}) {
     useEffect(() => {
         if(Number(user?.cart?.totalPrice) >= 10) {
             setDelivery(0.5);
-        }else {
+        } else {
             const deliveryPerRegion = Number(environments.regions[order?.address?.region]);
             if(!isNaN(deliveryPerRegion)) {
                 setDelivery(deliveryPerRegion);
             }
         }
-    },[user, order?.address]);
+    },[user?.cart?.totalPrice, order]);
 
 
     const onSubmitOrderHandler = () => {
@@ -59,6 +59,7 @@ function Order({user, setUser, match,history,setNotification}) {
     }
     useEffect(() => {
         setOrder(prevState => ({...prevState, cart:user?.cart}))
+        console.log(order)
     },[user?.cart?.products]);
 
     return (
