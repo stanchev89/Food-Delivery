@@ -1,6 +1,6 @@
 import './ShowOrderCart.css';
 import {FiShoppingCart} from 'react-icons/fi';
-import {IoMdClose, IoMdSearch} from 'react-icons/io'
+import {IoMdClose} from 'react-icons/io'
 
 function ShowOrderCart({order,closeHandler}) {
 

@@ -59,7 +59,6 @@ function Order({user, setUser, match,history,setNotification}) {
     }
     useEffect(() => {
         setOrder(prevState => ({...prevState, cart:user?.cart}))
-        console.log(order)
     },[user?.cart?.products]);
 
     return (

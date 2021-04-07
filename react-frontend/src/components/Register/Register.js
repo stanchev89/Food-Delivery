@@ -4,10 +4,9 @@ import userService from "../../services/userService";
 import {useEffect} from "react";
 
 const Register = ({history, setNotification}) => {
-    const invalidInput = false;
     useEffect(() => {
         return () => setNotification({});
-    },[])
+    },[]);
 
     const onSubmitRegisterHandler = (e) => {
         e.preventDefault();

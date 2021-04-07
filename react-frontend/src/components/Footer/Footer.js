@@ -28,9 +28,9 @@ function Footer(props) {
             </nav>
 
             <article className="footer-icons">
-                <img height="40" src="https://shoplineimg.com/assets/footer/card_visa.png"/>
-                <img height="40" src="https://shoplineimg.com/assets/footer/card_master.png"/>
-                <img height="40" src="https://shoplineimg.com/assets/footer/card_paypal.png"/>
+                <img style={{height: 40}} src="https://shoplineimg.com/assets/footer/card_visa.png" alt="visa logo"/>
+                <img style={{height: 40}}  src="https://shoplineimg.com/assets/footer/card_master.png" alt="mastercard logo"/>
+                <img style={{height: 40}}  src="https://shoplineimg.com/assets/footer/card_paypal.png" alt="paypal logo"/>
             </article>
 
 			<h5>Food Delivery &copy; 2021</h5>

@@ -14,6 +14,7 @@ const Notification = ({notification, setNotification}) => {
     }
 
     return (
+        // eslint-disable-next-line no-useless-concat
         <article className={'notification' + ' ' + notification?.type}>
             {
                 notification?.type === 'error'
