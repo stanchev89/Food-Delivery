@@ -30,10 +30,13 @@ button:focus {
 
 @media not all and (min-resolution: .001dpcm) {
     @media {
-        /*.safari10 {*/
-        /*  color:#0000FF;*/
-        /*  background-color:#CCCCCC;*/
-        /*}*/
+        .App {
+            width: 100%;
+        }
+        .safari10 {
+          color:#0000FF;
+          background-color:#CCCCCC;
+        }
         .menu .cart {
             position: -webkit-sticky;
         }

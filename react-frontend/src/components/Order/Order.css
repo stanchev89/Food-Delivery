@@ -34,3 +34,10 @@
 .finish-order .finish-order-summary {
     text-align: center;
 }
+
+@media screen and (max-width: 1000px) {
+    .finish-order .finish-order-details {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

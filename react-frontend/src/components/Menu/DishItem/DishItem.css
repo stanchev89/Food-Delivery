@@ -31,10 +31,10 @@
 .dish img {
     width: 100px;
     max-width: 20%;
-    height: 100px;
+    height: 80px;
     max-height: 90%;
     border-radius: 90px;
-    object-fit: cover;
+    object-fit: contain;
     margin-right: 10px;
   }
 
@@ -101,4 +101,19 @@
 
 .dish .price-btn:focus {
     outline: none;
+}
+
+@media screen and (max-width: 800px) {
+    .dish {
+        flex-direction: column;
+        height: fit-content;
+    }
+    .dish img {
+
+        height: 80px;
+        max-height: 90%;
+        border-radius: 90px;
+        object-fit: contain;
+        margin-right: 10px;
+    }
 }

@@ -29,13 +29,7 @@
 .order-table tr:first-child th:last-child {
     border-top-right-radius: 6px;
 }
-.order-table td {
-    border-right: 1px solid #c6c9cc;
-    border-bottom: 1px solid #c6c9cc;
-}
-.order-table td:first-child {
-    border-left: 1px solid #c6c9cc;
-}
+
 .order-table tr:nth-child(even) td {
     background: #8D9F3E;
     color: white;

@@ -62,3 +62,12 @@
     font-size: .8rem;
     margin: 0;
 }
+
+@media screen and (max-width: 1000px) {
+    .posts {
+        flex-direction: column;
+    }
+    .post-create {
+        margin-bottom: 20px;
+    }
+}

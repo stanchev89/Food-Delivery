@@ -19,3 +19,9 @@
     border-bottom: 2px solid #E25E20;
     padding: 10px;
 }
+
+@media screen and (max-width: 1000px) {
+    .conditions .conditions-item {
+        width: 80%;
+    }
+}

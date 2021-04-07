@@ -35,6 +35,7 @@
     border-radius: 5px;
     border: none;
     overflow: hidden;
+    background: white;
 }
 
 .profile-address-item-wrapper.location {
@@ -47,6 +48,7 @@
     cursor: pointer;
     color: #E25E20;
 }
+
 
 .profile-address-item-wrapper.buttons .confirm:hover {
     color: green;
