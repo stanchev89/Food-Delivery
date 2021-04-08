@@ -2,7 +2,7 @@ Food-Delivery project
 
 # The app is deployed at https://food-delivery-stanchev.herokuapp.com 
  
- If app doesn't work correctly : There is problem with some browser and mobile phones with cookies. I'll try to fix this issue.
+ If app doesn't work correctly : There is problem with some browsers and mobile phones with cookies. I'll try to fix this issue.
  Works correctly with desktop Chrome browser.
 
 # Food delivery is online shopping platform suitable for restaurants, fast-food, or even all type of shops.
