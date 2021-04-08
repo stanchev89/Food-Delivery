@@ -48,11 +48,13 @@
         flex-direction: column;
     }
     .menu .food-list {
-        width:90%;
+        width:100%;
     }
     .menu .cart {
         position: static;
         width: 100%;
+        height: fit-content;
         margin-bottom: 20px;
+        margin-top: 5px;
     }
 }
