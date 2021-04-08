@@ -5,9 +5,12 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileAddress from "./ProfileAddress/ProfileAddress";
 import userService from "../../services/userService";
 import ProfileOrders from "./ProfileOrders/ProfileOrders";
+import {useContext} from 'react'
+import UserContext from "../../context/UserContext";
 
 
-const Profile = ({user, setUser, match, setNotification}) => {
+const Profile = ({match, setNotification}) => {
+    const [user, setUser] = useContext(UserContext);
     const onDeleteAddressHandler = (adr, idx) => {
         user.address.splice(idx, 1);
         userService.editUserData({deleteAddress: adr});
@@ -56,22 +59,17 @@ const Profile = ({user, setUser, match, setNotification}) => {
                             <Switch>
                                 <Route path="/profile" exact render={(props) => (
                                     <ProfileInfo {...props}
-                                                 user={user}
-                                                 setUser={setUser}
                                                  setNotification={setNotification}
                                     />
                                 )}/>
                                 <Route path="/profile/address" exact render={(props) => (
                                     <ProfileAddress {...props}
-                                                    user={user}
-                                                    setUser={setUser}
                                                     setNotification={setNotification}
                                                     onDeleteAddressHandler={onDeleteAddressHandler}
                                                     onUpdateExistAddressHandler={onUpdateExistAddressHandler}
                                     />
                                 )}/>
-                                <Route path="/profile/orders" exact render={(props) => (
-                                    <ProfileOrders {...props} user={user}/>
+                                <Route path="/profile/orders" exact component={ProfileOrders}/>
                                 )}/>
                             </Switch>
                         </section>

@@ -3,9 +3,12 @@ import DishItem from "./DishItem/DishItem";
 import Cart from "../Cart/Cart";
 import foodService from "../../services/foodService";
 import Login from "../Login/Login";
+import {useContext} from 'react'
+import UserContext from "../../context/UserContext";
 
 function Menu(props) {
-    const {menu, user, setUser, match, history,setNotification} = props;
+    const {menu, match, history,setNotification} = props;
+    const [user,setUser] = useContext(UserContext);
     const addToCart = (dish) => {
         foodService.addToCart(user, dish)
             .then(user => {
@@ -70,8 +73,8 @@ function Menu(props) {
             </article>
             {
                 user
-                    ? <Cart user={user} setUser={setUser} match={match}/>
-                    : <Login setUser={setUser} history={history} setNotification={setNotification}/>
+                    ? <Cart match={match}/>
+                    : <Login history={history} setNotification={setNotification}/>
             }
         </section>
     );

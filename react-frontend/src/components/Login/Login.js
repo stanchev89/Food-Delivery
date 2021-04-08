@@ -2,9 +2,11 @@ import './Login.css';
 import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
 import { Link } from 'react-router-dom'
-import {useEffect} from "react";
+import {useEffect,useContext} from "react";
+import UserContext from "../../context/UserContext";
 
-const Login = ({setUser, history, setNotification,...props}) => {
+const Login = ({setNotification, history}) => {
+    const [_,setUser] = useContext(UserContext);
 
     useEffect(() => {
         return () => setNotification({});
@@ -24,7 +26,7 @@ const Login = ({setUser, history, setNotification,...props}) => {
                     setNotification(notification);
                 }else {
                     setNotification({});
-                    setUser(res)
+                    setUser(res);
                     history.push('/')
                 }
             })

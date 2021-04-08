@@ -1,12 +1,13 @@
 import './Posts.css';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import postService from "../../services/postService";
 import PostItem from "./PostItem/PostItem";
 import {BsChatDots} from 'react-icons/bs'
+import UserContext from "../../context/UserContext";
 
-export const Posts = ({user, setNotification}) => {
+export const Posts = ({ setNotification}) => {
     const [allPosts, setAllPosts] = useState([]);
-
+    const [user] = useContext(UserContext);
     useEffect(() => {
         postService.getPosts()
             .then(posts => {

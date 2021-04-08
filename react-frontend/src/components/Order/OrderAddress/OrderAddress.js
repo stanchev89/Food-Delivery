@@ -1,11 +1,12 @@
 import './OrderAddress.css';
 import environments from "../../../environments";
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import AddNewAddressForm from '../../Profile/AddNewAddressForm/AddNewAddressForm';
+import UserContext from "../../../context/UserContext";
 
 const mapBgRegions = environments.mapBgRegions;
-const OrderAddress = ({user, order, setOrder, setUser}) => {
-
+const OrderAddress = ({setOrder}) => {
+    const [user, setUser] = useContext(UserContext);
     const [viewNewAddress, setViewNewAddress] = useState(false);
 
     const toggleNewAddressForm = () => {

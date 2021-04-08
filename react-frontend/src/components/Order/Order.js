@@ -2,12 +2,14 @@ import './Order.css';
 import Cart from "../Cart/Cart";
 import OrderAddress from "./OrderAddress/OrderAddress";
 import OrderPayment from "./OrderPayment/OrderPayment";
-import {useState,useEffect} from 'react'
+import {useState,useEffect, useContext} from 'react'
 import OrderDescription from "./OrderDescription/OrderDescription";
 import environments from "../../environments";
 import userService from "../../services/userService";
+import UserContext from "../../context/UserContext";
 
-function Order({user, setUser, match,history,setNotification}) {
+function Order({match,history,setNotification}) {
+    const [user, setUser] = useContext(UserContext);
     const [order,setOrder] = useState({cart:user?.cart});
     const [delivery, setDelivery] = useState(0.5);
 
@@ -67,10 +69,10 @@ function Order({user, setUser, match,history,setNotification}) {
                 {
                     user?.cart?.products?.length > 0
                         ? <>
-                            <Cart user={user} setUser={setUser} match={match}/>
-                            <OrderAddress user={user} setUser={setUser} order={order} setOrder={setOrder} />
-                            <OrderPayment order={order} setOrder={setOrder}/>
-                            <OrderDescription order={order} setOrder={setOrder}/>
+                            <Cart match={match}/>
+                            <OrderAddress setOrder={setOrder} />
+                            <OrderPayment setOrder={setOrder}/>
+                            <OrderDescription setOrder={setOrder}/>
                         </>
                         : <p>Нямате добавени продукти в количката...</p>
 

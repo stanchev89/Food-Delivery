@@ -1,9 +1,10 @@
 import './ProfileInfo.css';
 import {useState, useEffect} from 'react';
 import userService from "../../../services/userService";
-
-const ProfileInfo = ({user, setUser, setNotification,history}) => {
-
+import {useContext} from 'react'
+import UserContext from "../../../context/UserContext";
+const ProfileInfo = ({setNotification,history}) => {
+    const [user, setUser] = useContext(UserContext);
     useEffect(() => {
         return () => setNotification({});
     },[])

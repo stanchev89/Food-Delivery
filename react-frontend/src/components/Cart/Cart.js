@@ -4,9 +4,12 @@ import {BsTrash} from 'react-icons/bs';
 import CartItem from "./CartItem/CartItem";
 import foodService from "../../services/foodService";
 import {Link} from 'react-router-dom'
+import {useContext} from 'react'
+import UserContext from "../../context/UserContext";
 
 function Cart(props) {
-    const {user, setUser, match} = props;
+    const {match} = props;
+    const [user,setUser] = useContext(UserContext);
     const onChangeItemQuantity = (item, action) => {
         action === 'add' ? item.quantity++ : item.quantity--;
         foodService.addToCart(user, item, action)

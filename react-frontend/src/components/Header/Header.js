@@ -2,9 +2,11 @@ import "./Header.css";
 import {NavLink, Link} from "react-router-dom";
 import {FaUser, FaShoppingCart} from 'react-icons/fa';
 import {FiLogOut} from 'react-icons/fi';
+import {useContext} from 'react'
+import UserContext from "../../context/UserContext";
 
-function Header(props) {
-    const {user} = props;
+function Header() {
+    const [user] = useContext(UserContext);
     return (
         <article className="container-header">
             <article className="container-left">

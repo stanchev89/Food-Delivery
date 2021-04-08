@@ -2,8 +2,10 @@ import './ProfileOrders.css';
 import {IoMdSearch} from 'react-icons/io';
 import {useState} from 'react'
 import ShowOrderCart from './ShowOrderCart/ShowOrderCart';
-
-function ProfileOrders({user}){
+import {useContext} from 'react'
+import UserContext from "../../../context/UserContext";
+function ProfileOrders(){
+    const [user] = useContext(UserContext);
 
     const[showCart,setShowCart] = useState(false);
     const[currentOrder,setCurrentOrder] = useState(undefined);

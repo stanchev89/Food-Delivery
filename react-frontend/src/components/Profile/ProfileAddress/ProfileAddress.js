@@ -2,10 +2,12 @@ import './ProfileAddress.css';
 import {useState} from 'react';
 import ProfileAddressItem from "./ProfileAddressItem/ProfileAddressItem";
 import AddNewAddressForm from '../AddNewAddressForm/AddNewAddressForm';
+import {useContext} from 'react'
+import UserContext from "../../../context/UserContext";
 
-
-const ProfileAddress = ({user, setUser, setNotification, onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
+const ProfileAddress = ({setNotification, onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
     const [addAddressMode, setAddAddressMode] = useState(false);
+    const [user, setUser] = useContext(UserContext);
 
     const toggleNewAddressForm = () => {
         setAddAddressMode(prev => !prev);
@@ -34,7 +36,7 @@ const ProfileAddress = ({user, setUser, setNotification, onDeleteAddressHandler,
 
             {
                 addAddressMode
-                    ? <AddNewAddressForm user={user} setUser={setUser} toggleNewAddressForm={toggleNewAddressForm}/>
+                    ? <AddNewAddressForm toggleNewAddressForm={toggleNewAddressForm}/>
                     : <button className="add-new-address-btn"
                               onClick={toggleNewAddressForm}
                     >
