@@ -102,7 +102,7 @@
     outline: none;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
     .dish {
         font-size: .7rem;
         flex-direction: column;
@@ -136,7 +136,8 @@
     }
     .dish .dish-buy-order h3{
         align-self: center;
-        font-size: .7rem;
+        font-size: .5rem;
+        min-width: 60px;
     }
     .dish .dish-buy-order .price-btn{
         align-self: baseline;
@@ -144,22 +145,33 @@
         border-bottom-right-radius: 0;
         padding:5px;
         margin: 0;
+        font-size: .5rem;
 
     }
 }
 
 @media screen and (max-width: 1000px) {
     .dish {
-        font-size: .7rem;
+        font-size: .5rem;
     }
     .dish-buy {
         justify-content: center;
     }
     .dish .dish-buy-order {
-        width: unset;
+        width: fit-content;
     }
     .dish .dish-buy {
         justify-content: center;
+    }
+    .dish .price {
+        border-top-left-radius: 6px;
+        padding: 5px;
+        min-width: 80px;
+        font-size: .7rem;
+    }
+
+    .dish .price-btn {
+        border-top-right-radius: 6px;
     }
     .dish .price-btn:hover {
         font-weight: bold;
