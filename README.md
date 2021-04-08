@@ -17,10 +17,10 @@ You can change the port or change origins in 'Rest-api/config/config.js'.
 
 Admin panel ('Food-Delivery/admin-panel) is React builded platform which is not finished yet.Now is using just to add or remove items (dishes) form the shop.
 Also you can show or hide dishes from 'daily menu' just with one click.
-To use admin panel run 'npm install' to install all dependencies, then 'npm start' will start the app at port 3000 by default.
+To use admin panel run 'npm install' to install all dependencies, then 'npm start' will start the app at port 3001 by default.
 
 ### React frontend app is located in 'Food-Delivery/react-frontend'
-Install all dependencies with 'npm install', then 'npm start' will start application at port 3001 by default.
+Install all dependencies with 'npm install', then 'npm start' will start application at port 3000 by default.
 
 
 ------------------------------------------------------------------
