@@ -1,11 +1,10 @@
 Food-Delivery project
+# Food delivery is online shopping platform suitable for restaurants, fast-food, or even all type of shops.
 
 # The app is deployed at https://food-delivery-stanchev.herokuapp.com 
  
- If app doesn't work correctly : There is problem with some browsers and mobile phones with cookies. I'll try to fix this issue.
- Works correctly with desktop Chrome browser.
+ If app doesn't work correctly : There might be a problem with cookies. If browser is set to prevent cross-site tracking then cookie will be not set and the app will not works as expect.
 
-# Food delivery is online shopping platform suitable for restaurants, fast-food, or even all type of shops.
 
 ## Design: Everything is custom styled with no libraries.
 
