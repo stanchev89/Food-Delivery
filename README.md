@@ -16,7 +16,7 @@ You need to open the folder "Rest-api" and run 'npm install' to install all depe
 After that run 'node index.js' and the api will listening on port 3500.
 You can change the port or change origins in 'Rest-api/config/config.js'.
 
-Admin panel ('Food-Delivery/admin-panel) is React builded platform which is not finished but just to help adding, removing items (dishes) form shop.
+Admin panel ('Food-Delivery/admin-panel) is React builded platform which is not finished yet.Now is using just to add or remove items (dishes) form the shop.
 Also you can show or hide dishes from 'daily menu' just with one click.
 To use admin panel run 'npm install' to install all dependencies, then 'npm start' will start the app at port 3000 by default.
 
