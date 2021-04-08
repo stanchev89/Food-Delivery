@@ -1,8 +1,15 @@
 Food-Delivery project
 
+# The app is deployed at https://food-delivery-stanchev.herokuapp.com 
+ 
+ If app doesn't work correctly : There is problem with some browser and mobile phones with cookies. I'll try to fix this issue.
+ Works correctly with desktop Chrome browser.
+
 # Food delivery is online shopping platform suitable for restaurants, fast-food, or even all type of shops.
 
-## How to install and run the application
+## Design: Everything is custom styled with no libraries.
+
+## How to install and run the application locally
 
 Backend is building with NODE JS, Express, Mongoose, Mongo - with cloud based database - Mongo Atlas.
 You need to open the folder "Rest-api" and run 'npm install' to install all dependencies. 
