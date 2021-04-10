@@ -44,6 +44,7 @@ export const Posts = ({ setNotification}) => {
         const newPost = {
             title: e.target.title.value,
             description: e.target.description.value,
+            author: user._id
         };
         postService.createPost(newPost)
             .then(res => {
@@ -80,7 +81,7 @@ export const Posts = ({ setNotification}) => {
                                         <PostItem key={post?.description + post?.title + post?.author.username}
                                                   item={post}
                                                   likeHandler={likeHandler}
-                                                  user={user}
+                                                  setAllPosts={setAllPosts}
                                         />
                                     ))
                             }

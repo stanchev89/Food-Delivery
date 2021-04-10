@@ -19,6 +19,12 @@ const postService = {
         return fetchWithCredentials(fullPath,'POST',post)
             .then(res => res.json())
             .catch(console.error);
+    },
+    deletePost: (post) => {
+        const fullPath = path + 'delete_post';
+        return fetchWithCredentials(fullPath,'POST',post)
+            .then(res => res.json())
+            .catch(console.error)
     }
 }
 

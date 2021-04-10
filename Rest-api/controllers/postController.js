@@ -8,37 +8,36 @@ function getPosts(req, res, next) {
 };
 
 function addNewPost(req, res, next) {
-    if(req.user) {
-        const newPost = {
-            title: req.body.title,
-            description: req.body.description,
-            likes: [],
-            dislikes: [],
-            author: req.user._id
-        };
-        postModel.find({ author: newPost.author,
-            description: newPost.description,
-            title: newPost.title
-        }).then(exist => {
-            if(exist.length > 0) {
-                res.status(409).send({message: `The post is already published!`});
-                return;
-            }
-            return postModel.create(newPost)
-                .then(post => {
-                    return getPosts(req,res,next);
-                }).catch(next)
-        })
-    }else {
-        res.status(401).send({message: 'Unauthorized!'})
-    }
+
+    const newPost = {
+        title: req.body.title,
+        description: req.body.description,
+        likes: [],
+        dislikes: [],
+        author: req.body.author
+    };
+    postModel.find({
+        author: newPost.author,
+        description: newPost.description,
+        title: newPost.title
+    }).then(exist => {
+        if (exist.length > 0) {
+            res.status(409).send({message: `The post is already published!`});
+            return;
+        }
+        return postModel.create(newPost)
+            .then( () => {
+                return getPosts(req, res, next);
+            }).catch(next)
+    })
+
 
 }
 
-function editPost (req,res,next) {
+function editPost(req, res, next) {
     const post = req.body;
     const update = {
-        $set : {
+        $set: {
             title: post.title,
             description: post.description,
             likes: post.likes,
@@ -47,15 +46,25 @@ function editPost (req,res,next) {
     }
 
     postModel.findOneAndUpdate({_id: post._id}, update)
-        .then(() =>  {
-           return getPosts(req,res,next);
-        } )
+        .then(() => {
+            return getPosts(req, res, next);
+        })
         .catch(next);
+}
+
+function deletePost(req, res, next) {
+    const post = req.body;
+    postModel.findOneAndDelete({title: post.title, description: post.description, author: post.author})
+        .then(() => {
+            return getPosts(req, res, next);
+        }).catch(next);
+
 }
 
 
 module.exports = {
     getPosts,
     addNewPost,
-    editPost
+    editPost,
+    deletePost
 }

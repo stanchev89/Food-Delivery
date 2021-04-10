@@ -78,4 +78,8 @@
     .profile-address-item-wrapper.location {
         min-width:50px
     }
+
+    .profile-address-item-wrapper input {
+        font-size: .3rem;
+    }
 }
