@@ -31,9 +31,6 @@ export const Posts = ({ setNotification}) => {
         }
         postService.editPost(post)
             .then(res => {
-                const index = allPosts.findIndex(p => p.author._id === user._id);
-                const copyPosts = allPosts;
-                copyPosts[index] = post;
                 setAllPosts(res);
             })
             .catch(console.error);
