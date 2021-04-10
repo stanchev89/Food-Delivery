@@ -81,7 +81,7 @@ const PostItem = ({item, likeHandler, setAllPosts}) => {
                                 <input type="text" defaultValue={item.title} id="post-form-input-title" name="title"/>
                                 <label htmlFor="post-form-input-description">Вашето мнение:</label>
                                 <textarea defaultValue={item.description} id="post-form-input-description" name="description"/>
-                                <article className="post-item-edit-controls">
+                                <article className="post-item-edit-controls form">
                                     <button><FiCheck className='post-item-edit-confirm'/></button>
                                     <IoMdClose onClick={toggleEditMode}/>
                                 </article>
