@@ -1,10 +1,22 @@
 import "./DishItem.css";
+import {useState} from 'react';
 
 function DishItem(props) {
     const {dish, addToCart, isLogged} = props;
+    const [showImage, setShowImage] = useState(false);
+    const showImageToggle = () => {
+        setShowImage(prev => !prev);
+    }
     return (
         <article className="dish">
-            <img src={dish.img} alt="dish img"/>
+            {/*<article className="dish-big-img">*/}
+            {/*    {*/}
+            {/*        showImage*/}
+            {/*            ? <img src={dish.img} display={showImage} class="dish-big-image"/>*/}
+            {/*            : null*/}
+            {/*    }*/}
+            {/*</article>*/}
+            <img src={dish.img} alt="dish img" onClick={showImageToggle}/>
             <article className="dish-content">
                 <h3>{dish.name}</h3>
                 <ul className="products">

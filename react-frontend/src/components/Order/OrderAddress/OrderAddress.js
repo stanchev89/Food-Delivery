@@ -19,6 +19,12 @@ const OrderAddress = ({setOrder}) => {
         }
     },[]);
 
+    useEffect(() => {
+        if(user?.address.length > 0) {
+            setOrder(prevState => ({...prevState,address: user.address[0]}))
+        }
+    },[user?.address]);
+
     const onSelectAddressHandler = (e) => {
         console.log('change')
         const selectedLocation = e.target.value;
