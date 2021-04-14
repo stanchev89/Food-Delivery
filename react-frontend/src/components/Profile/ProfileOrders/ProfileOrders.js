@@ -10,6 +10,11 @@ function ProfileOrders(){
     const[showCart,setShowCart] = useState(false);
     const[currentOrder,setCurrentOrder] = useState(undefined);
 
+    function parseDateTime(s) {
+        const b = s.split(/\D/);
+        return new Date(b[0],b[1]-1,b[2],b[3],b[4],b[5])
+    }
+
     const toggleShowCart = (order) => {
         if(!order) {
              setShowCart(prev => !prev);
@@ -38,7 +43,8 @@ function ProfileOrders(){
                         </thead>
                         <tbody>
                         {
-                            user?.orders.sort((a,b) => Date.parse(b.date) - Date.parse(a.date)).map(order => (
+                            user?.orders.sort((a,b) => Date.parse(parseDateTime(b.date)) - Date.parse(parseDateTime(a.date))
+                            ).map(order => (
                                 <tr key={order._id}>
                                     <td>{order.date}</td>
                                     <td>{order.address.location}</td>

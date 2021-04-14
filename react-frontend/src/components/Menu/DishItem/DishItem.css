@@ -102,7 +102,7 @@
     color:#8D9F3E;
     border: 2px solid #8D9F3E;
     border-top:none;
-    padding: 9px;
+    padding: 9px 8px;
   }
 
 .dish .price-btn:focus {

@@ -63,10 +63,10 @@
     background-color: #8D9F3E;
 }
 
-.switch input:focus + .slider {
-    box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.7);
-    outline: none;
-}
+/*.switch input:focus + .slider {*/
+/*    box-shadow: 0 0 0 4px rgba(21, 156, 228, 0.7);*/
+/*    outline: none;*/
+/*}*/
 
 .switch input:checked + .slider:before {
     transform: translateX(26px);
