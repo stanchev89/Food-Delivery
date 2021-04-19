@@ -15,19 +15,19 @@ function Cart(props) {
         foodService.addToCart(user, item, action)
             .then(user => setUser(user))
             .catch(console.error);
-    }
+    };
 
     const clearCart = () => {
         foodService.clearCart()
             .then(user => setUser(user))
             .catch(console.error);
-    }
+    };
 
     const onRemoveItemHandler = (dish) => {
         foodService.removeItemFromCart(user, dish)
             .then(user => setUser(user))
             .catch(console.error);
-    }
+    };
     return (
         <section className="cart">
             <article className="cart-icon-wrapper">
@@ -41,7 +41,7 @@ function Cart(props) {
                         <ul>
                             {
                                 user?.cart?.products.map(item => (
-                                    <li key={item?.name}>
+                                    <li key={item?.name+Object.keys(item.selected_options)+Object.values(item.selected_options)}>
                                         <CartItem item={item}
                                                   onChangeItemQuantity={onChangeItemQuantity}
                                                   onRemoveItem={onRemoveItemHandler}

@@ -70,5 +70,5 @@ function ProfileOrders(){
             }
         </article>
     )
-}
+};
 export default ProfileOrders;

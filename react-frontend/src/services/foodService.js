@@ -5,17 +5,25 @@ import userService from "./userService";
 const initialCart = {
 	products:[],
 	totalPrice:0
-}
+};
 
 function objectsEqual(o1, o2){
 	return typeof o1 === 'object' && Object.keys(o1).length > 0
 		? Object.keys(o1).length === Object.keys(o2).length
-		&& Object.keys(o1).every(p => this.objectsEqual(o1[p], o2[p]))
+		&& Object.keys(o1).every(p => objectsEqual(o1[p], o2[p]))
 		: o1 === o2;
 }
-function arraysEqual(arr1, arr2){
-	return arr1.length === arr2.length && arr1.every((o, idx) => objectsEqual(o, arr2[idx]));
+
+
+function arraysEqual(arr1,arr2){
+    const sortedArr1 = arr1.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
+    const sortedArr2 = arr2.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
+    return sortedArr1.length === sortedArr2.length
+        && sortedArr1.every((o, idx) => objectsEqual(o, sortedArr2[idx]))
 }
+
+
+
 function calculateCartTotalPrice(cart){
 	cart.totalPrice = 0;
 	cart.products.forEach((product) => {
@@ -34,7 +42,7 @@ const foodService = {
 		const exist = cart.products?.find((prod) =>
 			prod.name === item.name
 			&& prod.price === item.price
-			&& arraysEqual(prod.selected_options, item.selected_options));
+			&& objectsEqual(prod.selected_options, item.selected_options));
 		if (exist) {
 			if(!addOrSubtract) {
 				exist.quantity += 1;
