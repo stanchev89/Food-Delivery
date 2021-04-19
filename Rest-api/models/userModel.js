@@ -41,13 +41,8 @@ const userSchema = new mongoose.Schema(
                     {
                         name: types.String,
                         price: types.Number,
-                        options: [
-                            {
-                                key: types.String,
-                                values: [types.String]
-                            }
-                        ],
-                        selected_options: [types.String],
+                        options: types.Mixed,
+                        selected_options: types.Mixed,
                         quantity: {
                             type: types.Number
                         }
@@ -83,13 +78,9 @@ const userSchema = new mongoose.Schema(
                 {
                     name: types.String,
                     price: types.Number,
-                    options: [
-                        {
-                            key: types.String,
-                            values: [types.String]
-                        }
-                    ],
-                    selected_options: [types.String],
+                    options: types.Mixed,
+                    selected_options: types.Mixed
+                    ,
                     quantity: {
                         type: types.Number
                     }

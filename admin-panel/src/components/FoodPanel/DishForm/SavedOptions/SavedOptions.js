@@ -10,18 +10,17 @@ function SavedOptions(props) {
 
 
             {
-                options.map((opt, idx) => {
-                    const [optionName] = Object.keys(opt);
-                    const [optionValues] = Object.values(opt);
+                Object.keys(options)?.map(optionName => {
+                    const optionValues = options[optionName];
                     return (
-                        <article className="saved-options-item" key={idx}>
+                        <article className="saved-options-item" key={optionName}>
                             <h3 className="item-title">{optionName}</h3>
-                            <FiEdit2 onClick={props.editExistOption.bind(null,idx)}/>
-                            <MdRemove onClick={props.deleteExistOption.bind(null,idx)}/>
+                            <FiEdit2 onClick={props.editExistOption.bind(null,optionName)}/>
+                            <MdRemove onClick={props.deleteExistOption.bind(null,optionName)}/>
                             {
-                                <ul className="item-value-ul" key={idx}>
+                                <ul className="item-value-ul" key={optionName+'_values'}>
                                     {
-                                        optionValues.filter(v => v !== null && v !== '').map((value, idxValue) => (
+                                        optionValues.map((value, idxValue) => (
 
                                             <li key={idxValue}>
                                                 <p className="item-value">{value}</p>

@@ -8,11 +8,14 @@ import * as foodService from '../../../services/foodService';
 function DishForm(props) {
     const initialDish = {
         name: '', products: '', meatless: false, category: '', price: 0,
-        weight: 0, img: '', options: [], _editing_options: []
+        weight: 0, img: '', options: {}, _editing_options: {}
     }
     const editDish = props.editDish ? props.editDish(props.match.params.id) : null;
     if(editDish) {
-        editDish._editing_options = [];
+        editDish._editing_options = {};
+        if(!editDish.hasOwnProperty('options')) {
+            editDish.options = {};
+        }
     }
     const [newDish, setNewDish] = useState(editDish ? editDish : initialDish);
 
@@ -35,7 +38,7 @@ function DishForm(props) {
     }
 
     const onChange = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const prop = event.target.name;
         const value = event.target.value;
 
@@ -47,48 +50,38 @@ function DishForm(props) {
     }
 
 
-    function addDishOption(event) {
+    function addDishOption() {
         const newOption = {
             name: []
         }
         setNewDish((prevState) => (
             {
                 ...prevState,
-                _editing_options: prevState._editing_options ? prevState._editing_options.concat(newOption) : newOption
+                _editing_options: Object.assign(prevState._editing_options,newOption)
             }
         ));
     }
 
-    function onChangeOptionName(index, event) {
+    function onChangeOptionName(optName, event) {
         const newName = event.target.value;
-        const currOption = newDish._editing_options[index];
-        const [oldName] = Object.keys(currOption);
-        let newWordsObject = {};
+        const optValues = newDish._editing_options[optName];
 
-        Object.keys(currOption).forEach(key => {
-            if (key === oldName) {
-                let newPair = {[newName]: currOption[oldName]};
-                newWordsObject = {...newWordsObject, ...newPair}
-            } else {
-                newWordsObject = {...newWordsObject, [key]: currOption[key]}
-            }
-        });
         const allOptions = newDish._editing_options;
-        allOptions[index] = newWordsObject;
+        delete allOptions[optName];
+        allOptions[newName] = optValues;
         setNewDish((prevState) => (
             {
                 ...prevState,
                 _editing_options: allOptions
 
             }
-        ))
+        ));
 
     }
 
-    function onChangeOptionValue(indexOpt, indexVal, event) {
-        const [optName] = Object.keys(newDish._editing_options[indexOpt]);
+    function onChangeOptionValue(optName, indexVal, event) {
         const allOpts = newDish._editing_options;
-        allOpts[indexOpt][optName][indexVal] = event.target.value;
+        allOpts[optName].splice(indexVal,1,event.target.value);
         setNewDish((prevState) => (
             {
                 ...prevState,
@@ -97,23 +90,20 @@ function DishForm(props) {
         ))
     }
 
-    function addOptionValue(index) {
+    function addOptionValue(optName) {
         const prevOptions = newDish._editing_options;
-        const [optName] = Object.keys(prevOptions[index]);
-        prevOptions[index][optName].push('');
+        prevOptions[optName].push('');
         setNewDish((prevState) => (
             {
                 ...prevState,
                 _editing_options: prevOptions
-
             }
         ))
     }
 
-    function removeOptionValue(indexOpt, idxValue) {
+    function removeOptionValue(optName, idxValue) {
         const prevOptions = newDish._editing_options;
-        const [optName] = Object.keys(prevOptions[indexOpt]);
-        prevOptions[indexOpt][optName][idxValue] = null;
+        prevOptions[optName].splice(idxValue,1);
 
         setNewDish((prevState) => (
             {
@@ -126,24 +116,20 @@ function DishForm(props) {
 
     function saveOptions() {
         const newOptions = newDish._editing_options
-            ? newDish._editing_options.concat(newDish.options)
-            : newDish.options
+            ? Object.assign(newDish.options,newDish._editing_options)
+            : newDish.options;
         setNewDish((prevState) => (
             {
                 ...prevState,
-                options: newOptions
+                options: newOptions,
+                _editing_options: {}
             }
-        ))
-        deleteDishOption(-1);
-
+        ));
     }
 
-    function deleteDishOption(index) {
-        const currentOptions = index ? newDish._editing_options : [];
-        if (index) {
-            currentOptions.splice(index, 1);
-
-        }
+    function deleteDishOption(optName) {
+        const currentOptions = newDish._editing_options;
+        delete currentOptions[optName]
         setNewDish((prevState) => (
             {
                 ...prevState,
@@ -152,9 +138,10 @@ function DishForm(props) {
         ))
     }
 
-    function editExistOption(index) {
+    function editExistOption(optName) {
         const currOptions = newDish.options;
-        const optionToEdit = currOptions.splice(index, 1);
+        const optionToEdit = { [optName]: currOptions[optName] };
+        delete currOptions[optName];
         setNewDish((prevState) => (
             {
                 ...prevState,
@@ -164,9 +151,9 @@ function DishForm(props) {
         ))
     }
 
-    function deleteExistOption(index) {
+    function deleteExistOption(optName) {
         const currOptions = newDish.options;
-        currOptions.splice(index, 1);
+        delete currOptions[optName];
         setNewDish((prevState) => (
             {
                 ...prevState,
@@ -229,7 +216,7 @@ function DishForm(props) {
                 <SavedOptions options={newDish.options} editExistOption={editExistOption}
                               deleteExistOption={deleteExistOption}/>
                 <DishOptions
-                    options={newDish._editing_options ? newDish._editing_options : []}
+                    options={newDish._editing_options ? newDish._editing_options : {}}
                     addDishOption={addDishOption}
                     onChangeOptionName={onChangeOptionName}
                     deleteOption={deleteDishOption}

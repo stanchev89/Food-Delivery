@@ -1,58 +1,50 @@
 import {Component} from 'react';
-import {MdDeleteForever} from 'react-icons/md';
-import {MdRemoveCircleOutline} from 'react-icons/md';
+import {MdDeleteForever, MdRemoveCircleOutline} from 'react-icons/md';
 import './DishOptions.css';
 
 
 class DishOption extends Component {
-    saveOptions() {
-        const option = {};
-        option[this.state.optionName] = this.state.optionValue;
-        return this.props.saveOptions(option)
-    }
+    // saveOptions() {
+    //     const option = {};
+    //     option[this.state.optionName] = this.state.optionValue;
+    //     return this.props.saveOptions(option)
+    // }
 
     render() {
         return (
             <>
                 {
-                    this.props.options?.length > 0
-                        ? this.props.options.map((opt, idx) => {
-                            const [optName] = Object.keys(opt);
-                            const [optValue] = Object.values(opt).filter(v => v !== null);
+                    Object.keys(this.props.options)?.length > 0
+                        ? Object.keys(this.props.options).map(optName => {
                             return (
 
-                                <article className="option-wrapper" key={idx}>
+                                <article className="option-wrapper" key={optName}>
                                     <h3>Set option</h3>
-
                                     <article className="option-name-wrapper">
 
                                         <input type="text" placeholder="enter option name"
-                                               value={optName === 'name' ? '' : optName}
-                                               onChange={this.props.onChangeOptionName.bind(this, idx)}/>
-                                        <button type="button" onClick={this.props.addOptionValue.bind(this, idx)}>Add
+                                               defaultValue={optName === 'name' ? '' : optName}
+                                               onBlur={this.props.onChangeOptionName.bind(this, optName)}/>
+                                        <button type="button" onClick={this.props.addOptionValue.bind(this, optName)}>Add
                                             value
                                         </button>
-                                        <MdRemoveCircleOutline onClick={this.props.deleteOption.bind(null, idx)}/>
+                                        <MdRemoveCircleOutline onClick={this.props.deleteOption.bind(null, optName)}/>
                                     </article>
                                     {
-                                        this.props.options[idx][optName].map((val, i) => {
-                                            <h1>{val}</h1>
+                                        this.props.options[optName].map((val, i) => {
+                                            <h1>{optName}</h1>
                                             return (
 
                                                 <article key={i} className="option-values-wrapper">
                                                     {
-                                                        val !== null ?
-                                                            <>
-                                                                <input type="text" placeholder="enter value"
-                                                                       value={optValue[i]}
-                                                                       onChange={this.props.onChangeOptionValue.bind(this, idx, i)}/>
-                                                                <MdDeleteForever
-                                                                    onClick={this.props.removeOptionValue.bind(this, idx, i)}/>
-                                                            </>
-                                                            : null
-
+                                                        <>
+                                                            <input type="text" placeholder="enter value"
+                                                                   value={val}
+                                                                   onChange={this.props.onChangeOptionValue.bind(this, optName, i)}/>
+                                                            <MdDeleteForever
+                                                                onClick={this.props.removeOptionValue.bind(this, optName, i)}/>
+                                                        </>
                                                     }
-
                                                 </article>
                                             )
                                         })
@@ -65,7 +57,7 @@ class DishOption extends Component {
                 }
                 <article className="options-btn-wrapper">
                     {
-                        this.props.options?.length === 0
+                        Object.keys(this.props.options)?.length === 0
                             ? <button className="add-dish-options" type="button" onClick={this.props.addDishOption}>Add
                                 dish option</button>
                             : <button className="add-dish-save-options" type="button"
