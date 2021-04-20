@@ -84,9 +84,22 @@
 }
 
 .dish-select {
-    padding:10px;
-    font-size: 2rem;
+    padding:5px 10px;
+    font-size: 1rem;
+    border: 1px solid #E25E20;
+    border-radius: 6px;
+    margin-left: 5px;
 }
+.dish-select:focus {
+    border: 2px solid #8D9F3E;
+    outline: none;
+    border-radius: 6px;
+    padding:4px 9px;
+}
+
+/*.dish-select:active {*/
+/*    border: 1px solid #8D9F3E;*/
+/*}*/
 
 .dish .price {
     width: 100%;

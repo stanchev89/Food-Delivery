@@ -5,10 +5,12 @@ function DishItem(props) {
     const {dish, addToCart, isLogged} = props;
     const [showImage, setShowImage] = useState(false);
     const [dishOptions, setDishOptions] = useState({});
+    const [additionalPrice, setAdditionalPrice] = useState(0);
+
 
     useEffect(() => {
         const initalOptions = {};
-        if(dish.options) {
+        if (dish.options) {
             for (const option in dish.options) {
                 initalOptions[option] = dish.options[option][0];
             }
@@ -17,16 +19,22 @@ function DishItem(props) {
     }, []);
     const addOption = (e) => {
         const key = e.target.name;
-        const value = e.target.value;
+        const [value, addPrice] = e.target.value.split('|');
+        if (addPrice) {
+            setAdditionalPrice(Number(addPrice));
+        } else {
+            setAdditionalPrice(0);
+        }
         setDishOptions(prev => ({...prev, [key]: value}))
     }
     const showImageToggle = () => {
         setShowImage(prev => !prev);
     };
     const addDishToCart = () => {
+        dish.price += additionalPrice;
         dish.selected_options = dishOptions;
-        console.log(dish);
-        return addToCart(dish);
+        addToCart(dish);
+        dish.price -= additionalPrice;
     }
     return (
         <article className="dish">
@@ -62,14 +70,23 @@ function DishItem(props) {
                                                         onChange={addOption}
                                                 >
                                                     {
-                                                        options.map(opt => (
-                                                            <option className="dish-option"
-                                                                    value={opt}
-                                                                    key={opt}
-                                                            >
-                                                                {opt}
-                                                            </option>
-                                                        ))
+                                                        options.map(opt => {
+                                                                const [value, addPrice] = opt.split('|');
+                                                                return (
+                                                                    <option className="dish-option"
+                                                                            value={opt}
+                                                                            key={opt}
+                                                                    >
+                                                                        {
+                                                                            addPrice
+                                                                                ? `${value} (+${Number(addPrice).toFixed(2)} лв.)`
+                                                                                : `${value}`
+                                                                        }
+                                                                    </option>
+                                                                )
+                                                            }
+                                                        )
+
                                                     }
                                                 </select>
                                             </article>
@@ -88,7 +105,7 @@ function DishItem(props) {
 
             <article className="dish-buy">
                 <article className="dish-buy-order">
-                    <h3 className="price">{dish.price.toFixed(2)} лв.</h3>
+                    <h3 className="price">{additionalPrice ? (dish.price + additionalPrice).toFixed(2) : (dish.price + additionalPrice).toFixed(2)} лв.</h3>
                     {
                         isLogged
                             ? <button className="price-btn"
