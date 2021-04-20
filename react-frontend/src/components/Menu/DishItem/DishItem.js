@@ -25,6 +25,7 @@ function DishItem(props) {
     };
     const addDishToCart = () => {
         dish.selected_options = dishOptions;
+        console.log(dish);
         return addToCart(dish);
     }
     return (

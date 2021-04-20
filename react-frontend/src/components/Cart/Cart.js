@@ -9,7 +9,7 @@ import UserContext from "../../context/UserContext";
 
 function Cart(props) {
     const {match} = props;
-    const [user,setUser] = useContext(UserContext);
+    const [user, setUser] = useContext(UserContext);
     const onChangeItemQuantity = (item, action) => {
         action === 'add' ? item.quantity++ : item.quantity--;
         foodService.addToCart(user, item, action)
@@ -41,7 +41,11 @@ function Cart(props) {
                         <ul>
                             {
                                 user?.cart?.products.map(item => (
-                                    <li key={item?.name+Object.keys(item.selected_options)+Object.values(item.selected_options)}>
+                                    <li key={
+                                        item?.name
+                                        + typeof (item?.selected_options) === 'object' ? (`${Object.keys(item.selected_options).join('')}`) : ''
+                                        + typeof (item?.selected_options) === 'object' ? (`${Object.values(item.selected_options).join('')}`) : ''
+                                    }>
                                         <CartItem item={item}
                                                   onChangeItemQuantity={onChangeItemQuantity}
                                                   onRemoveItem={onRemoveItemHandler}
@@ -59,7 +63,7 @@ function Cart(props) {
 
                                 {
                                     !match.path.includes('order')
-                                        ? <Link to="order" >
+                                        ? <Link to="order">
                                             <button className="cart-summary-btn">Поръчай</button>
                                         </Link>
                                         : null
