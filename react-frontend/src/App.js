@@ -22,6 +22,7 @@ import Cart from "./components/Cart/Cart";
 import Notification from "./components/Notification/Notification";
 import Profile from "./components/Profile/Profile";
 import UserContext from "./context/UserContext";
+import ErrorBoundary from "./ErrorBoundary";
 
 class App extends Component {
     constructor(props) {
@@ -81,7 +82,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <UserContext.Provider value={[this.state.currentUser,this.setUser]}>
+                <UserContext.Provider value={[this.state.currentUser, this.setUser]}>
                     <Header/>
                     {
                         this.state.notification.message
@@ -92,57 +93,59 @@ class App extends Component {
                             : null
                     }
                     <main className="app-main">
-                        <Switch>
+                        <ErrorBoundary>
+                            <Switch>
 
-                            <Route path="/" exact render={(props) => (
-                                <Menu {...props}
-                                      menu={this.state.menu}
-                                      setNotification={this.setNotification}
-                                />
-                            )}/>
-
-                            <Route path="/register" exact render={(props) => (
-                                <Register {...props}
+                                <Route path="/" exact render={(props) => (
+                                    <Menu {...props}
+                                          menu={this.state.menu}
                                           setNotification={this.setNotification}
-                                />
-                            )}/>
+                                    />
+                                )}/>
 
-                            <Route path="/login" exact render={(props) => (
-                                <Login {...props}
-                                       setNotification={this.setNotification}
-                                />
-                            )}/>
+                                <Route path="/register" exact render={(props) => (
+                                    <Register {...props}
+                                              setNotification={this.setNotification}
+                                    />
+                                )}/>
 
-                            <Route path="/profile" render={(props) => (
-                                <Profile {...props}
-                                         setNotification={this.setNotification}
-                                />
-                            )}/>
+                                <Route path="/login" exact render={(props) => (
+                                    <Login {...props}
+                                           setNotification={this.setNotification}
+                                    />
+                                )}/>
+
+                                <Route path="/profile" render={(props) => (
+                                    <Profile {...props}
+                                             setNotification={this.setNotification}
+                                    />
+                                )}/>
 
 
-                            <Route path="/logout" exact component={Logout} />
+                                <Route path="/logout" exact component={Logout}/>
 
-                            <Route path="/cart" exact render={(props) => (
-                                <Cart {...props}
-                                      setNotification={this.setNotification}
-                                />
-                            )}/>
+                                <Route path="/cart" exact render={(props) => (
+                                    <Cart {...props}
+                                          setNotification={this.setNotification}
+                                    />
+                                )}/>
 
-                            <Route path="/order" exact render={(props) => (
-                                <Order {...props}
-                                       setNotification={this.setNotification}
-                                />
-                            )}/>
+                                <Route path="/order" exact render={(props) => (
+                                    <Order {...props}
+                                           setNotification={this.setNotification}
+                                    />
+                                )}/>
 
-                            <Route path="/posts" exact render={(props) => (
-                                <Posts {...props}
-                                       setNotification={this.setNotification}
-                                />
-                            )}/>
-                            <Route path="/contacts" exact component={Contacts}/>
-                            <Route path="/about" exact component={About}/>
-                            <Route path="/conditions" exact component={Conditions}/>
-                        </Switch>
+                                <Route path="/posts" exact render={(props) => (
+                                    <Posts {...props}
+                                           setNotification={this.setNotification}
+                                    />
+                                )}/>
+                                <Route path="/contacts" exact component={Contacts}/>
+                                <Route path="/about" exact component={About}/>
+                                <Route path="/conditions" exact component={Conditions}/>
+                            </Switch>
+                        </ErrorBoundary>
                     </main>
                     <Footer/>
                 </UserContext.Provider>
