@@ -184,6 +184,14 @@
         font-size: .5rem;
 
     }
+
+    .dish-select {
+        padding:2px 5px;
+        font-size: .5rem;
+        border: 1px solid #E25E20;
+        border-radius: 6px;
+        margin-left: 5px;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -215,5 +223,12 @@
         background: #8D9F3E;
         color:white;
         border: none;
+    }
+    .dish-select {
+        padding:3px 8px;
+        font-size: .8rem;
+        border: 1px solid #E25E20;
+        border-radius: 6px;
+        margin-left: 5px;
     }
 }

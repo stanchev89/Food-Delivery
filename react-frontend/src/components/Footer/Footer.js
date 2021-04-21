@@ -33,7 +33,11 @@ function Footer(props) {
                 <img style={{height: 40}}  src="https://shoplineimg.com/assets/footer/card_paypal.png" alt="paypal logo"/>
             </article>
 
-			<h5>Food Delivery &copy; 2021</h5>
+            <article className="company-logo">
+                <img src="logo.png" alt=""/>
+                <h5>Food Delivery &copy; 2021</h5>
+            </article>
+
 		</section>
 	);
 }
