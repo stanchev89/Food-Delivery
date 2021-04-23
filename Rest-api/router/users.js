@@ -29,6 +29,7 @@ router.post("/logout", userController.logout);
 router.get("/profile", auth(false), userController.getProfileInfo);
 
 router.put("/profile", auth(true), userController.editProfileInfo);
+router.post("/profile/:id/orders", auth(true), userController.getOrders);
 
 
 router.post('/change_password',

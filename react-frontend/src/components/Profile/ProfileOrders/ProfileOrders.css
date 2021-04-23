@@ -6,6 +6,7 @@
     color: black;
     text-align: center;
 }
+
 .order-table {
     border-collapse: separate;
     border-spacing: 0;
@@ -18,14 +19,17 @@
     overflow: scroll;
     max-width: 250px;
 }
+
 .order-table th {
     text-align: center;
     background: #E25E20;
     color: #fff;
 }
+
 .order-table tr:first-child th:first-child {
     border-top-left-radius: 6px;
 }
+
 .order-table tr:first-child th:last-child {
     border-top-right-radius: 6px;
 }
@@ -38,6 +42,7 @@
 .order-table tr:last-child td:first-child {
     border-bottom-left-radius: 6px;
 }
+
 .order-table tr:last-child td:last-child {
     border-bottom-right-radius: 6px;
 }
@@ -47,6 +52,26 @@
 }
 
 .profile-orders .magnifier:hover {
+    cursor: pointer;
+}
+
+.table-pages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-pages ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding-left: 0;
+}
+
+.table-pages li {
+    margin: 10px;
+}
+.table-pages li:hover {
     cursor: pointer;
 }
 

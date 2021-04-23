@@ -29,6 +29,19 @@ const userService = {
             .then(res => res.json())
             .catch(err => console.error(err));
     },
+    getUserOrders: (data) => {
+        const {userId,...params} = data;
+        const fullPath = environments.apiURL + `user/profile/${userId}/orders`;
+        return fetchWithCredentials(fullPath,'POST',params)
+            .then(res => res.json())
+            .then(res => {
+                const [{orders}] = res.data;
+                const {count} = res;
+                const [{length}] = count;
+                return [orders,length];
+            })
+            .catch(console.error);
+    },
     logout: () => {
         const fullPath = environments.apiURL + 'user/logout';
         return fetchWithCredentials(fullPath,'POST')

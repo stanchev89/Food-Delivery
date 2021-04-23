@@ -10,7 +10,7 @@ function ShowOrderCart({order,closeHandler}) {
             totalPrice += product.price * product.quantity
         });
         return totalPrice.toFixed(2) + ' лв.'
-    }
+    };
     return (
         <article className="show-order-cart">
                 <article className="show-order-cart-icons">
@@ -31,7 +31,10 @@ function ShowOrderCart({order,closeHandler}) {
                 {
                     order?.cart?.map((item,i) => (
                         <tr key={i}>
-                            <td>{item.name}</td>
+                            <td>
+                                <p>{item.name}</p>
+                                <p>{ typeof item.selected_options === 'object' ? Object.keys(item.selected_options) : ''}</p>
+                            </td>
                             <td>{item.quantity}</td>
                             <td>{Number(item.price).toFixed(2)} лв.</td>
                         </tr>
