@@ -3,13 +3,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    position: absolute;
-    top: 30%;
+    position: fixed;
+    top: 25%;
     right:50%;
     transform: translate(50%);
     background: white;
     border-radius: 10px;
     border: 2px solid #E25E20;
+}
+.order-number {
+    margin: 50px 0 0 0 ;
 }
 
 .show-order-cart .close-order-cart {
@@ -65,7 +68,15 @@
     border-right: 1px solid #c6c9cc;
     border-bottom: 1px solid #c6c9cc;
     font-size: .6rem;
+    font-weight: bold;
 }
+.order-cart-table .dish-selected-options {
+    font-weight: normal;
+    font-style: italic;
+    font-size: .2rem;
+    padding: 0;
+}
+
 
 .show-order-cart-description {
     display: flex;
@@ -92,6 +103,12 @@
 }
 .show-order-cart-description .description-title {
     font-size: .6rem;
+}
+
+.spacer {
+    height: 50%;
+    margin: 20px 0 -50px 0;
+    background: transparent; /* you'll need this if #container's parent element has a different background from #container itself */
 }
 
 @media screen and (max-width: 800px) {

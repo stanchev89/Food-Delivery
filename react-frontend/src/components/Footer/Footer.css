@@ -5,6 +5,7 @@
     width: 100%;
     text-align: end;
     border-top: 2px solid #8D9F3E;
+    margin-top: 100px;
 }
 .footer .company-logo {
     display: flex;

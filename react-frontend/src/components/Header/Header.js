@@ -11,7 +11,7 @@ function Header() {
         <article className="container-header">
             <article className="container-left">
                 <Link to="/">
-                    <img src="logo.png" alt="site-logo" className="logo"/>
+                    <img src="/logo.png" alt="site-logo" className="logo"/>
                 </Link>
             </article>
 

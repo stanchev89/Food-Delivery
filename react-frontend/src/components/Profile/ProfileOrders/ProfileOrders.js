@@ -12,8 +12,10 @@ function ProfileOrders() {
     const [currentOrder, setCurrentOrder] = useState(undefined);
     const [userOrders, setUserOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState([1,2,3,4,5,6,7,8,9,10]);
+    const [totalPages, setTotalPages] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     const [showPerPage, setShowPerPage] = useState(10);
+
+    // const myRef = useRef("show-order-cart");
 
 
     useEffect(() => {
@@ -67,7 +69,7 @@ function ProfileOrders() {
     }
 
     const onChangePageHandler = (e) => {
-        if(e === 'next' || e === 'back') {
+        if (e === 'next' || e === 'back') {
             e === 'next'
                 ? setCurrentPage(prev => prev + 1 <= totalPages.length ? prev + 1 : prev)
                 : setCurrentPage(prev => prev - 1 >= 1 ? prev - 1 : prev);
@@ -87,23 +89,30 @@ function ProfileOrders() {
     const onChangeViewPerPageHandler = (e) => {
         const selected = Number(e.target.value);
         setShowPerPage(prev => {
-            if(selected == prev) {
+            if (selected == prev) {
                 return;
             }
             return selected;
         });
         setCurrentPage(() => 1);
 
-    }
+    };
+    // const executeScroll = () => {
+    //    return  () => myRef.current?.scrollIntoView({behavior: 'smooth'})
+    // };
 
-    const toggleShowCart = (order) => {
-        if (!order) {
+    const toggleShowCart = (data) => {
+        if (!data) {
             setShowCart(prev => !prev);
             setCurrentOrder(prev => undefined);
             return;
+        } else if (data === 'close') {
+            setShowCart(() => false);
+            return;
         }
-        setShowCart(prev => !prev);
-        setCurrentOrder(prev => order);
+        setShowCart(prev => true);
+        // executeScroll();
+        setCurrentOrder(prev => data);
     };
 
 
@@ -113,6 +122,45 @@ function ProfileOrders() {
                 userOrders?.length === 0
                     ? <p>Все още нямате направени поръчки...</p>
                     : <>
+                        {
+                            totalPages.length > 1
+                                ? <nav className="table-pages">
+                                    <ul>
+                                        <li onClick={onChangePageHandler.bind(null, 'back')}>
+                                            <IoIosArrowBack
+                                                className="back"
+                                            />
+                                        </li>
+                                        {
+                                            totalPages.map(page => (
+                                                <li key={page}
+                                                    className={currentPage == page ? 'is-active' : ''}
+                                                    name={page}
+                                                    onClick={onChangePageHandler}
+                                                >
+                                                    {page}
+                                                </li>
+                                            ))
+                                        }
+                                        <li onClick={onChangePageHandler.bind(null, 'next')}>
+                                            <IoIosArrowForward
+                                                className="next"
+                                            />
+                                        </li>
+                                    </ul>
+
+                                    <article className="show-per-page-wrapper">
+                                        <label className="show-per-page-title">Покажи</label>
+                                        <select name="show-per-page" id="show-per-page" onChange={onChangeViewPerPageHandler}>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                        </select>
+                                    </article>
+
+                                </nav>
+                                : null
+                        }
                         <table className="order-table">
                             <thead>
                             <tr>
@@ -143,52 +191,24 @@ function ProfileOrders() {
                             }
                             </tbody>
                         </table>
-                        {
-                            totalPages.length > 1
-                                ? <nav className="table-pages">
-                                    <ul>
-                                        <li onClick={onChangePageHandler.bind(null,'back')}>
-                                            <IoIosArrowBack
-                                                className="back"
-                                            />
-                                        </li>
-                                        {
-                                            totalPages.map(page => (
-                                                <li key={page}
-                                                    className={currentPage == page ? 'is-active' : ''}
-                                                    name={page}
-                                                    onClick={onChangePageHandler}
-                                                >
-                                                    {page}
-                                                </li>
-                                            ))
-                                        }
-                                        <li onClick={onChangePageHandler.bind(null,'next')}>
-                                            <IoIosArrowForward
-                                                className="next"
-                                            />
-                                        </li>
-                                    </ul>
-                                    <article className="show-per-page-wrapper">
-                                        <label className="show-per-page-title">Покажи</label>
-                                        <select name="show-per-page" id="show-per-page" onChange={onChangeViewPerPageHandler}>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                    </article>
 
-                                </nav>
-                                : null
-                        }
                     </>
             }
             {
                 showCart
-                    ? <ShowOrderCart order={currentOrder} closeHandler={toggleShowCart}/>
+                    ?
+                    <ShowOrderCart order={currentOrder}
+                                   closeHandler={toggleShowCart}
+                        // ref={myRef}
+                                   id="show-order-cart"
+                    />
+
                     : null
             }
+
         </article>
     )
-};
+}
+
+;
 export default ProfileOrders;

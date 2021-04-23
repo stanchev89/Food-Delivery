@@ -34,7 +34,7 @@ function Footer(props) {
             </article>
 
             <article className="company-logo">
-                <img src="logo.png" alt=""/>
+                <img src="/logo.png" alt=""/>
                 <h5>Smolyanobyad &copy; 2021</h5>
             </article>
 
