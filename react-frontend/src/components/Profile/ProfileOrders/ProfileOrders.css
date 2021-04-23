@@ -65,6 +65,7 @@
     display: flex;
     list-style: none;
     justify-content: center;
+    align-items: center;
     padding-left: 0;
 }
 
@@ -73,6 +74,24 @@
 }
 .table-pages li:hover {
     cursor: pointer;
+}
+
+.table-pages .is-active {
+    padding: 2px;
+    color: #E25E20;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.show-per-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 5px;
+}
+
+.show-per-page-title{
+    font-size: .6rem;
 }
 
 

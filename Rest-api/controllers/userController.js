@@ -138,7 +138,7 @@ function getOrders(req, res, next) {
             'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}}
         }
     }]).then(count => {
-        userModel.find({_id: userId},{orders: {$slice: [0, limit]}})
+        userModel.find({_id: userId},{orders: {$slice: [skip, limit]}})
             // .sort(sort)
             .then(data => {
                 res.status(200).json({data, count});
