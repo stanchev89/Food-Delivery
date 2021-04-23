@@ -138,7 +138,7 @@ function getOrders(req, res, next) {
             'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}}
         }
     }]).then(count => {
-        userModel.find({_id: userId}, {orders: {$slice: [0, limit]}})
+        userModel.find({_id: userId},{orders: {$slice: [0, limit]}})
             // .sort(sort)
             .then(data => {
                 res.status(200).json({data, count});
@@ -190,7 +190,11 @@ function editProfileInfo(req, res, next) {
     }
 
     if (order) {
-        update.$push.orders = order;
+        update.$push.orders = {
+            $each:[order],
+            $sort: {date: -1}
+        }
+
         update.$set.cart = {}
     }
     userModel
