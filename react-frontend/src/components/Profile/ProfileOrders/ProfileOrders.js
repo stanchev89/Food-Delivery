@@ -67,15 +67,18 @@ function ProfileOrders() {
     }
 
     const onChangePageHandler = (e) => {
+        if(e === 'next' || e === 'back') {
+            e === 'next'
+                ? setCurrentPage(prev => prev + 1 <= totalPages.length ? prev + 1 : prev)
+                : setCurrentPage(prev => prev - 1 >= 1 ? prev - 1 : prev);
+            return;
+        }
         e.preventDefault();
         const text = e.target.textContent;
         const toPage = Number(text);
         if (!text) {
             console.log(e.target.className?.baseVal)
-            e.target.className?.baseVal === 'next'
-                ? setCurrentPage(prev => prev + 1 <= totalPages.length ? prev + 1 : prev)
-                : setCurrentPage(prev => prev - 1 >= 1 ? prev - 1 : prev);
-            return;
+
         }
         ;
         setCurrentPage(() => Number(toPage));
@@ -88,7 +91,9 @@ function ProfileOrders() {
                 return;
             }
             return selected;
-        })
+        });
+        setCurrentPage(() => 1);
+
     }
 
     const toggleShowCart = (order) => {
@@ -142,10 +147,9 @@ function ProfileOrders() {
                             totalPages.length > 1
                                 ? <nav className="table-pages">
                                     <ul>
-                                        <li>
+                                        <li onClick={onChangePageHandler.bind(null,'back')}>
                                             <IoIosArrowBack
                                                 className="back"
-                                                onClick={onChangePageHandler}
                                             />
                                         </li>
                                         {
@@ -159,9 +163,9 @@ function ProfileOrders() {
                                                 </li>
                                             ))
                                         }
-                                        <li>
+                                        <li onClick={onChangePageHandler.bind(null,'next')}>
                                             <IoIosArrowForward
-                                                className="next" onClick={onChangePageHandler}
+                                                className="next"
                                             />
                                         </li>
                                     </ul>
