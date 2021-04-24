@@ -86,7 +86,7 @@
 .dish-select {
     padding:5px 10px;
     font-size: 1rem;
-    border: 1px solid #E25E20;
+    border: 1px solid #8D9F3E;
     border-radius: 6px;
     margin-left: 5px;
 }
@@ -188,7 +188,7 @@
     .dish-select {
         padding:2px 5px;
         font-size: .5rem;
-        border: 1px solid #E25E20;
+        border: 1px solid #8D9F3E;
         border-radius: 6px;
         margin-left: 5px;
     }
@@ -227,7 +227,7 @@
     .dish-select {
         padding:3px 8px;
         font-size: .8rem;
-        border: 1px solid #E25E20;
+        border: 1px solid #8D9F3E;
         border-radius: 6px;
         margin-left: 5px;
     }

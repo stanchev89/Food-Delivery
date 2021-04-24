@@ -5,7 +5,7 @@ function DishItem(props) {
     const {dish, addToCart, isLogged} = props;
     const [showImage, setShowImage] = useState(false);
     const [dishOptions, setDishOptions] = useState({});
-    const [additionalPrice, setAdditionalPrice] = useState(0);
+    const [additionalPrice, setAdditionalPrice] = useState({});
 
 
     useEffect(() => {
@@ -17,25 +17,41 @@ function DishItem(props) {
         }
         setDishOptions(prev => initalOptions);
     }, []);
+
     const addOption = (e) => {
         const key = e.target.name;
         const [value, addPrice] = e.target.value.split('|');
         if (addPrice) {
-            setAdditionalPrice(Number(addPrice));
+            setAdditionalPrice(prev => ({...prev,[key]: addPrice}));
         } else {
-            setAdditionalPrice(0);
+            if(additionalPrice[key]) {
+                setAdditionalPrice(prev => ({...prev, [key]: 0}))
+            }
         }
         setDishOptions(prev => ({...prev, [key]: value}))
-    }
+    };
+
     const showImageToggle = () => {
         setShowImage(prev => !prev);
     };
+
+    const calculateAdditionalPrice = () => {
+        let addToPrice = 0;
+        if(Object.keys(additionalPrice)?.length > 0) {
+            for (const key in additionalPrice) {
+                addToPrice += Number(additionalPrice[key]);
+            };
+        }
+        return addToPrice;
+    };
+
     const addDishToCart = () => {
-        dish.price += additionalPrice;
+
+        dish.price += calculateAdditionalPrice();
         dish.selected_options = dishOptions;
         addToCart(dish);
-        dish.price -= additionalPrice;
-    }
+        dish.price -= calculateAdditionalPrice();
+    };
     return (
         <article className="dish">
             {/*<article className="dish-big-img">*/}
@@ -105,7 +121,7 @@ function DishItem(props) {
 
             <article className="dish-buy">
                 <article className="dish-buy-order">
-                    <h3 className="price">{additionalPrice ? (dish.price + additionalPrice).toFixed(2) : (dish.price + additionalPrice).toFixed(2)} лв.</h3>
+                    <h3 className="price">{(dish.price + calculateAdditionalPrice()).toFixed(2)} лв.</h3>
                     {
                         isLogged
                             ? <button className="price-btn"
