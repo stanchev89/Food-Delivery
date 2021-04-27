@@ -7,11 +7,12 @@ import userService from "../../services/userService";
 import ProfileOrders from "./ProfileOrders/ProfileOrders";
 import {useContext} from 'react'
 import UserContext from "../../context/UserContext";
+import * as routes from '../../routes';
 
 
-const Profile = ({match, setNotification}) => {
+const Profile = () => {
     const [user, setUser] = useContext(UserContext);
-    const onDeleteAddressHandler = (adr, idx) => {
+        const onDeleteAddressHandler = (adr, idx) => {
         user.address.splice(idx, 1);
         userService.editUserData({deleteAddress: adr});
         setUser(user);
@@ -32,19 +33,19 @@ const Profile = ({match, setNotification}) => {
                         <section className="profile-header">
                             <nav className="profile-header-nav">
                                 <NavLink
-                                    to={match.url}
+                                    to={routes.profile}
                                     exact
                                     activeClassName="is-active">
                                     Моите данни
                                 </NavLink>
                                 <NavLink
-                                    to={match.url + '/address'}
+                                    to={routes.profile + '/address'}
                                     exact
                                     activeClassName="is-active">
                                     Моите адреси
                                 </NavLink>
                                 <NavLink
-                                    to={match.url + '/orders'}
+                                    to={routes.profile + '/orders'}
                                     exact
                                     activeClassName="is-active">
                                     Моите поръчки
@@ -57,19 +58,16 @@ const Profile = ({match, setNotification}) => {
                                 <FaUser className="profile-icon"/>
                             </article>
                             <Switch>
-                                <Route path="/profile" exact render={(props) => (
-                                    <ProfileInfo {...props}
-                                                 setNotification={setNotification}
-                                    />
+                                <Route path={routes.profile} exact render={(props) => (
+                                    <ProfileInfo {...props}/>
                                 )}/>
-                                <Route path="/profile/address" exact render={(props) => (
+                                <Route path={routes.profile + '/address'} exact render={(props) => (
                                     <ProfileAddress {...props}
-                                                    setNotification={setNotification}
                                                     onDeleteAddressHandler={onDeleteAddressHandler}
                                                     onUpdateExistAddressHandler={onUpdateExistAddressHandler}
                                     />
                                 )}/>
-                                <Route path="/profile/orders" exact component={ProfileOrders}/>
+                                <Route path={routes.profile + '/orders'} exact component={ProfileOrders}/>
                                 )}/>
                             </Switch>
                         </section>

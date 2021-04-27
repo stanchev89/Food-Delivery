@@ -135,10 +135,12 @@ function getOrders(req, res, next) {
         {
         $project: {
             'orders': 1,
-            'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}}
+            'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}},
+            // 'sortedOrders': {$sort: {"$orders": {"date": -1}}, $slice:[skip,limit]}
         }
     }]).then(count => {
         userModel.find({_id: userId},{orders: {$slice: [skip, limit]}})
+        // userModel.find({_id: userId},{orders: { $push: {"date": { $each: [], $sort: -1}} ,$slice: [skip, limit]}})
             // .sort(sort)
             .then(data => {
                 res.status(200).json({data, count});

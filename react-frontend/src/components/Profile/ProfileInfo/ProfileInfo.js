@@ -3,8 +3,10 @@ import {useState, useEffect} from 'react';
 import userService from "../../../services/userService";
 import {useContext} from 'react'
 import UserContext from "../../../context/UserContext";
-const ProfileInfo = ({setNotification,history}) => {
+import NotificationContext from "../../../context/NotificationContext";
+const ProfileInfo = ({history}) => {
     const [user, setUser] = useContext(UserContext);
+    const [notification,setNotification] = useContext(NotificationContext);
     useEffect(() => {
         return () => setNotification({});
     },[])

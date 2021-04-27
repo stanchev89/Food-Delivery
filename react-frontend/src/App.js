@@ -15,7 +15,6 @@ import Posts from "./components/Posts/Posts";
 import About from "./components/About/About";
 import Conditions from "./components/Conditions/Conditions";
 
-
 import {Route, Switch} from "react-router-dom";
 import {Component} from "react";
 import Cart from "./components/Cart/Cart";
@@ -23,6 +22,9 @@ import Notification from "./components/Notification/Notification";
 import Profile from "./components/Profile/Profile";
 import UserContext from "./context/UserContext";
 import ErrorBoundary from "./ErrorBoundary";
+import RouteGuard from "./hoc/RouteGuard";
+import NotificationContext from './context/NotificationContext';
+import * as routes from './routes'
 
 class App extends Component {
     constructor(props) {
@@ -34,7 +36,7 @@ class App extends Component {
                 message: '',
                 type: ''
             }
-        }
+        };
         this.setUser = this.setUser.bind(this)
         this.getUserInfo = this.getUserInfo.bind(this);
         this.setNotification = this.setNotification.bind(this);
@@ -83,71 +85,73 @@ class App extends Component {
         return (
             <div className="App">
                 <UserContext.Provider value={[this.state.currentUser, this.setUser]}>
-                    <Header/>
-                    {
-                        this.state.notification.message
-                            ? <Notification
-                                notification={this.state.notification}
-                                setNotification={this.setNotification}
-                            />
-                            : null
-                    }
-                    <main className="app-main">
-                        <ErrorBoundary>
-                            <Switch>
+                    <NotificationContext.Provider value={[this.state.notification, this.setNotification]}>
+                        <Header/>
+                        {
+                            this.state.notification.message
+                                ? <Notification
+                                    notification={this.state.notification}
+                                    setNotification={this.setNotification}
+                                />
+                                : null
+                        }
+                        <main className="app-main">
+                            <ErrorBoundary>
+                                <Switch>
 
-                                <Route path="/" exact render={(props) => (
-                                    <Menu {...props}
-                                          menu={this.state.menu}
-                                          setNotification={this.setNotification}
+                                    <Route path={routes.rootPath} exact render={(props) => (
+                                        <Menu {...props}
+                                              menu={this.state.menu}
+                                        />
+                                    )}/>
+
+                                    <RouteGuard path={routes.register}
+                                                WrappedComponent={Register}
+                                                mustBeLoggedIn={false}
+                                                redirectTo="/"
                                     />
-                                )}/>
 
-                                <Route path="/register" exact render={(props) => (
-                                    <Register {...props}
-                                              setNotification={this.setNotification}
+                                    <RouteGuard path={routes.login}
+                                                WrappedComponent={Login}
+                                                mustBeLoggedIn={false}
+                                                redirectTo="/"
                                     />
-                                )}/>
 
-                                <Route path="/login" exact render={(props) => (
-                                    <Login {...props}
-                                           setNotification={this.setNotification}
+
+                                    <RouteGuard path={routes.profile}
+                                                WrappedComponent={Profile}
+                                                mustBeLoggedIn={true}
+                                                redirectTo="/login"
                                     />
-                                )}/>
 
-                                <Route path="/profile" render={(props) => (
-                                    <Profile {...props}
-                                             setNotification={this.setNotification}
+                                    <RouteGuard path={routes.logout}
+                                                WrappedComponent={Logout}
+                                                mustBeLoggedIn={true}
+                                                redirectTo="/"
                                     />
-                                )}/>
 
-
-                                <Route path="/logout" exact component={Logout}/>
-
-                                <Route path="/cart" exact render={(props) => (
-                                    <Cart {...props}
-                                          setNotification={this.setNotification}
+                                    <RouteGuard path={routes.cart}
+                                                WrappedComponent={Cart}
+                                                mustBeLoggedIn={true}
+                                                redirectTo="/login"
                                     />
-                                )}/>
 
-                                <Route path="/order" exact render={(props) => (
-                                    <Order {...props}
-                                           setNotification={this.setNotification}
+                                    <RouteGuard path={routes.order}
+                                                WrappedComponent={Order}
+                                                mustBeLoggedIn={true}
+                                                redirectTo="/login"
                                     />
-                                )}/>
 
-                                <Route path="/posts" exact render={(props) => (
-                                    <Posts {...props}
-                                           setNotification={this.setNotification}
-                                    />
-                                )}/>
-                                <Route path="/contacts" exact component={Contacts}/>
-                                <Route path="/about" exact component={About}/>
-                                <Route path="/conditions" exact component={Conditions}/>
-                            </Switch>
-                        </ErrorBoundary>
-                    </main>
-                    <Footer/>
+                                    <Route path={routes.posts} exact component={Posts}/>
+                                    <Route path={routes.contacts} exact component={Contacts}/>
+                                    <Route path={routes.about} exact component={About}/>
+                                    <Route path={routes.conditions} exact component={Conditions}/>
+                                </Switch>
+                            </ErrorBoundary>
+                        </main>
+                        <Footer/>
+                    </NotificationContext.Provider>
+
                 </UserContext.Provider>
             </div>
         );

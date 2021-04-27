@@ -1,7 +1,10 @@
 import './Notification.css';
 import {MdClose, MdDone, MdError} from 'react-icons/md'
+import {useContext} from "react";
+import NotificationContext from "../../context/NotificationContext";
 
-const Notification = ({notification, setNotification}) => {
+const Notification = () => {
+    const [notification,setNotification] = useContext(NotificationContext);
 
     const closeNotification = () => {
         setNotification({})

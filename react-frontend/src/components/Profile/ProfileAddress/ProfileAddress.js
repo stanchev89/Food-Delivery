@@ -5,7 +5,8 @@ import AddNewAddressForm from '../AddNewAddressForm/AddNewAddressForm';
 import {useContext} from 'react'
 import UserContext from "../../../context/UserContext";
 
-const ProfileAddress = ({setNotification, onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
+
+const ProfileAddress = ({onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
     const [addAddressMode, setAddAddressMode] = useState(false);
     const [user, setUser] = useContext(UserContext);
 
@@ -23,7 +24,6 @@ const ProfileAddress = ({setNotification, onDeleteAddressHandler, onUpdateExistA
                         index={index}
                         onDeleteAddressHandler={onDeleteAddressHandler}
                         onUpdateExistAddressHandler={onUpdateExistAddressHandler}
-                        setNotification={setNotification}
                     />
                 ))
             }

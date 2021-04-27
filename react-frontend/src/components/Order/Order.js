@@ -7,9 +7,11 @@ import OrderDescription from "./OrderDescription/OrderDescription";
 import environments from "../../environments";
 import userService from "../../services/userService";
 import UserContext from "../../context/UserContext";
+import NotificationContext from "../../context/NotificationContext";
 
-function Order({match,history,setNotification}) {
+function Order({match,history}) {
     const [user, setUser] = useContext(UserContext);
+    const [notification,setNotification] = useContext(NotificationContext);
     const [order,setOrder] = useState({cart:user?.cart});
     const [delivery, setDelivery] = useState(0.5);
 

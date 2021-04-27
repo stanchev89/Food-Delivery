@@ -1,12 +1,14 @@
 import './ProfileAddressItem.css';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {FiCheck, FiEdit2, FiTrash} from 'react-icons/fi'
 import {IoMdClose} from 'react-icons/io';
 import environments from "../../../../environments";
+import NotificationContext from "../../../../context/NotificationContext";
 
 const mapBgRegions = environments.mapBgRegions;
 
-const ProfileAddressItem = ({address, index,onDeleteAddressHandler,onUpdateExistAddressHandler, setNotification}) => {
+const ProfileAddressItem = ({address, index,onDeleteAddressHandler,onUpdateExistAddressHandler}) => {
+    const [notification,setNotification] = useContext(NotificationContext);
     const [editMode, setEditMode] = useState(false);
     const [location,setLocation] = useState(address.location);
 

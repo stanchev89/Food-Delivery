@@ -5,10 +5,12 @@ import foodService from "../../services/foodService";
 import Login from "../Login/Login";
 import {useContext,useState,useEffect} from 'react'
 import UserContext from "../../context/UserContext";
+import NotificationContext from "../../context/NotificationContext";
 
 function Menu(props) {
-    const {menu, match, history,setNotification} = props;
+    const {menu, match, history} = props;
     const [user,setUser] = useContext(UserContext);
+    const [notification,setNotification] = useContext(NotificationContext);
     const [meatlessMode, setMeatlessMode] = useState(false);
 
     const addToCart = (dish) => {

@@ -4,9 +4,11 @@ import userService from "../../services/userService";
 import { Link } from 'react-router-dom'
 import {useEffect,useContext} from "react";
 import UserContext from "../../context/UserContext";
+import NotificationContext from '../../context/NotificationContext'
 
-const Login = ({setNotification, history}) => {
+const Login = ({history}) => {
     const [_,setUser] = useContext(UserContext);
+    const [notification,setNotification] = useContext(NotificationContext);
 
     useEffect(() => {
         return () => setNotification({});
