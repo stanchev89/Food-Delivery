@@ -123,43 +123,42 @@ function ProfileOrders() {
                     ? <p>Все още нямате направени поръчки...</p>
                     : <>
                         {
-                            totalPages.length > 1
-                                ? <nav className="table-pages">
-                                    <ul>
-                                        <li onClick={onChangePageHandler.bind(null, 'back')}>
-                                            <IoIosArrowBack
-                                                className="back"
-                                            />
-                                        </li>
-                                        {
-                                            totalPages.map(page => (
-                                                <li key={page}
-                                                    className={currentPage == page ? 'is-active' : ''}
-                                                    name={page}
-                                                    onClick={onChangePageHandler}
-                                                >
-                                                    {page}
-                                                </li>
-                                            ))
-                                        }
-                                        <li onClick={onChangePageHandler.bind(null, 'next')}>
-                                            <IoIosArrowForward
-                                                className="next"
-                                            />
-                                        </li>
-                                    </ul>
 
-                                    <article className="show-per-page-wrapper">
-                                        <label className="show-per-page-title">Покажи</label>
-                                        <select name="show-per-page" id="show-per-page" onChange={onChangeViewPerPageHandler}>
-                                            <option value="10">10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                    </article>
+                            <nav className="table-pages">
+                                <ul>
+                                    <li onClick={onChangePageHandler.bind(null, 'back')}>
+                                        <IoIosArrowBack
+                                            className="back"
+                                        />
+                                    </li>
+                                    {
+                                        totalPages.map(page => (
+                                            <li key={page}
+                                                className={currentPage == page ? 'is-active' : ''}
+                                                name={page}
+                                                onClick={onChangePageHandler}
+                                            >
+                                                {page}
+                                            </li>
+                                        ))
+                                    }
+                                    <li onClick={onChangePageHandler.bind(null, 'next')}>
+                                        <IoIosArrowForward
+                                            className="next"
+                                        />
+                                    </li>
+                                </ul>
 
-                                </nav>
-                                : null
+                                <article className="show-per-page-wrapper">
+                                    <label className="show-per-page-title">Покажи</label>
+                                    <select name="show-per-page" id="show-per-page" onChange={onChangeViewPerPageHandler}>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                </article>
+
+                            </nav>
                         }
                         <table className="order-table">
                             <thead>
