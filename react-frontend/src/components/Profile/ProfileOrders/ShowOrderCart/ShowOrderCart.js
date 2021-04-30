@@ -4,14 +4,20 @@ import {IoMdClose} from 'react-icons/io';
 import {useEffect, useRef} from 'react';
 
 function ShowOrderCart({order, closeHandler}) {
-    const myRef = useRef(null);
-    const executeScroll = () => {
-        return () => myRef.current?.scrollIntoView({behavior: 'smooth'})
-    };
+    const myRef = useRef();
+
     useEffect(() => {
-        executeScroll();
-        
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
     }, []);
+
+    const handleClick = (event) => {
+        if(!myRef.current.contains(event.target)) {
+            closeHandler('close');
+        }
+    };
     const showOptions = (item) => {
         const options = [];
         if (item.selected_options) {
