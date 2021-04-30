@@ -22,7 +22,7 @@ import Notification from "./components/Notification/Notification";
 import Profile from "./components/Profile/Profile";
 import UserContext from "./context/UserContext";
 import ErrorBoundary from "./ErrorBoundary";
-import RouteGuard from "./hoc/RouteGuard";
+import Routeguard from "./hoc/RouteGuard";
 import NotificationContext from './context/NotificationContext';
 import * as routes from './routes'
 
@@ -42,12 +42,12 @@ class App extends Component {
         this.setNotification = this.setNotification.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         foodService.getDailyMenu()
             .then(dishes => {
                 this.setState(state => ({...state, menu: dishes}))
             }).catch(err => console.error(err));
-        userService.getUserInfo()
+        await userService.getUserInfo()
             .then(user => {
                 if (user) {
                     this.setState((state) => ({currentUser: user.message ? undefined : user}))
@@ -71,7 +71,7 @@ class App extends Component {
                 notification
             }
         ))
-    }
+    };
 
     getUserInfo() {
         userService.getUserInfo()
@@ -105,41 +105,70 @@ class App extends Component {
                                         />
                                     )}/>
 
-                                    <RouteGuard path={routes.register}
-                                                WrappedComponent={Register}
-                                                mustBeLoggedIn={false}
-                                                redirectTo="/"
+                                    <Route path={routes.register}
+                                           render={ () =>
+                                               (
+                                                   <Routeguard mustBeLoggedIn={false} redirectTo={routes.login}>
+                                                       <Register/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
-                                    <RouteGuard path={routes.login}
-                                                WrappedComponent={Login}
-                                                mustBeLoggedIn={false}
-                                                redirectTo="/"
+                                    <Route path={routes.login}
+                                           render={ () =>
+                                               (
+                                                   <Routeguard mustBeLoggedIn={false} redirectTo={routes.rootPath}>
+                                                       <Login/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
 
-                                    <RouteGuard path={routes.profile}
-                                                WrappedComponent={Profile}
-                                                mustBeLoggedIn={true}
-                                                redirectTo="/login"
+                                    <Route path={routes.profile}
+                                           render={ () =>
+                                               (
+                                                   <Routeguard mustBeLoggedIn={true} redirectTo={routes.login}>
+                                                       <Profile/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
-                                    <RouteGuard path={routes.logout}
-                                                WrappedComponent={Logout}
-                                                mustBeLoggedIn={true}
-                                                redirectTo="/"
+                                    <Route path={routes.logout}
+                                           render={() =>
+                                               (
+                                                   <Routeguard mustBeLoggedIn={true} redirectTo={routes.login}>
+                                                       <Logout/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
-                                    <RouteGuard path={routes.cart}
-                                                WrappedComponent={Cart}
-                                                mustBeLoggedIn={true}
-                                                redirectTo="/login"
+                                    <Route path={routes.cart}
+                                           render={ ({match,location}) =>
+                                               (
+                                                   <Routeguard
+                                                       mustBeLoggedIn={true}
+                                                       redirectTo={routes.login}
+                                                       match={match}
+                                                       location={location}
+                                                   >
+                                                       <Cart/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
-                                    <RouteGuard path={routes.order}
-                                                WrappedComponent={Order}
-                                                mustBeLoggedIn={true}
-                                                redirectTo="/login"
+                                    <Route path={routes.order}
+                                           render={ ({match,location}) =>
+                                               (
+                                                   <Routeguard mustBeLoggedIn={true} match={match} location={location} redirectTo={routes.login}>
+                                                       <Order/>
+                                                   </Routeguard>
+                                               )
+                                           }
                                     />
 
                                     <Route path={routes.posts} exact component={Posts}/>
