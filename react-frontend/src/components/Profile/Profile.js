@@ -62,10 +62,13 @@ const Profile = () => {
                                     <ProfileInfo {...props}/>
                                 )}/>
                                 <Route path={routes.profile + '/address'} exact render={(props) => (
-                                    <ProfileAddress {...props}
-                                                    onDeleteAddressHandler={onDeleteAddressHandler}
-                                                    onUpdateExistAddressHandler={onUpdateExistAddressHandler}
-                                    />
+                                    <>
+                                        <ProfileAddress {...props}
+                                                        onDeleteAddressHandler={onDeleteAddressHandler}
+                                                        onUpdateExistAddressHandler={onUpdateExistAddressHandler}
+                                        />
+                                    </>
+
                                 )}/>
                                 <Route path={routes.profile + '/orders'} exact component={ProfileOrders}/>
                                 )}/>

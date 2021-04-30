@@ -10,6 +10,7 @@ function ShowOrderCart({order, closeHandler}) {
     };
     useEffect(() => {
         executeScroll();
+        
     }, []);
     const showOptions = (item) => {
         const options = [];
@@ -81,7 +82,6 @@ function ShowOrderCart({order, closeHandler}) {
                 }
 
             </article>
-            {/*<div className="spacer"></div>*/}
         </>
     )
 }

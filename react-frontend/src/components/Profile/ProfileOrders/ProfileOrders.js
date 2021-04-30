@@ -110,7 +110,7 @@ function ProfileOrders() {
             setShowCart(() => false);
             return;
         }
-        setShowCart(prev => true);
+        setShowCart(prev => !prev);
         // executeScroll();
         setCurrentOrder(prev => data);
     };
@@ -204,10 +204,7 @@ function ProfileOrders() {
 
                     : null
             }
-
         </article>
     )
-}
-
-;
+};
 export default ProfileOrders;

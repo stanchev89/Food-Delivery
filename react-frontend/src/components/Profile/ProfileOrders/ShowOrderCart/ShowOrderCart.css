@@ -1,5 +1,6 @@
 .show-order-cart {
     min-width: 500px;
+    max-height: 65%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -10,9 +11,11 @@
     background: white;
     border-radius: 10px;
     border: 2px solid #E25E20;
+    overflow: scroll;
+    margin-bottom: 20px;
 }
 .order-number {
-    margin: 50px 0 0 0 ;
+    margin: 20px 0 0 0 ;
 }
 
 .show-order-cart .close-order-cart {
@@ -26,15 +29,11 @@
 }
 
 .profile-order-cart-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     color: #E25E20;
-    position: absolute;
     right: 50%;
-    transform: translate(80%);
-    padding:5px;
-    top: -25px;
     background: white;
-    border-radius: 10px;
+    margin-top: 10px;
 }
 
 .order-cart-table {
@@ -105,11 +104,6 @@
     font-size: .6rem;
 }
 
-.spacer {
-    height: 50%;
-    margin: 20px 0 -50px 0;
-    background: transparent; /* you'll need this if #container's parent element has a different background from #container itself */
-}
 
 @media screen and (max-width: 800px) {
     .show-order-cart {

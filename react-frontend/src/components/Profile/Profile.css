@@ -54,7 +54,6 @@
     transform: translate(-50%);
     font-size: 3rem;
 }
-
 @media screen and (max-width: 800px) {
     .profile .profile-content {
         max-width: 100%;
