@@ -67,14 +67,13 @@
     position: fixed;
     left: 30%;
     top: 20%;
-    max-width: 40vw;
-    max-height: 70vh;
+    max-width: 30vw;
     z-index: 1;
 }
 
 .dish-big-img-wrapper img {
     max-width: 100%;
-    max-height: 80%;
+    max-height: 100%;
     border-radius: 1px;
     border: 1px solid #E25E20;
     box-shadow: 0px 0px 100px 8px;
