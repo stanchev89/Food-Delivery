@@ -18,9 +18,11 @@ function Cart(props) {
     };
 
     const clearCart = () => {
-        foodService.clearCart()
-            .then(user => setUser(user))
-            .catch(console.error);
+        if(user?.cart.products.length > 0) {
+            foodService.clearCart()
+                .then(user => setUser(user))
+                .catch(console.error);
+        };
     };
 
     const onRemoveItemHandler = (dish) => {

@@ -16,6 +16,7 @@
 }
 .order-number {
     margin: 20px 0 0 0 ;
+    font-size: .5rem;
 }
 
 .show-order-cart .close-order-cart {

@@ -13,6 +13,7 @@
     justify-content: space-between;
     margin:10px;
     padding: 10px;
+    position: relative;
   }
 
 .dish .dish-content {
@@ -27,23 +28,72 @@
     margin-left: 0;
     margin-right: 10px;
   }
-
-.dish img {
+.dish-img-wrapper {
     width: 100px;
-    max-width: 20%;
-    height: 80px;
-    max-height: 90%;
-    border-radius: 90px;
-    object-fit: contain;
-    margin-right: 10px;
-  }
-
-.dish .dish-big-img img {
-    min-width:500px;
+    position:relative;
 }
-.dish-big-image {
+.dish-img-wrapper img {
+    width: 100%;
+    max-height: 80px;
+    /*max-width: 20%;*/
+    /*height: 80px;*/
+    /*max-height: 90%;*/
+    border-radius: 90px;
+    margin-right: 10px;
+    object-fit: contain;
+  }
+.dish-img-wrapper img:hover {
+    cursor: pointer;
+}
+.dish-img-zoom {
+    /*position: absolute;*/
+    /*top: 25%;*/
+    /*font-size: 2rem;*/
+    /*transform: translate(-50%);*/
+    /*color: whitesmoke;*/
+    display: none;
+}
+.dish-img-zoom.show {
+    color: #E25E20;
+    display: inline-block;
     position: absolute;
-    min-width: 1000px;
+    top: 25%;
+    font-size: 2rem;
+    transform: translate(-50%);
+}
+
+.dish-img-zoom:hover {
+    cursor: pointer;
+}
+.dish-img-zoom.show:hover {
+    cursor: pointer;
+}
+.dish-big-img-wrapper {
+    position: fixed;
+    left: 30%;
+    top: 20%;
+    max-width: 500px;
+    max-height: 300px;
+    z-index: 1;
+}
+
+.dish-big-img-wrapper img {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #E25E20;
+    box-shadow: 0px 0px 100px 8px;
+}
+.close-big-img {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border: 1px solid #E25E20;
+    border-radius: 90px;
+    color: #E25E20;
+    font-size: 1.2rem;
+}
+.close-big-img:hover {
+    cursor: pointer;
 }
 .dish ul {
     max-height: 50px;

@@ -1,12 +1,15 @@
 import "./DishItem.css";
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
+import {IoMdClose} from 'react-icons/io';
+import {GrZoomIn} from 'react-icons/gr';
 
 function DishItem(props) {
     const {dish, addToCart, isLogged} = props;
     const [showImage, setShowImage] = useState(false);
     const [dishOptions, setDishOptions] = useState({});
     const [additionalPrice, setAdditionalPrice] = useState({});
-
+    const [showZoomIcon,setShowZoomIcon] = useState(false);
+    const bigImgRef = useRef();
 
     useEffect(() => {
         const initalOptions = {};
@@ -16,15 +19,30 @@ function DishItem(props) {
             }
         }
         setDishOptions(prev => initalOptions);
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
     }, []);
+
+    const handleClick = (event) => {
+        if(!bigImgRef.current?.contains(event.target)) {
+            setShowImage(() => false);
+        }
+    };
+
+    const zoomIconHandler = (boolean) => {
+        setShowZoomIcon(() => boolean);
+        console.log(showZoomIcon);
+    }
 
     const addOption = (e) => {
         const key = e.target.name;
         const [value, addPrice] = e.target.value.split('|');
         if (addPrice) {
-            setAdditionalPrice(prev => ({...prev,[key]: addPrice}));
+            setAdditionalPrice(prev => ({...prev, [key]: addPrice}));
         } else {
-            if(additionalPrice[key]) {
+            if (additionalPrice[key]) {
                 setAdditionalPrice(prev => ({...prev, [key]: 0}))
             }
         }
@@ -32,15 +50,16 @@ function DishItem(props) {
     };
 
     const showImageToggle = () => {
-        setShowImage(prev => !prev);
+        return setShowImage(prev => !prev);
     };
 
     const calculateAdditionalPrice = () => {
         let addToPrice = 0;
-        if(Object.keys(additionalPrice)?.length > 0) {
+        if (Object.keys(additionalPrice)?.length > 0) {
             for (const key in additionalPrice) {
                 addToPrice += Number(additionalPrice[key]);
-            };
+            }
+            ;
         }
         return addToPrice;
     };
@@ -54,14 +73,31 @@ function DishItem(props) {
     };
     return (
         <article className="dish">
-            {/*<article className="dish-big-img">*/}
-            {/*    {*/}
-            {/*        showImage*/}
-            {/*            ? <img src={dish.img} display={showImage} class="dish-big-image"/>*/}
-            {/*            : null*/}
-            {/*    }*/}
-            {/*</article>*/}
-            <img src={dish.img} alt="dish img" onClick={showImageToggle}/>
+
+            {
+                showImage
+                    ? <article className="dish-big-img-wrapper" ref={bigImgRef}>
+                        <IoMdClose class="close-big-img" onClick={() => setShowImage(() => false)}/>
+                        <img src={dish.img} className="dish-big-image"/>
+                    </article>
+
+                    : null
+            }
+            <article className="dish-img-wrapper">
+                <img
+                    src={dish.img}
+                    alt="dish img"
+                    onClick={showImageToggle}
+                    onMouseEnter={() => zoomIconHandler(true)}
+                    onMouseLeave={() => zoomIconHandler(false)}
+                />
+                <GrZoomIn
+                    className={showZoomIcon ? "dish-img-zoom show" : "dish-img-zoom"}
+                    onMouseEnter={() => zoomIconHandler(true)}
+                    onMouseLeave={() => zoomIconHandler(false)}
+                    onClick={showImageToggle}
+                />
+            </article>
             <article className="dish-content">
                 <h3>{dish.name}</h3>
                 <ul className="products">
