@@ -162,9 +162,9 @@ class App extends Component {
                                     />
 
                                     <Route path={routes.order}
-                                           render={ ({match,location}) =>
+                                           render={ ({match,location,history}) =>
                                                (
-                                                   <Routeguard mustBeLoggedIn={true} match={match} location={location} redirectTo={routes.login}>
+                                                   <Routeguard mustBeLoggedIn={true} match={match} history={history} location={location} redirectTo={routes.login}>
                                                        <Order/>
                                                    </Routeguard>
                                                )

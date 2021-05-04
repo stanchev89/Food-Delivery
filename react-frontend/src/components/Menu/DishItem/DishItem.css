@@ -46,11 +46,6 @@
     cursor: pointer;
 }
 .dish-img-zoom {
-    /*position: absolute;*/
-    /*top: 25%;*/
-    /*font-size: 2rem;*/
-    /*transform: translate(-50%);*/
-    /*color: whitesmoke;*/
     display: none;
 }
 .dish-img-zoom.show {
@@ -79,7 +74,7 @@
 
 .dish-big-img-wrapper img {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 1px;
     border: 1px solid #E25E20;
     box-shadow: 0px 0px 100px 8px;
 }

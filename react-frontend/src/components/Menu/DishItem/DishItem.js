@@ -34,7 +34,7 @@ function DishItem(props) {
     const zoomIconHandler = (boolean) => {
         setShowZoomIcon(() => boolean);
         console.log(showZoomIcon);
-    }
+    };
 
     const addOption = (e) => {
         const key = e.target.name;
@@ -59,7 +59,6 @@ function DishItem(props) {
             for (const key in additionalPrice) {
                 addToPrice += Number(additionalPrice[key]);
             }
-            ;
         }
         return addToPrice;
     };

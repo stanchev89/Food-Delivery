@@ -75,7 +75,7 @@ function Cart(props) {
                         </article>
 
                     </article>
-                    : <p>Няма добавени продукти...</p>
+                    : <p>Нямате добавени продукти...</p>
             }
 
         </section>

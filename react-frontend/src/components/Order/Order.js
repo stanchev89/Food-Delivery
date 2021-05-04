@@ -47,16 +47,16 @@ function Order({match,history}) {
                     const notification = {
                         message:'Благодарим ви за поръчката!',
                         type: 'success'
-                    }
-                    setNotification(notification)
+                    };
+                    setNotification(notification);
+                    history.push('/')
                 })
-                .then(() => history.push('/'))
                 .catch(console.error);
         }else {
             const notification = {
                 message: 'Моля, въведете адрес и начин на плащане!',
                 type: 'error'
-            }
+            };
             setNotification(notification)
         }
 
