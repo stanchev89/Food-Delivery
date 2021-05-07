@@ -38,20 +38,21 @@ function Order({match,history}) {
             payment: order?.payment,
             date: new Date().toLocaleString()
         };
-        const validOrder = newOrder.cart && newOrder.address.location && newOrder.address.region && newOrder.delivery && newOrder.totalPrice && newOrder.payment;
+        const validOrder = (!!newOrder.cart) && (!!newOrder.address.location) && (!!newOrder.address.region) && (!!newOrder.delivery) && (!!newOrder.totalPrice) && (!!newOrder.payment);
         if(validOrder) {
-            userService.editUserData({order:newOrder})
-                .then(user =>  {
-                    user.cart = {};
-                    setUser(user);
+            userService.addNewOrder(newOrder)
+                .then(res => {
+                    const updatedUser = user;
+                    updatedUser.cart = {};
+                    setUser(updatedUser);
                     const notification = {
                         message:'Благодарим ви за поръчката!',
                         type: 'success'
                     };
                     setNotification(notification);
                     history.push('/')
-                })
-                .catch(console.error);
+                }).catch(console.error);
+
         }else {
             const notification = {
                 message: 'Моля, въведете адрес и начин на плащане!',

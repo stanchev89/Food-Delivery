@@ -23,6 +23,12 @@ const userService = {
             .then(res => res.json())
             .catch(console.error)
     },
+    addNewOrder: (data) => {
+        const fullPath = environments.apiURL + 'orders/new_order';
+        return fetchWithCredentials(fullPath,'POST',data)
+            .then(res => res.json())
+            .catch(console.error)
+    },
     getUserInfo: () => {
         const fullPath = environments.apiURL + 'user/profile';
         return fetchWithCredentials(fullPath,'GET')

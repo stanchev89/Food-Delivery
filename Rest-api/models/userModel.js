@@ -35,31 +35,6 @@ const userSchema = new mongoose.Schema(
                 delivery: types.Number
             }
         ],
-        orders: [
-            {
-                cart: [
-                    {
-                        name: types.String,
-                        price: types.Number,
-                        options: types.Mixed,
-                        selected_options: types.Mixed,
-                        quantity: {
-                            type: types.Number
-                        }
-                    }
-                ]
-                ,
-                payment: types.String,
-                address: {
-                    region: types.String,
-                    location: types.String,
-                },
-                delivery: types.Number,
-                description: types.String,
-                totalPrice: types.Number,
-                date: types.String
-            }
-        ],
         phone: {
             type: types.String,
             required: true

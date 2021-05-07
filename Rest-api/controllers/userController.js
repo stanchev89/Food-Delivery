@@ -9,7 +9,7 @@ const bsonToJson = (data) => {
     return JSON.parse(JSON.stringify(data));
 };
 const removePassword = (data) => {
-    const {password, __v, orders, ...userData} = data;
+    const {password, __v,...userData} = data;
     return userData;
 };
 
@@ -25,7 +25,6 @@ function register(req, res, next) {
             products: [],
             totalPrice: 0
         },
-        orders: [],
         address: []
     };
     if (password === repeatPassword) {
@@ -117,7 +116,7 @@ function getProfileInfo(req, res, next) {
     const {_id: userId} = req.user;
 
     userModel
-        .findOne({_id: userId}, {password: 0, __v: 0, orders: 0})
+        .findOne({_id: userId}, {password: 0, __v: 0})
         // .populate("dish") //finding by Id and returning without password and __v
         .then((user) => {
             res.status(200).json(user);
@@ -146,7 +145,6 @@ function getOrders(req, res, next) {
                 res.status(200).json({data, count});
             })
     }).catch(next);
-
 
 }
 
