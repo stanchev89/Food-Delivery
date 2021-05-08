@@ -45,8 +45,8 @@ function Cart(props) {
                                 user?.cart?.products.map(item => (
                                     <li key={
                                         item?.name
-                                        + typeof (item?.selected_options) === 'object' ? (`${Object.keys(item.selected_options).join('')}`) : ''
-                                        + typeof (item?.selected_options) === 'object' ? (`${Object.values(item.selected_options).join('')}`) : ''
+                                        + typeof (item?.selected_options) === 'object' ? (`${item.name} ${Object.keys(item.selected_options).join('')}`) : ''
+                                        + typeof (item?.selected_options) === 'object' ? (`${item.name} ${Object.values(item.selected_options).join('')}`) : ''
                                     }>
                                         <CartItem item={item}
                                                   onChangeItemQuantity={onChangeItemQuantity}

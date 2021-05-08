@@ -124,29 +124,29 @@ function getProfileInfo(req, res, next) {
         .catch(next);
 }
 
-function getOrders(req, res, next) {
-    const userId = mongoose.Types.ObjectId(req.params.id);
-    const {sort, skip, limit} = req.body;
-    userModel.aggregate([
-        {
-            $match: {_id: userId}
-        },
-        {
-        $project: {
-            'orders': 1,
-            'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}},
-            // 'sortedOrders': {$sort: {"$orders": {"date": -1}}, $slice:[skip,limit]}
-        }
-    }]).then(count => {
-        userModel.find({_id: userId},{orders: {$slice: [skip, limit]}})
-        // userModel.find({_id: userId},{orders: { $push: {"date": { $each: [], $sort: -1}} ,$slice: [skip, limit]}})
-            // .sort(sort)
-            .then(data => {
-                res.status(200).json({data, count});
-            })
-    }).catch(next);
-
-}
+// function getOrders(req, res, next) {
+//     const userId = mongoose.Types.ObjectId(req.params.id);
+//     const {sort, skip, limit} = req.body;
+//     userModel.aggregate([
+//         {
+//             $match: {_id: userId}
+//         },
+//         {
+//         $project: {
+//             'orders': 1,
+//             'length': {$cond: {if: {$isArray: "$orders"}, then: {$size: "$orders"}, else: "NA"}},
+//             // 'sortedOrders': {$sort: {"$orders": {"date": -1}}, $slice:[skip,limit]}
+//         }
+//     }]).then(count => {
+//         userModel.find({_id: userId},{orders: {$slice: [skip, limit]}})
+//         // userModel.find({_id: userId},{orders: { $push: {"date": { $each: [], $sort: -1}} ,$slice: [skip, limit]}})
+//             // .sort(sort)
+//             .then(data => {
+//                 res.status(200).json({data, count});
+//             })
+//     }).catch(next);
+//
+// }
 
 function getAllUsers(req, res, next) {
     userModel
@@ -159,7 +159,7 @@ function getAllUsers(req, res, next) {
 
 function editProfileInfo(req, res, next) {
     const {_id: userId} = req.user || req.body;
-    const {username, addAddress, deleteAddress, phone, email, cart, order} = req.body;
+    const {username, addAddress, deleteAddress, phone, email, cart} = req.body;
     const update = {
         $addToSet: {},
         $push: {},
@@ -187,15 +187,6 @@ function editProfileInfo(req, res, next) {
 
     if (cart) {
         update.$set.cart = cart;
-    }
-
-    if (order) {
-        update.$push.orders = {
-            $each:[order],
-            $sort: {date: -1}
-        }
-
-        update.$set.cart = {}
     }
     userModel
         .findOneAndUpdate({_id: userId}, update, {new: true})

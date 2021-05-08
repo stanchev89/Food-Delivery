@@ -2,15 +2,38 @@ const {orderModel} = require('../models');
 const mongoose = require("mongoose");
 
 
-function getUserOrders(req, res, next) {
-    const userId = mongoose.Types.ObjectId(req.params.id);
-    const {sort,type, skip, limit} = req.body;
-    orderModel.find({user: userId})
-        .sort({sort:type})
-        .skip(skip)
-        .limit(limit)
-        .then(data => res.status(200).json(data))
-        .catch(next)
+async function getUserOrders(req, res, next) {
+    const {userId, sort, type, skip, limit} = req.body;
+    // const orders = await orderModel.find({user: userId})
+    //     .sort({[sort]:type})
+    //     .skip(skip)
+    //     .limit(limit);
+    // const response = {
+    //     data: await orders,
+    //     count: await orders.count()
+    // }
+    // if(!!response.data && !!response.count) {
+    //     return res.status(200).json(response)
+    // }
+
+    orderModel.aggregate([
+        {
+            "$facet": {
+                "orders": [
+                    {"$match": {user: mongoose.Types.ObjectId(userId)}},
+                    {"$sort": sort},
+                    {"$skip": skip},
+                    {"$limit": limit}
+                ],
+                "totalCount": [
+                    {"$match": {user: mongoose.Types.ObjectId(userId)}},
+                    {"$count": "count"}
+                ]
+            }
+        }
+    ]).then(data => {
+        res.status(200).json(data)
+    }).catch(next);
 
     // userModel.aggregate([
     //     {
@@ -33,7 +56,7 @@ function getUserOrders(req, res, next) {
 
 };
 
-function postNewOrder(req,res,next){
+function postNewOrder(req, res, next) {
     const order = req.body;
     const userId = mongoose.Types.ObjectId(req.user._id);
     order.user = userId;

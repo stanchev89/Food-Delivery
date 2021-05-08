@@ -87,7 +87,7 @@ export const Posts = () => {
                             {
                                 !user
                                     ?
-                                    <p className="post-list-title-info">* Само регистрирани потребители оценяват мнения.</p>
+                                    <p className="post-list-title-info">* Само регистрирани потребители могат да оценяват мнения.</p>
                                     : null
                             }
                         </>

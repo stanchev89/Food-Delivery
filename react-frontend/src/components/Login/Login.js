@@ -3,16 +3,18 @@ import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
 import { Link } from 'react-router-dom'
 import {useEffect,useContext} from "react";
+import {useHistory} from 'react-router-dom'
 import UserContext from "../../context/UserContext";
 import NotificationContext from '../../context/NotificationContext'
 
-const Login = ({history}) => {
+const Login = () => {
+    const history = useHistory();
     const [_,setUser] = useContext(UserContext);
     const [notification,setNotification] = useContext(NotificationContext);
 
-    useEffect(() => {
-        return () => setNotification({});
-    },[]);
+    // useEffect(() => {
+    //     return () => setNotification({});
+    // },[]);
 
     const onSubmitLoginHandler = (e) => {
         e.preventDefault();

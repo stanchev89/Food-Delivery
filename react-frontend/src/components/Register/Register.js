@@ -2,11 +2,12 @@ import './Register.css';
 import {FiUserPlus} from 'react-icons/fi'
 import userService from "../../services/userService";
 import {useContext, useEffect} from "react";
+import {useHistory} from 'react-router-dom';
 import NotificationContext from "../../context/NotificationContext";
 
-const Register = ({history}) => {
+const Register = () => {
     const [notification,setNotification] = useContext(NotificationContext);
-
+    const history = useHistory();
     useEffect(() => {
         return () => setNotification({});
     },[]);

@@ -3,7 +3,7 @@ import DishItem from "./DishItem/DishItem";
 import Cart from "../Cart/Cart";
 import foodService from "../../services/foodService";
 import Login from "../Login/Login";
-import {useContext,useState,useEffect} from 'react'
+import {useContext,useState} from 'react'
 import UserContext from "../../context/UserContext";
 import NotificationContext from "../../context/NotificationContext";
 

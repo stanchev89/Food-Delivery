@@ -21,11 +21,14 @@ function ProfileOrders() {
     useEffect(() => {
         const data = {
             userId: user._id,
+            sort: {"created_at": -1},
             skip: 0,
             limit: showPerPage
         };
         userService.getUserOrders(data)
-            .then(([orders, count]) => {
+            .then(res => {
+                const [{orders, totalCount}] = res;
+                const [{count}] = totalCount;
                 setTotalPages(() => {
                     const pages = Math.ceil(Number(count) / showPerPage);
                     const totalPagesArr = [];
@@ -34,7 +37,7 @@ function ProfileOrders() {
                     }
                     return totalPagesArr;
                 });
-                setUserOrders(() => orders.sort((a, b) => parseDateTime(b.date) - parseDateTime(a.date)));
+                setUserOrders(() => orders);
             })
             .catch(console.error);
     }, []);
@@ -42,11 +45,14 @@ function ProfileOrders() {
     useEffect(() => {
         const data = {
             userId: user._id,
+            sort: {"created_at": -1},
             skip: (currentPage - 1) * showPerPage,
             limit: showPerPage
         };
         userService.getUserOrders(data)
-            .then(([orders, count]) => {
+            .then(res => {
+                const [{orders, totalCount}] = res;
+                const [{count}] = totalCount;
                 setTotalPages(() => {
                     const pages = Math.ceil(Number(count) / showPerPage);
                     const totalPagesArr = [];
@@ -63,9 +69,10 @@ function ProfileOrders() {
 
     }, [currentPage, showPerPage])
 
-    function parseDateTime(s) {
-        const b = s.split(/\D/);
-        return new Date(b[0], b[1] - 1, b[2], b[3], b[4], b[5])
+    function parseDateTime(date) {
+        // const b = s.split(/\D/);
+        // return new Date(b[0], b[1] - 1, b[2], b[3], b[4], b[5])
+        return date.split('T').join(' ').split('.')[0];
     }
 
     const onChangePageHandler = (e) => {
@@ -97,9 +104,7 @@ function ProfileOrders() {
         setCurrentPage(() => 1);
 
     };
-    // const executeScroll = () => {
-    //    return  () => myRef.current?.scrollIntoView({behavior: 'smooth'})
-    // };
+
 
     const toggleShowCart = (data) => {
         if (!data) {
@@ -111,7 +116,6 @@ function ProfileOrders() {
             return;
         }
         setShowCart(prev => !prev);
-        // executeScroll();
         setCurrentOrder(prev => data);
     };
 
@@ -174,7 +178,7 @@ function ProfileOrders() {
                             {
                                 userOrders?.map(order => (
                                     <tr key={order._id}>
-                                        <td>{order.date}</td>
+                                        <td>{parseDateTime(order.created_at)}</td>
                                         <td>{order.address.location}</td>
                                         <td>{order.payment}</td>
                                         <td>{Number(order.totalPrice).toFixed(2)} лв.</td>
