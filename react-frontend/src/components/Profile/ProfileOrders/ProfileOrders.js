@@ -1,5 +1,5 @@
 import './ProfileOrders.css';
-import {IoIosArrowBack, IoIosArrowForward, IoMdSearch} from 'react-icons/io';
+import {IoIosArrowBack, IoIosArrowForward, IoIosArrowRoundDown, IoIosArrowRoundUp, IoMdSearch} from 'react-icons/io';
 import {useContext, useEffect, useState} from 'react'
 import ShowOrderCart from './ShowOrderCart/ShowOrderCart';
 import UserContext from "../../../context/UserContext";
@@ -14,14 +14,14 @@ function ProfileOrders() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
     const [showPerPage, setShowPerPage] = useState(10);
-
-    // const myRef = useRef("show-order-cart");
+    const [sortBy, setSortBy] = useState('created_at');
+    const [sortType, setSortType] = useState(-1);
 
 
     useEffect(() => {
         const data = {
             userId: user._id,
-            sort: {"created_at": -1},
+            sort: {[sortBy]: sortType},
             skip: 0,
             limit: showPerPage
         };
@@ -45,7 +45,7 @@ function ProfileOrders() {
     useEffect(() => {
         const data = {
             userId: user._id,
-            sort: {"created_at": -1},
+            sort: {[sortBy]: sortType},
             skip: (currentPage - 1) * showPerPage,
             limit: showPerPage
         };
@@ -61,18 +61,27 @@ function ProfileOrders() {
                     }
                     return totalPagesArr;
                 });
-                // setUserOrders(() => orders.sort((a, b) => parseDateTime(b.date) - parseDateTime(a.date)));
                 setUserOrders(() => orders);
-
             })
             .catch(console.error);
 
-    }, [currentPage, showPerPage])
+    }, [currentPage, showPerPage,sortType,sortBy]);
+
+    function sortHandler(selectedSortBy) {
+        if (selectedSortBy === sortBy) {
+            setSortType(prev => prev * -1);
+        } else {
+            setSortBy(prev => selectedSortBy);
+            setSortType(() => -1);
+        }
+    }
 
     function parseDateTime(date) {
         // const b = s.split(/\D/);
         // return new Date(b[0], b[1] - 1, b[2], b[3], b[4], b[5])
-        return date.split('T').join(' ').split('.')[0];
+        const fullDate = new Date(Date.parse(date)).toString();
+        return (fullDate.split('GMT')[0]);
+        // return date.split('T').join(' ').split('.')[0];
     }
 
     const onChangePageHandler = (e) => {
@@ -105,7 +114,6 @@ function ProfileOrders() {
 
     };
 
-
     const toggleShowCart = (data) => {
         if (!data) {
             setShowCart(prev => !prev);
@@ -118,7 +126,6 @@ function ProfileOrders() {
         setShowCart(prev => !prev);
         setCurrentOrder(prev => data);
     };
-
 
     return (
         <article className="profile-orders">
@@ -167,10 +174,42 @@ function ProfileOrders() {
                         <table className="order-table">
                             <thead>
                             <tr>
-                                <th>Дата</th>
+                                <th className="th-sorted">
+                                    <p className="p-sorted" onClick={() => sortHandler('created_at')}>Дата</p>
+
+                                    {
+                                        sortBy === 'created_at'
+                                            ?
+                                            <article className="sort-type">
+                                                {
+                                                    sortType === -1
+                                                        ? <IoIosArrowRoundDown/>
+                                                        : <IoIosArrowRoundUp/>
+                                                }
+                                            </article>
+
+                                        : null
+                                    }
+                                </th>
                                 <th>Адрес</th>
                                 <th>Плащане</th>
-                                <th>Крайна цена</th>
+                                <th className="th-sorted">
+                                    <p className="p-sorted" onClick={() => sortHandler('totalPrice')}>Крайна цена</p>
+
+                                    {
+                                        sortBy === 'totalPrice'
+                                            ?
+                                            <article className="sort-type">
+                                                {
+                                                    sortType === -1
+                                                        ? <IoIosArrowRoundDown/>
+                                                        : <IoIosArrowRoundUp/>
+                                                }
+                                            </article>
+
+                                            : null
+                                    }
+                                </th>
                                 <th>Продукти</th>
                             </tr>
                             </thead>

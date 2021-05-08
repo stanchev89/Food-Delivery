@@ -33,7 +33,6 @@ function DishItem(props) {
 
     const zoomIconHandler = (boolean) => {
         setShowZoomIcon(() => boolean);
-        console.log(showZoomIcon);
     };
 
     const addOption = (e) => {

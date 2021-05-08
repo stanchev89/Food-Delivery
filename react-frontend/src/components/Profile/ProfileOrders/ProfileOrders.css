@@ -96,6 +96,23 @@
     margin-top: 0;
 }
 
+.order-table .th-sorted {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.th-sorted svg {
+    font-size: 1.2rem;
+    margin: 0;
+}
+.order-table .p-sorted {
+    margin: 2px;
+}
+.order-table .p-sorted:hover {
+    cursor: pointer;
+}
+
 
 
 
