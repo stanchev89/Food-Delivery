@@ -202,6 +202,5 @@ module.exports = {
     logout,
     getProfileInfo,
     editProfileInfo,
-    changeUserPassword,
-    getOrders
+    changeUserPassword
 };

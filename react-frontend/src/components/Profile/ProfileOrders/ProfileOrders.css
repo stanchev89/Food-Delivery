@@ -109,7 +109,7 @@
 .order-table .p-sorted {
     margin: 2px;
 }
-.order-table .p-sorted:hover {
+.order-table .th-sorted:hover {
     cursor: pointer;
 }
 

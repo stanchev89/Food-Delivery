@@ -174,9 +174,8 @@ function ProfileOrders() {
                         <table className="order-table">
                             <thead>
                             <tr>
-                                <th className="th-sorted">
-                                    <p className="p-sorted" onClick={() => sortHandler('created_at')}>Дата</p>
-
+                                <th className="th-sorted" onClick={() => sortHandler('created_at')}>
+                                    <p className="p-sorted">Дата</p>
                                     {
                                         sortBy === 'created_at'
                                             ?
@@ -193,8 +192,8 @@ function ProfileOrders() {
                                 </th>
                                 <th>Адрес</th>
                                 <th>Плащане</th>
-                                <th className="th-sorted">
-                                    <p className="p-sorted" onClick={() => sortHandler('totalPrice')}>Крайна цена</p>
+                                <th className="th-sorted" onClick={() => sortHandler('totalPrice')}>
+                                    <p className="p-sorted">Крайна цена</p>
 
                                     {
                                         sortBy === 'totalPrice'
