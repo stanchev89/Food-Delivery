@@ -24,7 +24,7 @@ function Order({match,history}) {
                 setDelivery(deliveryPerRegion);
             }
         }
-    },[user?.cart?.totalPrice, order]);
+    },[user.cart.totalPrice, order]);
 
 
     const onSubmitOrderHandler = () => {
@@ -61,19 +61,20 @@ function Order({match,history}) {
             setNotification(notification)
         }
 
-    }
+    };
     useEffect(() => {
         setOrder(prevState => ({...prevState, cart:user?.cart}))
     },[user?.cart?.products]);
 
     return (
         <section className="finish-order">
+            <h1 className="finish-order-title">Завършване на поръчка</h1>
             <article className="finish-order-details">
                 {
                     user?.cart?.products?.length > 0
                         ? <>
                             <Cart match={match}/>
-                            <OrderAddress setOrder={setOrder} />
+                            <OrderAddress setOrder={setOrder} setUser={setUser} />
                             <OrderPayment setOrder={setOrder}/>
                             <OrderDescription setOrder={setOrder}/>
                         </>
