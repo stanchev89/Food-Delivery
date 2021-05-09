@@ -18,22 +18,21 @@ const OrderAddress = ({setOrder}) => {
             setOrder(prevState => ({...prevState,address: user.address[0]}))
         }
     },[]);
-
-    useEffect(() => {
-        if(user?.address.length > 0) {
-            setOrder(prevState => ({...prevState,address: user.address[0]}))
-        }
-    },[user?.address]);
+    //
+    // useEffect(() => {
+    //     if(user?.address.length > 0) {
+    //         setOrder(prevState => ({...prevState,address: user.address[0]}))
+    //     }
+    // },[user?.address]);
 
     const onSelectAddressHandler = (e) => {
-        console.log('change')
         const selectedLocation = e.target.value;
         const selected = user?.address?.find(adr => adr.location === selectedLocation);
         if(selected) {
             const {region,location,delivery} = selected;
-            setOrder(prevState => ({...prevState, address: {region, location, delivery}}))
+            setOrder(prevState => ({...prevState, address: {region, location, delivery}}));
         }
-    }
+    };
     return (
         <article className="order-address">
             <h3>Изберете адрес</h3>
@@ -41,9 +40,9 @@ const OrderAddress = ({setOrder}) => {
                 viewNewAddress
                     ? <AddNewAddressForm user={user} setUser={setUser} toggleNewAddressForm={toggleNewAddressForm}/>
                     : <article className="my-address">
-                        <form className="my-address-form" onChange={onSelectAddressHandler}>
+                        <form className="my-address-form" >
                             <p>Моите адреси:</p>
-                            <select name="address" id="address">
+                            <select name="address" id="address" onChange={onSelectAddressHandler}>
                                 {
                                     user?.address.map(adr => (
                                         <option key={adr.location} value={adr.location}>{adr.location}, {mapBgRegions[adr.region]}</option>
