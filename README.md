@@ -1,7 +1,7 @@
 Food-Delivery project
 # Food delivery is online shopping platform suitable for restaurants, fast-food, or even all type of shops.
 
-## Design: Everything is custom styled with no libraries.
+## Design: All components are custom styled.
 
 ## How to install and run the application locally
 
