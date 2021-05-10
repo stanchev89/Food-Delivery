@@ -42,12 +42,12 @@ class App extends Component {
         this.setNotification = this.setNotification.bind(this);
     }
 
-    async componentDidMount() {
+     componentDidMount() {
         foodService.getDailyMenu()
             .then(dishes => {
                 this.setState(state => ({...state, menu: dishes}))
             }).catch(err => console.error(err));
-        await userService.getUserInfo()
+         userService.getUserInfo()
             .then(user => {
                 if (user) {
                     this.setState((state) => ({currentUser: user.message ? undefined : user}))
