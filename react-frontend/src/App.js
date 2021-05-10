@@ -14,6 +14,7 @@ import Contacts from "./components/Contacts/Contacts";
 import Posts from "./components/Posts/Posts";
 import About from "./components/About/About";
 import Conditions from "./components/Conditions/Conditions";
+import PageNotFound from "./components/PageNotFound/PageNotFound"
 
 import {Route, Switch} from "react-router-dom";
 import {Component} from "react";
@@ -175,6 +176,7 @@ class App extends Component {
                                     <Route path={routes.contacts} exact component={Contacts}/>
                                     <Route path={routes.about} exact component={About}/>
                                     <Route path={routes.conditions} exact component={Conditions}/>
+                                    <Route path="*" component={PageNotFound}/>
                                 </Switch>
                             </ErrorBoundary>
                         </main>
