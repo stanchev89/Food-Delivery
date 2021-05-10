@@ -15,12 +15,12 @@ function objectsEqual(o1 = {}, o2 = {}){
 }
 
 
-function arraysEqual(arr1,arr2){
-    const sortedArr1 = arr1.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
-    const sortedArr2 = arr2.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
-    return sortedArr1.length === sortedArr2.length
-        && sortedArr1.every((o, idx) => objectsEqual(o, sortedArr2[idx]))
-}
+// function arraysEqual(arr1,arr2){
+//     const sortedArr1 = arr1.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
+//     const sortedArr2 = arr2.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
+//     return sortedArr1.length === sortedArr2.length
+//         && sortedArr1.every((o, idx) => objectsEqual(o, sortedArr2[idx]))
+// }
 
 
 

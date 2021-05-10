@@ -75,8 +75,8 @@ function DishItem(props) {
             {
                 showImage
                     ? <article className="dish-big-img-wrapper" ref={bigImgRef}>
-                        <IoMdClose class="close-big-img" onClick={() => setShowImage(() => false)}/>
-                        <img src={dish.img} className="dish-big-image"/>
+                        <IoMdClose className="close-big-img" onClick={() => setShowImage(() => false)}/>
+                        <img src={dish.img} className="dish-big-image" alt="dish big image"/>
                     </article>
 
                     : null

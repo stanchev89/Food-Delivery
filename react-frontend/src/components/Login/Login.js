@@ -2,7 +2,7 @@ import './Login.css';
 import {FiLogIn} from "react-icons/fi";
 import userService from "../../services/userService";
 import { Link } from 'react-router-dom'
-import {useEffect,useContext} from "react";
+import {useContext} from "react";
 import {useHistory} from 'react-router-dom'
 import UserContext from "../../context/UserContext";
 import NotificationContext from '../../context/NotificationContext'
@@ -54,5 +54,5 @@ const Login = () => {
             </article>
         </section>
     )
-}
+};
 export default Login;

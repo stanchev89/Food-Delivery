@@ -8,7 +8,7 @@ import UserContext from "../../../context/UserContext";
 
 const ProfileAddress = ({onDeleteAddressHandler, onUpdateExistAddressHandler}) => {
     const [addAddressMode, setAddAddressMode] = useState(false);
-    const [user, setUser] = useContext(UserContext);
+    const [user] = useContext(UserContext);
 
     const toggleNewAddressForm = () => {
         setAddAddressMode(prev => !prev);

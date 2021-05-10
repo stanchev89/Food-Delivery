@@ -65,13 +65,13 @@ function Header() {
                             ? (
                                 <ul>
                                     <li>
-                                        <NavLink to="/profile" className="user-bar-username-wrapper" activeClassName="is-active">
+                                        <NavLink to="/profile" className="user-bar-username-wrapper" activeClassName="is-active svg">
                                             <p className="user-bar-username">{user?.username}</p>
                                             <FaUser/>
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to="/cart" activeClassName="is-active">
+                                        <NavLink to="/cart" activeClassName="is-active svg">
                                             <FaShoppingCart/>
                                         </NavLink>
                                     </li>
