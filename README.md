@@ -20,4 +20,4 @@ Install all dependencies with 'npm install', then 'npm start' will start applica
 
 ------------------------------------------------------------------
 
-'Frontend' folder is Angular based version of the app.
+'Frontend' folder is Angular based version of the app which is not finished yet.
